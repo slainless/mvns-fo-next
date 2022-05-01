@@ -6,6 +6,7 @@ import Head from 'next/head'
 export default function Default({ children }) {
   return (
     <Box as="main" css={{ minHeight: '$full', minWidth: '$full' }}>
+      <Header />
       {children}
     </Box>
   )
