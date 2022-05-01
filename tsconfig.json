@@ -13,7 +13,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+    "noImplicitAny": false,
+    "paths": {
+      "@Theme": ["./stitches.config.ts"],
+      "@Functions/*": ["./functions/*"],
+      "@Components/*": ["./components/blocks/*", "./components/elements/*"],
+      "@Pages/*": ["./pages/*", "./components/pages/*"],
+      "@Layouts/*": ["./components/layouts/*"],
+      "@Styles/*": ["./styles/*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
