@@ -147,6 +147,12 @@ export const {
       borderTopRightRadius: v,
       borderBottomRightRadius: v,
     }),
+    roundedX: (v: Stitches.ScaleValue<'radii'>) => ({
+      borderTopLeftRadius: v,
+      borderBottomLeftRadius: v,
+      borderTopRightRadius: v,
+      borderBottomRightRadius: v,
+    }),
 
     p: (value: Stitches.PropertyValue<'padding'>) => ({
       padding: value,
@@ -273,6 +279,15 @@ export const {
     backgroundClip: (value: Stitches.PropertyValue<'backgroundClip'>) => ({
       WebkitBackgroundClip: value,
       backgroundClip: value,
+    }),
+
+    anim: (value: Stitches.PropertyValue<'transitionTimingFunction'>) => ({
+      transitionTimingFunction: value,
+      transitionDuration: '150ms',
+    }),
+
+    shadowBorder: (value: Stitches.PropertyValue<'color'>) => ({
+      boxShadow: `inset 0 0 0 1px $colors${value}`,
     }),
   },
 })

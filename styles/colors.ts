@@ -178,8 +178,10 @@ export const light = {
   ...blackA,
   // Semantic colors
   hiContrast: '$slate12',
+  hiContrastA: '$slateA12',
   // loContrast: '$slate1',
   loContrast: 'white',
+  loContrastA: '$slateA1',
   canvas: 'hsl(0 0% 93%)',
   panel: 'white',
   transparentPanel: 'hsl(0 0% 0% / 97%)',
@@ -248,7 +250,9 @@ export const dark = {
 
   // Semantic colors
   hiContrast: '$slate12',
+  hiContrastA: '$slateA12',
   loContrast: '$slate1',
+  loContrastA: '$slateA1',
   // loContrast: 'black',
   canvas: 'hsl(0 0% 15%)',
   panel: '$slate3',
