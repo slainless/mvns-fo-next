@@ -9,7 +9,7 @@ import BusinessBanner from '@Pages/landing/BusinessBanner'
 import Blog from '@Pages/landing/Blog'
 import Category from '@Pages/landing/Category'
 
-const Home: NextPage = () => {
+const Page: NextPage = () => {
   return (
     <>
       <Hero></Hero>
@@ -23,4 +23,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Page
