@@ -249,7 +249,7 @@ export const dark = {
   ...goldDarkA,
 
   // Semantic colors
-  hiContrast: '$slate12',
+  hiContrast: 'white',
   hiContrastA: '$slateA12',
   loContrast: '$slate1',
   loContrastA: '$slateA1',
