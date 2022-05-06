@@ -17,13 +17,16 @@ const MavensLogo = styled(Logo, {
     ['$screen-drop-shadow-opacity']: '1',
   },
 })
-export function Header() {
+export default function Header() {
   return (
     <Box
       css={{
         bc: '$loContrast',
         position: 'sticky',
+        zIndex: '$50',
+        boxShadow: 'inset 0 -1px 0 $colors$slate6',
         top: 0,
+        height: '$8',
       }}
     >
       <Grid
@@ -33,11 +36,11 @@ export function Header() {
         }}
         container="xl"
         css={{
-          py: '$3',
           // bc: '$loContrast',
           // position: 'sticky',
           // top: 0,
           ai: 'center',
+          height: '100%',
         }}
       >
         <Box css={{ height: '$tw_10', '@lg': { height: '$7' } }}>
