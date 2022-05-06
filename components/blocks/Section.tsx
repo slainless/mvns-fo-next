@@ -14,6 +14,21 @@ export const Section = styled('section', {
   },
 
   variants: {
+    container: {
+      xl: {
+        // maxWidth: '$container-xl',
+        maxWidth: '1340px',
+        mx: 'auto',
+        px: '$tw_4',
+
+        '@md': {
+          px: '$tw_8',
+        },
+        '@lg': {
+          px: '$tw_12',
+        },
+      },
+    },
     size: {
       '1': {
         py: '$3',
@@ -28,5 +43,6 @@ export const Section = styled('section', {
   },
   defaultVariants: {
     size: '3',
+    container: 'xl',
   },
 })
