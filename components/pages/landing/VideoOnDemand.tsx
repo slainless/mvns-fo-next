@@ -20,8 +20,8 @@ export default function Trending() {
           height: '24rem',
         }}
       >
-        {largeCard.map((props) => (
-          <SwiperSlide>
+        {largeCard.map((props, i) => (
+          <SwiperSlide key={i}>
             <CourseCard {...props} />
           </SwiperSlide>
         ))}

@@ -45,8 +45,8 @@ export default function Blog() {
           height: '28rem',
         }}
       >
-        {blogCards.map((props) => (
-          <SwiperSlide>
+        {blogCards.map((props, i) => (
+          <SwiperSlide key={i}>
             <BlogCard {...props} />
           </SwiperSlide>
         ))}

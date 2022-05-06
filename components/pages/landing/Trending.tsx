@@ -20,8 +20,8 @@ export default function Trending() {
           height: '28rem',
         }}
       >
-        {slimCard.map((props) => (
-          <SwiperSlide>
+        {slimCard.map((props, i) => (
+          <SwiperSlide key={i}>
             <CourseCard {...props} />
           </SwiperSlide>
         ))}
