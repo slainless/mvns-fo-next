@@ -5,18 +5,22 @@ import { Heading } from '@Components/Heading'
 import { Image } from '@Components/Image'
 import { Link } from '@Components/Link'
 import { Paragraph } from '@Components/Paragraph'
+import { Section } from '@Components/Section'
 import { Text } from '@Components/Text'
 
 export default function Hero() {
   return (
-    <Flex
-      as="section"
-      align="center"
+    <Section
+      size="2"
+      // as="section"
       css={{
+        display: 'flex',
         width: '100%',
         gap: '$tw_16',
         order: '$first',
         flexDirection: 'column',
+        ai: 'center',
+        px: 0,
 
         '@lg': {
           gap: '0',
@@ -30,15 +34,15 @@ export default function Hero() {
         css={{
           width: '100%',
           pointerEvents: 'none',
-          maxHeight: '$72',
           objectFit: 'cover',
           objectPosition: 'top',
           maxHeight: '$tw_72',
+          ml: '$-4',
 
           '@lg': {
             maxHeight: 'initial',
             width: '$tw_7p12',
-            roundedR: '$2xl',
+            roundedX: '$2xl',
           },
         }}
         src="/media/landing/hero.jpg"
@@ -130,6 +134,6 @@ export default function Hero() {
           <Link css={{ ml: '$1' }}>View all classes</Link>
         </Text>
       </Flex>
-    </Flex>
+    </Section>
   )
 }
