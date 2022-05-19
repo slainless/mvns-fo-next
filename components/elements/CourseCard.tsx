@@ -102,12 +102,13 @@ export default function CourseCard(props: Props) {
           }}
         >
           {!isEmpty(badges) &&
-            badges!.map((badge) => (
+            badges!.map((badge, i) => (
               <Badge
                 as="a"
                 interactive
                 css={{ rounded: '$full', px: '$2' }}
                 href={badge.href}
+                key={i}
               >
                 {badge.display}
               </Badge>
@@ -130,7 +131,7 @@ export default function CourseCard(props: Props) {
         )}
         {!isEmpty(date) && (
           <Text size="2" css={{ mb: '$1', color: '$slate11' }}>
-            <Icon>
+            <Icon thin={false}>
               <FiCalendar />
             </Icon>{' '}
             {date}

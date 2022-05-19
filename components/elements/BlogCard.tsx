@@ -14,7 +14,8 @@ type Props = ReactProps<typeof BaseCard> & {
     display: string
     href?: string
   }[]
-  date?: string
+  date?: string | Date
+  summary?: string
 }
 export default function BlogCard(props: Props) {
   const {
@@ -93,7 +94,7 @@ export default function BlogCard(props: Props) {
             <Icon>
               <FiCalendar />
             </Icon>{' '}
-            {date}
+            {date?.toString()}
           </Text>
         )}
       </Slot>
