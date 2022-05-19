@@ -17,6 +17,9 @@ import 'loaders.css/src/animations/ball-pulse.scss'
 // import { globalCss } from '@Theme'
 import { globalCss } from '@Theme'
 import ColorSchemeHandler from '@Components/ColorSchemeHandler'
+// import { toast, Toaster, ToastBar } from 'react-hot-toast'
+import Toaster from '@Components/Toaster'
+import { toast } from 'react-hot-toast'
 
 const globalStyles = globalCss({
   '#root': {
@@ -46,10 +49,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   globalStyles()
 
   return (
-    <Default>
-      <ColorSchemeHandler />
-      <Component {...pageProps} />
-    </Default>
+    <>
+      <Default>
+        <ColorSchemeHandler />
+        <Component {...pageProps} />
+      </Default>
+      <Toaster />
+    </>
   )
 }
 
