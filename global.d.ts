@@ -5,3 +5,11 @@ declare type HTMLAttr<T extends keyof ReactHTML> = Parameters<ReactHTML[T]>[0] &
 declare type ReactProps<T> = Parameters<T>[0]
 
 type Undefinable<T> = Extract<T, undefined> extends never ? false : true
+
+declare namespace NodeJS {
+  interface ProcessEnv extends Dict<string, string> {
+    MODE: 'development' | 'production'
+    NEXT_PUBLIC_API_ROOT: string
+    TZ?: string
+  }
+}
