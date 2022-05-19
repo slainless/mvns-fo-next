@@ -16,6 +16,7 @@ const StyledOverlay = styled(AlertDialogPrimitive.Overlay, overlayStyles, {
   right: 0,
   bottom: 0,
   left: 0,
+  zIndex: 51,
 })
 
 export function AlertDialog({ children, ...props }: AlertDialogProps) {
@@ -39,6 +40,7 @@ export const AlertDialogContent = styled(
     maxHeight: '85vh',
     padding: '$4',
     marginTop: '-5vh',
+    zIndex: 51,
 
     '&:focus': {
       outline: 'none',
@@ -51,3 +53,4 @@ export const AlertDialogTitle = AlertDialogPrimitive.Title
 export const AlertDialogDescription = AlertDialogPrimitive.Description
 export const AlertDialogAction = AlertDialogPrimitive.Action
 export const AlertDialogCancel = AlertDialogPrimitive.Cancel
+export const AlertDialogOverlay = StyledOverlay

@@ -50,6 +50,11 @@ export const Badge = styled('span', {
         px: '$2',
         fontSize: '$2',
       },
+      '3': {
+        height: '$6',
+        px: '$3',
+        fontSize: '$3',
+      },
     },
     variant: {
       gray: {

@@ -4,7 +4,17 @@ import { styled } from '@Theme'
 export const Icon = styled(Slot, {
   width: '15px',
   height: '15px',
-  '& path': {
-    strokeWidth: 1,
+  variants: {
+    thin: {
+      true: {
+        strokeWidth: 1,
+        '& path': {
+          strokeWidth: 1,
+        },
+      },
+    },
+  },
+  defaultVariants: {
+    thin: true,
   },
 })

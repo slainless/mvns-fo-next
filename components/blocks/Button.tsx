@@ -35,6 +35,11 @@ export const Button = styled('button', {
     pointerEvents: 'none',
   },
 
+  '& .ball-pulse > div': {
+    width: '$2',
+    height: '$2',
+  },
+
   variants: {
     size: {
       '1': {
@@ -108,6 +113,7 @@ export const Button = styled('button', {
         backgroundColor: '$green2',
         boxShadow: 'inset 0 0 0 1px $colors$green7',
         color: '$green11',
+        $loaderColor: '$colors$green11',
         '@hover': {
           '&:hover': {
             boxShadow: 'inset 0 0 0 1px $colors$green8',

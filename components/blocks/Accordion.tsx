@@ -84,7 +84,7 @@ export const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof StyledTrigger>,
   AccordionTriggerProps
 >(({ children, ...props }, forwardedRef) => (
-  <StyledHeader>
+  <StyledHeader data-type="accordion-header">
     <StyledTrigger {...props} ref={forwardedRef}>
       {children}
       <ChevronDownIcon />

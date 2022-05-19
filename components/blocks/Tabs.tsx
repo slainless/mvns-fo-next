@@ -5,12 +5,17 @@ import { Separator } from './Separator'
 
 export const Tabs = styled(TabsPrimitive.Root, {
   display: 'flex',
+  boxShadow: `inset 0 0 0 1px rgba(0,0,0,.1)`,
+  backgroundColor: '$slate2',
+  rounded: '$3',
+
   '&[data-orientation="horizontal"]': {
     flexDirection: 'column',
   },
 })
 
 export const TabsTrigger = styled(TabsPrimitive.Trigger, {
+  all: 'unset',
   flexShrink: 0,
   height: '$5',
   display: 'inline-flex',
@@ -23,8 +28,6 @@ export const TabsTrigger = styled(TabsPrimitive.Trigger, {
   justifyContent: 'center',
   color: '$slate11',
   border: '1px solid transparent',
-  borderTopLeftRadius: '$2',
-  borderTopRightRadius: '$2',
   zIndex: '10',
 
   '@hover': {
@@ -35,20 +38,44 @@ export const TabsTrigger = styled(TabsPrimitive.Trigger, {
 
   '&[data-state="active"]': {
     color: '$hiContrast',
-    borderColor: '$slate6',
+    borderColor: 'rgba(0,0,0,.1)',
     borderBottomColor: 'transparent',
+    backgroundColor: '$slate3',
   },
 
   '&[data-orientation="vertical"]': {
     justifyContent: 'flex-start',
-    borderTopRightRadius: 0,
-    borderBottomLeftRadius: '$2',
     borderBottomColor: 'transparent',
 
     '&[data-state="active"]': {
-      borderBottomColor: '$slate6',
+      borderColor: 'rgba(0,0,0,.1)',
       borderRightColor: 'transparent',
     },
+  },
+  variants: {
+    size: {
+      '1': {
+        height: '$5',
+        px: '$2',
+        fontSize: '$1',
+        lineHeight: '$sizes$5',
+      },
+      '2': {
+        height: '$6',
+        px: '$3',
+        fontSize: '$3',
+        lineHeight: '$sizes$6',
+      },
+      '3': {
+        height: '$7',
+        px: '$4',
+        fontSize: '$4',
+        lineHeight: '$sizes$7',
+      },
+    },
+  },
+  defaultVariants: {
+    size: '1',
   },
 })
 
@@ -74,14 +101,22 @@ export const TabsList = React.forwardRef<
 >((props, forwardedRef) => (
   <>
     <StyledTabsList {...props} ref={forwardedRef} />
-    <Separator />
+    <Separator
+      css={{
+        display: 'none',
+      }}
+    />
   </>
 ))
 
 export const TabsContent = styled(TabsPrimitive.Content, {
   flexGrow: 1,
+  boxShadow: `-1px 0 0 0 rgba(0,0,0,.1), inset -1px 0 rgba(0,0,0,.1), inset 0 1px rgba(0,0,0,.1), inset 0 -1px rgba(0,0,0,.1)`,
+  backgroundColor: '$slate3',
+  roundedR: '$2',
+
   '&:focus': {
-    outline: 'none',
-    boxShadow: 'inset 0 0 0 1px $slate8, 0 0 0 1px $slate8',
+    boxShadow:
+      '-1px 0 0 1px $colors$slate8, -2px 0 0 0 $colors$slate8, 1px 0 0 0 $colors$slate8, inset -1px 0 $colors$slate8, inset 0 1px $colors$slate8, inset 0 -1px $colors$slate8',
   },
 })

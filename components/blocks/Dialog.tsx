@@ -16,6 +16,7 @@ const StyledOverlay = styled(DialogPrimitive.Overlay, overlayStyles, {
   right: 0,
   bottom: 0,
   left: 0,
+  zIndex: 51,
 })
 
 export function Dialog({ children, ...props }: DialogProps) {
@@ -36,6 +37,7 @@ const StyledContent = styled(DialogPrimitive.Content, panelStyles, {
   maxHeight: '85vh',
   padding: '$4',
   marginTop: '-5vh',
+  zIndex: 52,
   // animation: `${fadeIn} 125ms linear, ${moveDown} 125ms cubic-bezier(0.22, 1, 0.36, 1)`,
 
   // Among other things, prevents text alignment inconsistencies when dialog can't be centered in the viewport evenly.
@@ -76,3 +78,4 @@ export const DialogTrigger = DialogPrimitive.Trigger
 export const DialogClose = DialogPrimitive.Close
 export const DialogTitle = DialogPrimitive.Title
 export const DialogDescription = DialogPrimitive.Description
+export const DialogOverlay = StyledOverlay
