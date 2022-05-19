@@ -13,6 +13,7 @@ import '@fontsource/libre-franklin/variable.css'
 import '@fontsource/libre-franklin/variable-italic.css'
 import '@fontsource/epilogue/variable.css'
 import '@fontsource/epilogue/variable-italic.css'
+import 'loaders.css/src/animations/ball-pulse.scss'
 // import { globalCss } from '@Theme'
 import { globalCss } from '@Theme'
 import ColorSchemeHandler from '@Components/ColorSchemeHandler'
@@ -24,14 +25,29 @@ const globalStyles = globalCss({
     letterSpacing: 'initial',
     bc: '$loContrast',
     width: '100%',
+    $loaderColor: '$colors$hiContrast',
   },
+  html: {
+    scrollPaddingTop: '$sizes$header',
+  },
+  '.loader-inner': {
+    lineHeight: 0,
+    '& > div': {
+      backgroundColor: 'var(--loaderColor) !important',
+    },
+  },
+  // '*': {
+  //   '-webkit-font-smoothing': 'antialiased',
+  //   '-moz-osx-font-smoothing': 'grayscale',
+  // },
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
   globalStyles()
+
   return (
     <Default>
-    <ColorSchemeHandler />
+      <ColorSchemeHandler />
       <Component {...pageProps} />
     </Default>
   )
