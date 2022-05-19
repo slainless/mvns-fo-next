@@ -7,6 +7,8 @@ import { Link } from '@Components/Link'
 import { Paragraph } from '@Components/Paragraph'
 import { Section } from '@Components/Section'
 import { Text } from '@Components/Text'
+import { styled } from '@Theme'
+import NextLink from 'next/link'
 
 export default function Hero() {
   return (
@@ -37,8 +39,7 @@ export default function Hero() {
           objectFit: 'cover',
           objectPosition: 'top',
           maxHeight: '$tw_72',
-          position: 'relative',
-          right: '$-4',
+          // transform: 'translateX($space$4)',
           order: '$last',
 
           '@lg': {
@@ -66,9 +67,11 @@ export default function Hero() {
         <Heading
           as="h1"
           css={{
-            fontFamily: '$display',
+            ff: '$anybody',
+            fontSet: '$7xl',
+            fontVariationSettings: `'wdth' 70`,
             textTransform: 'uppercase',
-            fontWeight: '$black',
+            fontWeight: '$bold',
             mb: '$3',
             // mx: 'auto',
             width: 'max-content',
@@ -77,24 +80,20 @@ export default function Hero() {
           <Text
             as="span"
             css={{
-              fontSet: '$5xl',
               fontWeight: 'inherit',
-              lineHeight: '0.5 !important',
+              fontSet: 'inherit',
 
-              '@sm': {
-                fontSet: '$7xl',
-              },
+              '@sm': {},
             }}
           >
             Share your
           </Text>
-          <br />
           <Text
             as="span"
             css={{
               color: '$red9',
-              fontSet: '$7xl',
               fontWeight: 'inherit',
+              fontSet: 'inherit',
             }}
           >
             Passion
@@ -111,14 +110,17 @@ export default function Hero() {
         >
           Make masters out of students.
         </Paragraph>
-        <Button
-          size="3"
-          css={{
-            px: '$7',
-          }}
-        >
-          Register Now
-        </Button>
+        <NextLink passHref href="/instructor/register">
+          <Button
+            as="a"
+            size="3"
+            css={{
+              px: '$7',
+            }}
+          >
+            Register Now
+          </Button>
+        </NextLink>
       </Flex>
     </Section>
   )
