@@ -1,5 +1,7 @@
 import { styled } from '@Theme'
 import { Text } from './Text'
+import PrimitiveLink from 'next/link'
+import { Url } from 'url'
 
 export const Link = styled('a', {
   alignItems: 'center',
@@ -7,56 +9,180 @@ export const Link = styled('a', {
   flexShrink: 0,
   outline: 'none',
   textDecorationLine: 'none',
-  textUnderlineOffset: '3px',
-  textDecorationColor: '$slate4',
   WebkitTapHighlightColor: 'rgba(0,0,0,0)',
   lineHeight: 'inherit',
-  '@hover': {
-    '&:hover': {
-      textDecorationLine: 'underline',
-    },
-  },
   '&:focus': {
     outlineWidth: '2px',
     outlineStyle: 'solid',
     outlineOffset: '2px',
-    textDecorationLine: 'none',
   },
   [`& ${Text}`]: {
     color: 'inherit',
   },
   variants: {
+    type: {
+      underline: {
+        textDecorationLine: 'none',
+        textUnderlineOffset: '3px',
+        textDecorationColor: '$slate4',
+
+        '@hover': {
+          '&:hover': {
+            textDecorationLine: 'underline',
+          },
+        },
+        '&:focus': {
+          textDecorationLine: 'none',
+        },
+      },
+      decorative: {
+        position: 'relative',
+
+        '&::after': {
+          content: `''`,
+          width: '$tw_1p3',
+          position: 'absolute',
+          left: 0,
+          bottom: '$-1',
+          transitionProperty: 'all',
+          transitionTimingFunction: '$in-out',
+          transitionDuration: '200ms',
+          height: '2px',
+        },
+        '&:hover::after': {
+          width: '100%',
+        },
+        '&:focus::after': {
+          width: 0,
+        },
+      },
+    },
     variant: {
       blue: {
         color: '$blue11',
-        textDecorationColor: '$blue4',
         '&:focus': {
           outlineColor: '$blue8',
         },
       },
+      red: {
+        color: '$red11',
+        '&:focus': {
+          outlineColor: '$red8',
+        },
+      },
       subtle: {
         color: '$slate11',
-        textDecorationColor: '$slate4',
         '&:focus': {
           outlineColor: '$slate8',
         },
       },
       contrast: {
         color: '$hiContrast',
-        textDecoration: 'underline',
-        textDecorationColor: '$slate4',
-        '@hover': {
-          '&:hover': {
-            textDecorationColor: '$slate7',
-          },
-        },
         '&:focus': {
           outlineColor: '$slate8',
         },
       },
     },
   },
+  compoundVariants: [
+    {
+      type: 'underline',
+      variant: 'blue',
+      css: {
+        textDecorationColor: '$blue4',
+      },
+    },
+    {
+      type: 'decorative',
+      variant: 'blue',
+      css: {
+        '&::after': {
+          backgroundColor: '$blue4',
+        },
+      },
+    },
+    {
+      type: 'underline',
+      variant: 'red',
+      css: {
+        textDecorationColor: '$red4',
+      },
+    },
+    {
+      type: 'decorative',
+      variant: 'red',
+      css: {
+        '&::after': {
+          backgroundColor: '$red4',
+        },
+      },
+    },
+    {
+      type: 'underline',
+      variant: 'subtle',
+      css: {
+        textDecorationColor: '$slate4',
+      },
+    },
+    {
+      type: 'decorative',
+      variant: 'subtle',
+      css: {
+        '&::after': {
+          backgroundColor: '$red4',
+        },
+      },
+    },
+    {
+      type: 'underline',
+      variant: 'contrast',
+      css: {
+        textDecorationLine: 'underline',
+        textDecorationColor: '$slate4',
+        '@hover': {
+          '&:hover': {
+            textDecorationColor: '$slate7',
+          },
+        },
+      },
+    },
+    {
+      type: 'decorative',
+      variant: 'contrast',
+      css: {
+        '&::after': {
+          backgroundColor: '$red8',
+        },
+      },
+    },
+  ],
   defaultVariants: {
+    type: 'underline',
     variant: 'contrast',
   },
 })
+
+type NextLinkProps = ReactProps<typeof PrimitiveLink>
+export function NextLink(
+  props: Omit<ReactProps<typeof Link>, 'href'> &
+    Omit<NextLinkProps, 'passHref' | 'as'> & {
+      asUrl?: Url
+    }
+) {
+  const { asUrl, prefetch, replace, scroll, shallow, locale, href, ...rest } =
+    props
+  return (
+    <PrimitiveLink
+      passHref
+      as={asUrl}
+      href={href}
+      prefetch={prefetch}
+      replace={replace}
+      scroll={scroll}
+      shallow={shallow}
+      locale={locale}
+    >
+      <Link {...rest} />
+    </PrimitiveLink>
+  )
+}
