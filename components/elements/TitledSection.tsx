@@ -12,9 +12,11 @@ type Props = ReactProps<typeof Section> & {
     href: string
   }
   css?: CSS
+
+  headingProps?: ReactProps<typeof Heading>
 }
 export function TitledSection(props: Props) {
-  const { title, hotlink, children, ...rest } = props
+  const { title, hotlink, children, headingProps, ...rest } = props
   return (
     <Section size="3" {...rest}>
       <Box css={{ mb: '$4', display: 'flex', ai: 'center' }}>
@@ -24,6 +26,7 @@ export function TitledSection(props: Props) {
             css={{
               mr: '$5',
             }}
+            {...headingProps}
           >
             {title}
           </Heading>
