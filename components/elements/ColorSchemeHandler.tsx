@@ -32,6 +32,8 @@ export default function ColorSchemeHandler() {
     const colorScheme = getTheme(pref)
     setColorScheme(colorScheme)
     document.body.classList.add(colorScheme)
+    document.documentElement.style.colorScheme =
+      colorScheme === Token.dark ? 'dark' : 'light'
   }, [pref])
 
   return <></>
