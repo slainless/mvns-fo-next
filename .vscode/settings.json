@@ -6,8 +6,8 @@
     "type",
     "function",
     "block",
-    "element",
     "style",
-    "api"
+    "api",
+    "page"
   ]
 }
