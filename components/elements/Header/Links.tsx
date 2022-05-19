@@ -1,8 +1,10 @@
 import { Flex } from '@Components/Flex'
 import { Box } from '@Components/Box'
-import { Link } from '@Components/Link'
+import { Link, NextLink } from '@Components/Link'
 import ThemeToggler from '@Components/ThemeToggler'
 import FullMenu from './FullMenu'
+import Login from '../Login'
+import Register from '../Register'
 
 export default function Links() {
   return (
@@ -11,10 +13,6 @@ export default function Links() {
       css={{
         jc: 'flex-end',
         ai: 'center',
-
-        [`& ${Link}`]: {
-          mr: '$4',
-        },
       }}
     >
       <Box
@@ -24,11 +22,29 @@ export default function Links() {
           '@lg': {
             display: 'contents',
           },
+
+          '& > a::after': {
+            width: 0,
+          },
+
+          [`& > ${Link}`]: {
+            mr: '$4',
+          },
         }}
       >
-        <Link href="#">Become Instructor</Link>
-        <Link href="#">Log In</Link>
-        <Link href="#">Register</Link>
+        <NextLink type="decorative" href="/instructor">
+          Become Instructor
+        </NextLink>
+        <Login>
+          <Link type="decorative" href="javascript:void(0)">
+            Log In
+          </Link>
+        </Login>
+        <Register>
+          <Link type="decorative" href="#">
+            Register
+          </Link>
+        </Register>
         <ThemeToggler />
       </Box>
       <Box

@@ -1,0 +1,61 @@
+import { Alert } from '@Components/Alert'
+import { Button } from '@Components/Button'
+import { Text } from '@Components/Text'
+import createStateStore from '@Functions/use-state'
+import { Cross2Icon } from '@radix-ui/react-icons'
+import create from 'zustand'
+
+export type AlertState = {
+  heading: string
+  text: string
+  variant: 'red'
+} | null
+
+export const useAlertState = createStateStore<AlertState>(null)
+export default function AlertFeedback() {
+  const [state, setState] = useAlertState()
+  if (state == null) return null
+  const { variant, heading, text } = state
+  return (
+    <Alert
+      variant={variant}
+      css={{
+        mb: '$4',
+        position: 'relative',
+      }}
+    >
+      <Text
+        size="3"
+        variant={variant}
+        css={{
+          mb: '$1',
+          fontWeight: '$bold',
+        }}
+      >
+        {heading}
+      </Text>
+      <Text size="2" variant={variant}>
+        {text}
+      </Text>
+      <Button
+        variant="red"
+        css={{
+          rounded: '$full',
+          px: 0,
+          width: '$5',
+          height: '$5',
+          position: 'absolute',
+          top: '$1',
+          right: '$1',
+          transformOrigin: 'top right',
+          transform: 'scale(0.7)',
+        }}
+        size="1"
+        type="button"
+        onClick={() => setState(null)}
+      >
+        <Cross2Icon />
+      </Button>
+    </Alert>
+  )
+}

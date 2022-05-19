@@ -1,7 +1,7 @@
 import { Box } from '@Components/Box'
 import { Flex } from '@Components/Flex'
 import { Grid } from '@Components/Grid'
-import { Link } from '@Components/Link'
+import { NextLink } from '@Components/Link'
 import { Text } from '@Components/Text'
 import { Heading } from '@Components/Heading'
 import { Icon } from '@Components/Icon'
@@ -50,17 +50,25 @@ function List(props: ListProps) {
         {title}
       </Heading>
       {items?.map((item, i) => (
-        <Link
+        <NextLink
+          type="decorative"
           href={item.href}
           key={i}
           css={{
             fontSet: '$sm',
             color: '$loContrast',
             fontFamily: '$poppins',
+            maxWidth: 'max-content',
+            '&::after': {
+              width: 0,
+            },
+            '&:hover': {
+              color: '$red8',
+            },
           }}
         >
           {item.display}
-        </Link>
+        </NextLink>
       ))}
     </Flex>
   )
@@ -87,17 +95,20 @@ export default function Footer() {
           <StyledList
             title="Mavensdotlive"
             items={[
-              { display: 'About Us', href: '' },
+              { display: 'About Us', href: '/about-us' },
               { display: 'For Business', href: '' },
               { display: 'Become a Partner', href: '' },
-              { display: 'Become an Instructor', href: '' },
+              {
+                display: 'Become an Instructor',
+                href: '/become-an-instructor',
+              },
               { display: 'Careers', href: '' },
             ]}
           />
           <StyledList
             title="Classes"
             css={{
-              gridColumn: '2/5',
+              gridColumn: 'span 3',
             }}
             items={[
               { display: 'Online', href: '' },
@@ -109,12 +120,12 @@ export default function Footer() {
           <StyledList
             title="More"
             items={[
-              { display: 'FAQs', href: '' },
+              { display: 'FAQs', href: '/faq' },
               { display: 'Terms', href: '' },
-              { display: 'Privacy', href: '' },
+              { display: 'Policy', href: '/policy' },
               { display: 'Blog', href: '' },
               { display: 'Sitemap', href: '' },
-              { display: 'Contact', href: '' },
+              { display: 'Contact', href: '/contact' },
             ]}
           />
         </Grid>

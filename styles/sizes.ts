@@ -47,4 +47,5 @@ export default {
   'container-lg': '1024px',
   'container-xl': '1280px',
   'container-2xl': '1536px',
+  header: '4rem',
 }

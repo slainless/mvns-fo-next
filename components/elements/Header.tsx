@@ -6,6 +6,7 @@ import Links from './Header/Links'
 import { Token, useColorSchemeStore } from '@Functions/use-color-scheme'
 import { Logo } from './Logo'
 import { darkTheme, styled } from '@Theme'
+import Link from 'next/link'
 
 const MavensLogo = styled(Logo, {
   height: 'inherit',
@@ -26,7 +27,7 @@ export default function Header() {
         zIndex: '$50',
         boxShadow: 'inset 0 -1px 0 $colors$slate6',
         top: 0,
-        height: '$8',
+        height: '$header',
       }}
     >
       <Grid
@@ -43,9 +44,11 @@ export default function Header() {
           height: '100%',
         }}
       >
-        <Box css={{ height: '$tw_10', '@lg': { height: '$7' } }}>
-          <MavensLogo />
-        </Box>
+        <Link href="/" passHref>
+          <Box as="a" css={{ height: '$tw_10', '@lg': { height: '$7' } }}>
+            <MavensLogo />
+          </Box>
+        </Link>
         {/* <Image
           src={
             colorScheme === Token.dark
