@@ -6,6 +6,7 @@ import {
 } from '@Functions/use-color-scheme'
 import shallow from 'zustand/shallow'
 import { useEffect, useRef, useState } from 'react'
+import { useIsomorphicLayoutEffect } from 'ahooks'
 
 const getTheme = (pref: Preference) => {
   return {
@@ -23,11 +24,11 @@ const getTheme = (pref: Preference) => {
 
 export default function ColorSchemeHandler() {
   const [pref, setColorScheme] = useColorSchemeStore(
-    (state) => [state.preference, state.setColorScheme] as const
-    // shallow
+    (state) => [state.preference, state.setColorScheme] as const,
+    shallow
   )
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     document.body.classList.remove(Token.light, Token.dark)
     const colorScheme = getTheme(pref)
     setColorScheme(colorScheme)
