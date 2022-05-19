@@ -36,7 +36,7 @@ export default function Blog() {
       title="Our Blog"
       hotlink={{
         display: 'See all',
-        href: '/blog/all',
+        href: '/blog',
       }}
     >
       <Swiper

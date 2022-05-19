@@ -11,13 +11,13 @@ export default function Trending() {
       title="Video on demand"
       hotlink={{
         display: 'See all classes',
-        href: '/class/all',
+        href: '/class',
       }}
     >
       <Swiper
-        swiperOptions={CardPreset.Large}
+        swiperOptions={CardPreset.Normal}
         swiperCSS={{
-          height: '24rem',
+          height: '28rem',
         }}
       >
         {largeCard.map((props, i) => (

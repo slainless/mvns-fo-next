@@ -3,7 +3,7 @@ import { Button } from '@Components/Button'
 import { Flex } from '@Components/Flex'
 import { Heading } from '@Components/Heading'
 import { Image } from '@Components/Image'
-import { Link } from '@Components/Link'
+import { Link, NextLink } from '@Components/Link'
 import { Paragraph } from '@Components/Paragraph'
 import { Section } from '@Components/Section'
 import { Text } from '@Components/Text'
@@ -64,9 +64,10 @@ export default function Hero() {
         <Heading
           as="h1"
           css={{
-            fontFamily: '$display',
+            ff: '$anybody',
+            fontVariationSettings: `'wdth' 70`,
             textTransform: 'uppercase',
-            fontWeight: '$black',
+            fontWeight: '$bold',
             mb: '$5',
             // mx: 'auto',
             width: 'max-content',
@@ -75,34 +76,19 @@ export default function Hero() {
           <Text
             as="span"
             css={{
-              fontSet: '$8xl',
+              fontSet: '$9xl',
               fontWeight: 'inherit',
-              lineHeight: '0.5 !important',
-
-              '@sm': {
-                fontSet: '$9xl',
-              },
-              '@lg': {
-                fontSet: '$8xl',
-              },
             }}
           >
             Get
           </Text>
-          <br />
           <Text
             as="span"
             css={{
+              fontSet: '$7xl',
               color: '$red9',
-              fontSet: '$5xl',
               fontWeight: 'inherit',
-
-              '@sm': {
-                fontSet: '$6xl',
-              },
-              '@lg': {
-                fontSet: '$6xl',
-              },
+              mt: '$-5',
             }}
           >
             Certified!
@@ -131,7 +117,9 @@ export default function Hero() {
         </Button>
         <Text>
           Not sure what to learn?{' '}
-          <Link css={{ ml: '$1' }}>View all classes</Link>
+          <NextLink css={{ ml: '$1' }} href="/class">
+            View all classes
+          </NextLink>
         </Text>
       </Flex>
     </Section>

@@ -1,6 +1,8 @@
 import { Box } from '@Components/Box'
 import { Flex } from '@Components/Flex'
+import { Grid } from '@Components/Grid'
 import { Link } from '@Components/Link'
+import { Text } from '@Components/Text'
 import { Heading } from '@Components/Heading'
 import { TitledSection } from '@Components/TitledSection'
 
@@ -22,17 +24,35 @@ export default function Category() {
       css={{
         backgroundImage: `url('/media/neonbrand-1-aA2Fadydc-unsplash.jpg')`,
         backgroundSize: 'cover',
+        position: 'relative',
         height: '1800px',
         width: '100%',
-        my: '$9',
+        mt: '$9',
       }}
     >
-      <Flex
+      <Box
+        css={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          inset: 0,
+          transitionProperty: 'all',
+          transitionTimingFunction: '$in-out',
+          transitionDuration: '100ms',
+          backgroundColor: '$blackA9',
+          ':hover > &': {
+            backgroundColor: '$blackA11',
+          },
+        }}
+      ></Box>
+      <Grid
+        columns={2}
         container="xl"
         css={{
-          py: '$6',
+          py: '$9',
           position: 'sticky',
           top: '$8',
+          columnGap: '$9',
         }}
       >
         <Box
@@ -41,7 +61,13 @@ export default function Category() {
             maxWidth: '$lg',
           }}
         >
-          <Heading size="4">
+          <Heading
+            size="4"
+            css={{
+              fontWeight: '$black',
+              color: '$whiteA11',
+            }}
+          >
             Choose a category to watch a class highlight.
           </Heading>
         </Box>
@@ -51,21 +77,48 @@ export default function Category() {
               flexDirection: 'column',
               width: 'max-content',
               rowGap: '$2',
-              mx: 'auto',
+              ff: '$spaceGrotesk',
+              fontWeight: '$semibold',
             }}
           >
             {categories.map((cat) => (
-              <Link
+              <Text
                 css={{
-                  fontSet: '$3xl',
+                  fontSet: '$4xl',
+                  fontWeight: 'inherit',
+                  color: '$whiteA11',
+                  dropShadow: '$md',
+                  transitionTimingFunction: '$in-out',
+                  transitionProperty: 'all',
+                  transitionDuration: '100ms',
+
+                  '&:hover': {
+                    color: '$whiteA12',
+                  },
+
+                  '&::before': {
+                    content: `''`,
+                    display: 'inline-block',
+                    height: '$2',
+                    width: 0,
+                    backgroundColor: '$red8',
+                    transitionTimingFunction: '$in-out',
+                    transitionProperty: 'all',
+                    transitionDuration: '100ms',
+                  },
+
+                  '&:hover::before': {
+                    width: '$2',
+                    mr: '$2',
+                  },
                 }}
               >
                 {cat[0]}
-              </Link>
+              </Text>
             ))}
           </Flex>
         </Box>
-      </Flex>
+      </Grid>
     </Box>
   )
 }

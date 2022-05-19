@@ -11,7 +11,7 @@ export default function Trending() {
       title="What's Trending Now"
       hotlink={{
         display: 'See all classes',
-        href: '/class/all',
+        href: '/class',
       }}
     >
       <Swiper

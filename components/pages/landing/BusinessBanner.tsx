@@ -45,17 +45,18 @@ export default function BusinessBanner() {
         >
           <Heading
             as="h2"
-            size="2"
+            size="3"
             css={{
-              fontFamily: '$display',
+              ff: '$anybody',
               letterSpacing: '$wide',
+              fontVariationSettings: `'wdth' 70`,
               color: '$red11',
               mb: '$4',
             }}
           >
             <StyledSlot
               css={{
-                fontSet: '$6xl',
+                fontSet: '$7xl',
               }}
             >
               <span>Mavens</span>
@@ -64,8 +65,8 @@ export default function BusinessBanner() {
             <br />
             <StyledSlot
               css={{
-                fontSet: '$6xl',
-                fontWeight: '$black',
+                fontSet: '$7xl',
+                fontWeight: '$bold',
                 color: '$red12',
               }}
             >
