@@ -115,3 +115,4 @@ export function Swiper(props: Props) {
     </Box>
   )
 }
+Swiper.displayName = 'Swiper'

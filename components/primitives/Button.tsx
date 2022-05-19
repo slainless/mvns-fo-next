@@ -16,7 +16,7 @@ export const Button: <T extends keyof ReactHTML = 'button'>(
   props: HTMLAttr<T>
 ) => JSX.Element = forwardRef((props, ref) => {
   const controlRef = useRef(null)
-  const mergedRef = ref == null ? controlRef : useMergedRef(ref, controlRef)
+  const mergedRef = useMergedRef(ref ?? (() => {}), controlRef)
   const { buttonProps } = useButton(
     // @ts-ignore
     {
@@ -31,4 +31,4 @@ export const Button: <T extends keyof ReactHTML = 'button'>(
     ref: mergedRef,
   })
 })
-Button['displayButton'] = 'AriaButton'
+Button['displayName'] = 'Aria.Button'

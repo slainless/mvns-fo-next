@@ -94,8 +94,9 @@ export default function ArticleCard(
             gap: '$2',
           }}
         >
-          {tags?.map((tag) => (
+          {tags?.map((tag, i) => (
             <Badge
+              key={i}
               className="card-tag"
               variant="red"
               {...merge(

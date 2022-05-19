@@ -64,3 +64,4 @@ export const Handler = forwardRef<ElementRef<'div'>, Props>((props, ref) => {
     </Div>
   )
 })
+Handler.displayName = 'Toaster.Handler'

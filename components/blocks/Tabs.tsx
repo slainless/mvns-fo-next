@@ -108,6 +108,7 @@ export const TabsList = React.forwardRef<
     />
   </>
 ))
+TabsList.displayName = 'Tabs.List'
 
 export const TabsContent = styled(TabsPrimitive.Content, {
   flexGrow: 1,

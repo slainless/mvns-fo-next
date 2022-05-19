@@ -48,3 +48,4 @@ export const Paragraph = React.forwardRef<
     />
   )
 })
+Paragraph.displayName = 'Paragraph'

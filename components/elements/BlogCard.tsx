@@ -75,9 +75,10 @@ export default function BlogCard(props: Props) {
           }}
         >
           {!isEmpty(badges) &&
-            badges!.map((badge) => (
+            badges!.map((badge, i) => (
               <Badge
                 as="a"
+                key={i}
                 interactive
                 css={{ rounded: '$full', px: '$2' }}
                 href={badge.href}

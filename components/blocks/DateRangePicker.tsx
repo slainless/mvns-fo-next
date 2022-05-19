@@ -8,6 +8,10 @@ import { TextField } from './TextField'
 import { Button as PrimitiveButton } from './Button'
 import * as DF from './DateField'
 export { Segment, Segments } from './DateField'
+import { makeDisplayName } from '@Functions/display-name'
+
+const MODULE_NAME = 'DateRangePicker'
+const name = makeDisplayName(MODULE_NAME)
 
 const StyledContent = styled(BaseDRP.Content)
 // export const DateRangePicker = forwardRef<
@@ -54,6 +58,7 @@ export const StartSegments = forwardRef<
     </StartField>
   )
 })
+StartSegments.displayName = name('StartSegments')
 
 export const EndSegments = forwardRef<
   ElementRef<typeof EndField>,
@@ -65,3 +70,4 @@ export const EndSegments = forwardRef<
     </EndField>
   )
 })
+EndSegments.displayName = name('EndSegments')

@@ -123,7 +123,7 @@ export default function LoginForm() {
             textAlign: 'center',
           }}
         >
-          Don't have an account? <Link variant="blue">Sign up</Link>
+          Don&apos;t have an account? <Link variant="blue">Sign up</Link>
         </Text>
       </Flex>
     </form>

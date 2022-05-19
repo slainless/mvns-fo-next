@@ -71,3 +71,4 @@ export const RadioCard = React.forwardRef<
     {props.children}
   </StyledRadio>
 ))
+RadioCard.displayName = 'RadioCard'

@@ -58,5 +58,6 @@ export const Select = React.forwardRef<
     <StyledCaretSortIcon />
   </SelectWrapper>
 ))
+Select.displayName = 'Select'
 
 Select.toString = () => `.${SelectWrapper.className}`

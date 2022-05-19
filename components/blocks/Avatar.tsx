@@ -299,3 +299,4 @@ export const Avatar = React.forwardRef<
     )
   }
 )
+Avatar.displayName = 'Avatar'

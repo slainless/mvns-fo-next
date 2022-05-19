@@ -226,8 +226,8 @@ function Weeks() {
   return (
     <>
       {N(weeksInMonth).map((_, weekIndex) => (
-        <Tr>
-          <Days key={weekIndex} weekIndex={weekIndex} />
+        <Tr key={weekIndex}>
+          <Days weekIndex={weekIndex} />
         </Tr>
       ))}
     </>

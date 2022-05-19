@@ -10,3 +10,4 @@ const StyledAnimated = styled(animated.div)
 export const Container = forwardRef<ElementRef<'div'>, Props>((props, ref) => {
   return <StyledAnimated {...props} ref={ref} />
 })
+Container.displayName = 'Toaster.Container'

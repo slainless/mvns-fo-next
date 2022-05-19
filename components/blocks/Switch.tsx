@@ -90,3 +90,4 @@ export const Switch = React.forwardRef<
     <StyledThumb />
   </StyledSwitch>
 ))
+Switch.displayName = 'Switch'

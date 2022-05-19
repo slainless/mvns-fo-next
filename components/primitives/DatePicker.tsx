@@ -20,6 +20,10 @@ import * as DateField from './DateField'
 import { Button as PrimitiveButton } from './Button'
 import { Root as PrimitiveCalendar } from './Calendar'
 import { CalendarStateOptions } from '@react-stately/calendar'
+import { makeDisplayName } from '@Functions/display-name'
+
+const MODULE_NAME = 'DatePicker'
+const name = makeDisplayName(MODULE_NAME)
 
 export const Root = (
   props: DatePickerStateOptions & { children: ReactNode }
@@ -46,12 +50,12 @@ export const Root = (
 export const Content = forwardRef<ElementRef<'div'>, ComponentProps<'div'>>(
   (props, ref) => {
     const context = useDatePickerContext()
-    const mergedRef =
-      context?.controlRef == null ? ref : useMergedRef(ref, context.controlRef)
+    const mergedRef = useMergedRef(ref, context?.controlRef ?? (() => {}))
 
     return <div {...context?.groupProps} {...props} ref={mergedRef} />
   }
 )
+Content.displayName = name('Content')
 
 export const Field = forwardRef<
   ElementRef<typeof DateField.Root>,
@@ -62,6 +66,7 @@ export const Field = forwardRef<
   // @ts-expect-error
   return <DateField.Root {...context?.fieldProps} {...props} ref={ref} />
 })
+Field.displayName = name('Field')
 
 export const Label = forwardRef<ElementRef<'label'>, ComponentProps<'label'>>(
   (props, ref) => {
@@ -70,6 +75,7 @@ export const Label = forwardRef<ElementRef<'label'>, ComponentProps<'label'>>(
     return <span {...context?.labelProps} {...props} ref={ref} />
   }
 )
+Label.displayName = name('Label')
 
 export const Button = forwardRef<
   ElementRef<typeof PrimitiveButton>,
@@ -86,6 +92,7 @@ export const Button = forwardRef<
     />
   )
 })
+Button.displayName = name('Button')
 
 export const Calendar = (props: CalendarStateOptions) => {
   const context = useDatePickerContext()

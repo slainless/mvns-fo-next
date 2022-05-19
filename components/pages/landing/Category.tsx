@@ -81,8 +81,9 @@ export default function Category() {
               fontWeight: '$semibold',
             }}
           >
-            {categories.map((cat) => (
+            {categories.map((cat, i) => (
               <Text
+                key={i}
                 css={{
                   fontSet: '$4xl',
                   fontWeight: 'inherit',

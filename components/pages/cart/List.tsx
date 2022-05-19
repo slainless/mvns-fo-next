@@ -106,12 +106,13 @@ export default function List() {
       <Card>
         <Table {...getTableProps()}>
           <Thead>
-            {headerGroups.map((headerGroup) => (
-              <Tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => {
+            {headerGroups.map((headerGroup, i) => (
+              <Tr key={i} {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column, i) => {
                   const { className, ...rest } = column.getHeaderProps()
                   return (
                     <Th
+                      key={i}
                       css={{
                         borderColor: '$slate6',
                         fontSize: '$sm !important',
@@ -146,10 +147,11 @@ export default function List() {
             ))}
           </Thead>
           <Tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
+            {rows.map((row, i) => {
               prepareRow(row)
               return (
                 <Tr
+                  key={i}
                   css={{
                     borderColor: '$slate4',
                     '&:last-child > td': {
@@ -158,8 +160,9 @@ export default function List() {
                   }}
                   {...row.getRowProps()}
                 >
-                  {row.cells.map((cell) => (
+                  {row.cells.map((cell, i) => (
                     <Td
+                      key={i}
                       css={{
                         px: '$2',
                         borderColor: '$slate4',

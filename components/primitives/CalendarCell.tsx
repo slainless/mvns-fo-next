@@ -15,18 +15,29 @@ import {
   useRangeCalendarContext,
 } from './CalendarContext'
 import { Button as PrimitiveButton } from './Button'
+import { makeDisplayName } from '@Functions/display-name'
+
+const MODULE_NAME = 'CalendarCell'
+const name = makeDisplayName(MODULE_NAME)
 
 export function Root(props: AriaCalendarCellProps & { children: ReactNode }) {
   const { children, ...rest } = props
-  const state = useCalendarContext() || useRangeCalendarContext()
+  const normalContext = useCalendarContext()
+  const rangeContext = useRangeCalendarContext()
+  const commonContext = normalContext || rangeContext
+
   const context = useCalendarGridContext()
   const controlRef = useRef<HTMLDivElement>(null)
-  if (state == null)
+  if (commonContext == null)
     throw new Error(
       'CalendarCell.Root can only be used inside Calendar.Root context'
     )
 
-  const contextProps = useCalendarCell(rest, state.calendarState, controlRef)
+  const contextProps = useCalendarCell(
+    rest,
+    commonContext.calendarState,
+    controlRef
+  )
 
   return (
     <CalendarCellContext.Provider
@@ -39,6 +50,7 @@ export function Root(props: AriaCalendarCellProps & { children: ReactNode }) {
     </CalendarCellContext.Provider>
   )
 }
+Root.displayName = name('Root')
 
 export const Content = forwardRef<ElementRef<'div'>, ComponentProps<'div'>>(
   (props, ref) => {
@@ -47,6 +59,7 @@ export const Content = forwardRef<ElementRef<'div'>, ComponentProps<'div'>>(
     return <div {...props} {...context?.cellProps} ref={ref} />
   }
 )
+Content.displayName = name('Content')
 
 export const Button = forwardRef<
   ElementRef<typeof PrimitiveButton>,
@@ -57,5 +70,6 @@ export const Button = forwardRef<
   // @ts-ignore
   return <PrimitiveButton {...props} {...context?.buttonProps} ref={ref} />
 })
+Button.displayName = name('Button')
 
 export const Consumer = CalendarCellContext.Consumer

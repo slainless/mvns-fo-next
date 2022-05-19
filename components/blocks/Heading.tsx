@@ -50,3 +50,4 @@ export const Heading = React.forwardRef<
     />
   )
 })
+Heading.displayName = 'Heading'

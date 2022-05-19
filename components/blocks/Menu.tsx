@@ -95,6 +95,7 @@ export const MenuRadioItem = React.forwardRef<
     {children}
   </StyledMenuRadioItem>
 ))
+MenuRadioItem.displayName = 'Menu.RadioItem'
 
 const StyledMenuCheckboxItem = styled(MenuPrimitive.CheckboxItem, itemCss)
 
@@ -116,6 +117,7 @@ export const MenuCheckboxItem = React.forwardRef<
     {children}
   </StyledMenuCheckboxItem>
 ))
+MenuCheckboxItem.displayName = 'Menu.CheckboxItem'
 
 export const MenuLabel = styled(MenuPrimitive.Label, labelCss)
 export const MenuRadioGroup = styled(MenuPrimitive.RadioGroup, {})

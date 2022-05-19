@@ -25,8 +25,11 @@ const name = makeDisplayName(MODULE_NAME)
 export function Root(props: AriaCalendarGridProps & { children: ReactNode }) {
   const { children, ...rest } = props
   const { locale } = useLocale()
-  const context = useCalendarContext() || useRangeCalendarContext()
-  const state = context?.calendarState
+  const normalContext = useCalendarContext()
+  const rangedContext = useRangeCalendarContext()
+  const commonContext = normalContext || rangedContext
+
+  const state = commonContext?.calendarState
   if (state == null)
     throw new Error('CalendarGrid should be used in Calendar context!')
 

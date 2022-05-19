@@ -73,6 +73,7 @@ export const DialogContent = React.forwardRef<
     </StyledCloseButton>
   </StyledContent>
 ))
+DialogContent.displayName = 'Dialog.Content'
 
 export const DialogTrigger = DialogPrimitive.Trigger
 export const DialogClose = DialogPrimitive.Close

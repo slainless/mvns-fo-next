@@ -44,25 +44,26 @@ export function Team(props: Props) {
   )
 }
 
-export const toTeam: ConversionType<Props> = (_) => (props) => {
-  const figures = getChildrenByType(props.children, ['figure'])
-  const members = figures.map((fig) => {
-    const img = getChildByType(fig['props']?.children, ['img'])
-    const caption = getChildByType(fig['props']?.children, ['figcaption'])
-    const name = getChild(
-      caption['props']?.children,
-      (child) => child?.['props']?.['as'] === 'name'
-    )
-    const position = getChild(
-      caption['props']?.children,
-      (child) => child?.['props']?.['as'] === 'position'
-    )
+export const toTeam: ConversionType<Props> = (_) =>
+  function TeamComponent(props) {
+    const figures = getChildrenByType(props.children, ['figure'])
+    const members = figures.map((fig) => {
+      const img = getChildByType(fig['props']?.children, ['img'])
+      const caption = getChildByType(fig['props']?.children, ['figcaption'])
+      const name = getChild(
+        caption['props']?.children,
+        (child) => child?.['props']?.['as'] === 'name'
+      )
+      const position = getChild(
+        caption['props']?.children,
+        (child) => child?.['props']?.['as'] === 'position'
+      )
 
-    return {
-      imgSrc: processProps(img['props'])?.src,
-      name: processProps(name?.['props'])?.children,
-      role: processProps(position?.['props'])?.children,
-    }
-  })
-  return <Team members={members}></Team>
-}
+      return {
+        imgSrc: processProps(img['props'])?.src,
+        name: processProps(name?.['props'])?.children,
+        role: processProps(position?.['props'])?.children,
+      }
+    })
+    return <Team members={members}></Team>
+  }

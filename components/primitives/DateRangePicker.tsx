@@ -53,8 +53,7 @@ export const Root = (
 export const Content = forwardRef<ElementRef<'div'>, ComponentProps<'div'>>(
   (props, ref) => {
     const context = useDateRangePickerContext()
-    const mergedRef =
-      context?.controlRef == null ? ref : useMergedRef(ref, context.controlRef)
+    const mergedRef = useMergedRef(ref, context?.controlRef ?? (() => {}))
 
     return <div {...props} {...context?.groupProps} ref={mergedRef} />
   }
