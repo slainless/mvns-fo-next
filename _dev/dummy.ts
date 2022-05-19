@@ -242,97 +242,227 @@ export const blogCards: ReactProps<typeof BlogCard>[] = [
   },
 ]
 
-// export const blogItems: Parameters<typeof Item>[0][] = [
-//   {
-//     title: `Everything You Need to Know About Business`,
-//     desc: lorem,
-//     tags: ['News', 'Business'],
-//     backgroundUrl: '/media/blog-thumb.png',
-//     date: new Date('20 January 2022'),
-//     href: '/blog/detail',
-//   },
-//   {
-//     title: `Everything You Need to Know About Business`,
-//     desc: lorem,
-//     tags: ['News', 'Business'],
-//     backgroundUrl: '/media/blog-thumb.png',
-//     date: new Date('20 January 2022'),
-//     href: '/blog/detail',
-//   },
-//   {
-//     title: `Everything You Need to Know About Business`,
-//     desc: lorem,
-//     tags: ['News', 'Business'],
-//     backgroundUrl: '/media/blog-thumb.png',
-//     date: new Date('20 January 2022'),
-//     href: '/blog/detail',
-//   },
-//   {
-//     title: `Everything You Need to Know About Business`,
-//     desc: lorem,
-//     tags: ['News', 'Business'],
-//     backgroundUrl: '/media/blog-thumb.png',
-//     date: new Date('20 January 2022'),
-//     href: '/blog/detail',
-//   },
-//   {
-//     title: `Everything You Need to Know About Business`,
-//     desc: lorem,
-//     tags: ['News', 'Business'],
-//     backgroundUrl: '/media/blog-thumb.png',
-//     date: new Date('20 January 2022'),
-//     href: '/blog/detail',
-//   },
-// ]
+export const blogItems: Parameters<typeof BlogCard>[0][] = [
+  {
+    title: `Everything You Need to Know About Business`,
+    summary: lorem,
+    badges: [
+      {
+        display: 'News',
+        href: '',
+      },
+      {
+        display: 'Tech',
+        href: '',
+      },
+    ],
+    backgroundUrl: '/media/blog-thumb.png',
+    date: new Date('20 January 2022'),
+    href: '/blog/detail',
+  },
+  {
+    title: `Everything You Need to Know About Business`,
+    summary: lorem,
+    badges: [
+      {
+        display: 'News',
+        href: '',
+      },
+      {
+        display: 'Tech',
+        href: '',
+      },
+    ],
+    backgroundUrl: '/media/blog-thumb.png',
+    date: new Date('20 January 2022'),
+    href: '/blog/detail',
+  },
+  {
+    title: `Everything You Need to Know About Business`,
+    summary: lorem,
+    badges: [
+      {
+        display: 'News',
+        href: '',
+      },
+      {
+        display: 'Tech',
+        href: '',
+      },
+    ],
+    backgroundUrl: '/media/blog-thumb.png',
+    date: new Date('20 January 2022'),
+    href: '/blog/detail',
+  },
+  {
+    title: `Everything You Need to Know About Business`,
+    summary: lorem,
+    badges: [
+      {
+        display: 'News',
+        href: '',
+      },
+      {
+        display: 'Tech',
+        href: '',
+      },
+    ],
+    backgroundUrl: '/media/blog-thumb.png',
+    date: new Date('20 January 2022'),
+    href: '/blog/detail',
+  },
+  {
+    title: `Everything You Need to Know About Business`,
+    summary: lorem,
+    badges: [
+      {
+        display: 'News',
+        href: '',
+      },
+      {
+        display: 'Tech',
+        href: '',
+      },
+    ],
+    backgroundUrl: '/media/blog-thumb.png',
+    date: new Date('20 January 2022'),
+    href: '/blog/detail',
+  },
+  {
+    title: `Everything You Need to Know About Business`,
+    summary: lorem,
+    badges: [
+      {
+        display: 'News',
+        href: '',
+      },
+      {
+        display: 'Tech',
+        href: '',
+      },
+    ],
+    backgroundUrl: '/media/blog-thumb.png',
+    date: new Date('20 January 2022'),
+    href: '/blog/detail',
+  },
+  {
+    title: `Everything You Need to Know About Business`,
+    summary: lorem,
+    badges: [
+      {
+        display: 'News',
+        href: '',
+      },
+      {
+        display: 'Tech',
+        href: '',
+      },
+    ],
+    backgroundUrl: '/media/blog-thumb.png',
+    date: new Date('20 January 2022'),
+    href: '/blog/detail',
+  },
+  {
+    title: `Everything You Need to Know About Business`,
+    summary: lorem,
+    badges: [
+      {
+        display: 'News',
+        href: '',
+      },
+      {
+        display: 'Tech',
+        href: '',
+      },
+    ],
+    backgroundUrl: '/media/blog-thumb.png',
+    date: new Date('20 January 2022'),
+    href: '/blog/detail',
+  },
+  {
+    title: `Everything You Need to Know About Business`,
+    summary: lorem,
+    badges: [
+      {
+        display: 'News',
+        href: '',
+      },
+      {
+        display: 'Tech',
+        href: '',
+      },
+    ],
+    backgroundUrl: '/media/blog-thumb.png',
+    date: new Date('20 January 2022'),
+    href: '/blog/detail',
+  },
+  {
+    title: `Everything You Need to Know About Business`,
+    summary: lorem,
+    badges: [
+      {
+        display: 'News',
+        href: '',
+      },
+      {
+        display: 'Tech',
+        href: '',
+      },
+    ],
+    backgroundUrl: '/media/blog-thumb.png',
+    date: new Date('20 January 2022'),
+    href: '/blog/detail',
+  },
+]
 
-// type Item = {
-//   product?: {
-//     img: string
-//     name: string
-//   }
-// price?: number
-//   quantity?: number
-//   subtotal?: number
-// }
-// export const cartItems: Item[] = [
-//   {
-//     product: {
-//       img: '/media/image 64.png',
-//       name: 'Statistics Data Science and Business Analysis',
-//     },
-// price: 49.65,
-//     quantity: 2,
-//   },
-//   {
-//     product: {
-//       img: '/media/image 64.png',
-//       name: 'Statistics Data Science and Business Analysis',
-//     },
-// price: 549.65,
-//     quantity: 20,
-//   },
-//   {
-//     product: {
-//       img: '/media/image 64.png',
-//       name: 'Statistics Data Science and Business Analysis',
-//     },
-// price: 49.65,
-//     quantity: 3,
-//   },
-//   {
-//     product: {
-//       img: '/media/image 64.png',
-//       name: 'Statistics Data Science and Business Analysis',
-//     },
-// price: 49.65,
-//     quantity: 7,
-//   },
-//   {
-//     product: {
-//       img: '/media/image 64.png',
-//       name: 'Statistics Data Science and Business Analysis',
-//     },
-// price: 49.65,
-//     quantity: 20,
-//   },
-// ].map((v) => ({ ...v, subtotal: v.price * v.quantity }))
+type Item = {
+  product?: {
+    img: string
+    name: string
+  }
+  price?: number
+  quantity?: number
+  subtotal?: number
+}
+export const cartItems: Item[] = [
+  {
+    product: {
+      img: '/media/image 64.png',
+      name: 'Statistics Data Science and Business Analysis',
+    },
+    price: 49.65,
+    quantity: 2,
+  },
+  {
+    product: {
+      img: '/media/image 64.png',
+      name: 'Statistics Data Science and Business Analysis',
+    },
+    price: 549.65,
+    quantity: 20,
+  },
+  {
+    product: {
+      img: '/media/image 64.png',
+      name: 'Statistics Data Science and Business Analysis',
+    },
+    price: 49.65,
+    quantity: 3,
+  },
+  {
+    product: {
+      img: '/media/image 64.png',
+      name: 'Statistics Data Science and Business Analysis',
+    },
+    price: 49.65,
+    quantity: 7,
+  },
+  {
+    product: {
+      img: '/media/image 64.png',
+      name: 'Statistics Data Science and Business Analysis',
+    },
+    price: 49.65,
+    quantity: 20,
+  },
+].map((v) => ({ ...v, subtotal: v.price * v.quantity }))
