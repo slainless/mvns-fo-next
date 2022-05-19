@@ -6,6 +6,7 @@
     "type",
     "function",
     "block",
-    "element"
+    "element",
+    "style"
   ]
 }

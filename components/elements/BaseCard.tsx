@@ -117,7 +117,7 @@ export default function BaseCard(props: Props) {
             as="h3"
             className="card-title"
             size="2"
-            css={{ mb: '$2', fontFamily: '$poppins', fontWeight: '$bold' }}
+            css={{ mb: '$2', ff: '$spaceGrotesk', fontWeight: '$bold' }}
           >
             {title}
           </Heading>

@@ -44,6 +44,7 @@ export const Heading = React.forwardRef<
       size={textSize[size]}
       css={{
         fontVariantNumeric: 'proportional-nums',
+        ff: '$spaceGrotesk',
         ...merge(textCss[size], props.css),
       }}
     />

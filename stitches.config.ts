@@ -6,6 +6,8 @@ import space from '@Styles/space'
 import sizes from '@Styles/sizes'
 import {
   fontSizes,
+  fallbackFonts,
+  variableFonts,
   fontWeights,
   lineHeights,
   letterSpacings,
@@ -34,6 +36,8 @@ export const {
     colors: light,
     space,
     fontSizes,
+    fallbackFonts,
+    variableFonts,
     fonts,
     fontWeights,
     lineHeights,
@@ -105,6 +109,18 @@ export const {
       first: '-9999',
       last: '9999',
     },
+    dropShadows: {
+      sm: 'drop-shadow(0 1px 1px rgb(0 0 0 / 0.05))',
+      base: 'drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))',
+      md: 'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06))',
+      lg: 'drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1))',
+      xl: 'drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08))',
+      '2xl': 'drop-shadow(0 25px 25px rgb(0 0 0 / 0.15))',
+      none: 'drop-shadow(0 0 #0000)',
+    },
+    misc: {
+      allFilters: `$$blur $$brightness $$contrast $$grayscale $$hueRotate $$invert $$saturate $$sepia $$dropShadow`,
+    },
   },
   media: {
     bp1: '(min-width: 520px)',
@@ -123,9 +139,16 @@ export const {
     light: '(prefers-color-scheme: light)',
   },
   utils: {
-    fontSet: (v: `$${TailwindKeys}`) => ({
+    fontSet: (v: `$${TailwindKeys}` | 'inherit' | 'initial') => ({
       fontSize: v,
       lineHeight: v,
+    }),
+    ff: (v: Stitches.ScaleValue<'fonts'>) => ({
+      fontFamily: v,
+
+      '@supports (font-variation-settings: normal)': {
+        fontFamily: `$variableFonts${v}`,
+      },
     }),
 
     rounded: (v: Stitches.ScaleValue<'radii'>) => ({
@@ -288,6 +311,54 @@ export const {
 
     shadowBorder: (value: Stitches.PropertyValue<'color'>) => ({
       boxShadow: `inset 0 0 0 1px $colors${value}`,
+    }),
+
+    pseudoUnderline: (o: true) => ({
+      '&::after': {
+        content: `''`,
+        width: '100%',
+        backgroundColor: 'currentColor',
+        position: 'absolute',
+        left: 0,
+        bottom: '$-1',
+        transitionProperty: 'all',
+        transitionTimingFunction: '$in-out',
+        transitionDuration: '200ms',
+        height: '2px',
+      },
+    }),
+
+    rtmv: (o: true) => ({
+      '& :first-child': {
+        mt: 0,
+      },
+      '& :last-child': {
+        mb: 0,
+      },
+    }),
+
+    rtmh: (o: 'ltr' | 'rtl') =>
+      o === 'ltr'
+        ? {
+            '& :first-child': {
+              ml: 0,
+            },
+            '& :last-child': {
+              mr: 0,
+            },
+          }
+        : {
+            '& :first-child': {
+              mr: 0,
+            },
+            '& :last-child': {
+              ml: 0,
+            },
+          },
+
+    dropShadow: (value: Stitches.ScaleValue<'dropShadows'>) => ({
+      $$dropShadow: `$dropShadows${value}`,
+      filter: `$$blur $$brightness $$contrast $$grayscale $$hueRotate $$invert $$saturate $$sepia $$dropShadow`,
     }),
   },
 })

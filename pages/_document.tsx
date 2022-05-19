@@ -19,16 +19,6 @@ export default class Document extends NextDocument {
             id="stitches"
             dangerouslySetInnerHTML={{ __html: getCssAndReset() }}
           />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="true"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=Inter:wght@100;300;400;500;600;700;900&family=Poppins:wght@300;400;500;600;700;900&family=Roboto+Mono&display=swap"
-            rel="stylesheet"
-          />
         </Head>
         <body id="root" className={darkTheme}>
           <Main />

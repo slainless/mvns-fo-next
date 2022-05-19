@@ -1,9 +1,30 @@
 export const fonts = {
-  inter: 'Inter, -apple-system, system-ui, sans-serif',
-  poppins: 'Poppins, -apple-system, system-ui, sans-serif',
-  display:
-    "'Big Shoulders Display', Impact, -apple-system, system-ui, sans-serif",
-  mono: 'Söhne Mono, menlo, monospace',
+  urbanist: 'Urbanist, $fallbackFonts$default',
+  recursive: 'Recursive, $fallbackFonts$default',
+  anybody: 'Anybody, $fallbackFonts$default',
+  spaceGrotesk: `'Space Grotesk', $fallbackFonts$default`,
+  jost: `Jost, $fallbackFonts$default`,
+  inter: `Inter, $fallbackFonts$default`,
+  epilogue: `Epilogue, $fallbackFonts$default`,
+  libreFranklin: `'Libre Franklin', $fallbackFonts$default`,
+  default: `$fallbackFonts$default`,
+}
+
+export const variableFonts: Record<keyof typeof fonts, string> = {
+  urbanist: 'UrbanistVariable',
+  recursive: 'RecursiveVariable',
+  anybody: 'AnybodyVariable',
+  spaceGrotesk: `'Space GroteskVariable'`,
+  jost: 'JostVariable',
+  inter: `InterVariable, $fallbackFonts$default`,
+  epilogue: `EpilogueVariable, $fallbackFonts$default`,
+  libreFranklin: `'Libre FranklinVariable', $fallbackFonts$default`,
+  default: `$fallbackFonts$default`,
+}
+
+export const fallbackFonts = {
+  default:
+    'ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji',
 }
 
 export const fontSizes = {
@@ -18,7 +39,7 @@ export const fontSizes = {
   9: '59px',
   xs: '0.75rem',
   sm: '0.875rem',
-  base: '1rem',
+  md: '1rem',
   lg: '1.125rem',
   xl: '1.25rem',
   '2xl': '1.5rem',
@@ -59,7 +80,7 @@ export const lineHeights = {
   loose: '2',
   xs: '1rem',
   sm: '1.25rem',
-  base: '1.5rem',
+  md: '1.5rem',
   lg: '1.75rem',
   xl: '1.75rem',
   '2xl': '2rem',
