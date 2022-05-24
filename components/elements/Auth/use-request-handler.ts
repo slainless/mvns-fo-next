@@ -1,9 +1,10 @@
+import { useAuthUserStore } from '@Methods/auth'
 import { UserAPI } from '@Methods/user'
 import { APIResponse } from '@Models/response'
 import { AuthUserResponse } from '@Models/user'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
-import { useAlertState } from './Alert'
+import { useAlertStore } from './Alert'
 import { useAlertDialogState } from './AlertDialog'
 import { useLoginControl } from './control'
 
@@ -14,8 +15,9 @@ export default function useRequestHandler(
   requestResult?: ResponseType,
   error?: Error
 ) {
-  const [alert, setAlert] = useAlertState()
-  const [alertDialog, setAlertDialog] = useAlertDialogState()
+  const setUser = useAuthUserStore((state) => state.setUser)
+  const setAlert = useAlertStore((state) => state.set)
+  const setAlertDialog = useAlertDialogState((state) => state.set)
   const { close } = useLoginControl()
 
   useEffect(() => {
@@ -37,6 +39,7 @@ export default function useRequestHandler(
 
       if (data instanceof AuthUserResponse.Login) {
         close()
+        setUser(data.data)
         return void toast(`Logged in`, {
           icon: '👋',
         })

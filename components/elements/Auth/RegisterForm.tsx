@@ -15,7 +15,7 @@ import { FiAtSign, FiEye, FiEyeOff } from 'react-icons/fi'
 import Loader from 'react-loaders'
 import { Grid } from '@Components/Grid'
 import { AuthUserResponse } from '@Models/user'
-import { useAlertState } from './Alert'
+import { useAlertStore } from './Alert'
 import { useAlertDialogState } from './AlertDialog'
 import useRequestHandler from './use-request-handler'
 
@@ -27,7 +27,7 @@ type RegisterInput = {
   confirm_password: string
 }
 export default function RegisterForm() {
-  const [alert, setAlert] = useAlertState()
+  const setAlert = useAlertStore((state) => state.set)
   const [hidePass, setHidePass] = useState(true)
 
   const {

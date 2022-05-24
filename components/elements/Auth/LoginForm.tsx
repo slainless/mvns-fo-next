@@ -12,7 +12,7 @@ import Loader from 'react-loaders'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRequest } from 'ahooks'
 import { UserAPI } from '@Methods/user'
-import { useAlertState } from './Alert'
+import { useAlertStore } from './Alert'
 import useRequestHandler from './use-request-handler'
 
 type LoginInput = {
@@ -20,7 +20,7 @@ type LoginInput = {
   password: string
 }
 export default function LoginForm() {
-  const [alert, setAlert] = useAlertState()
+  const setAlert = useAlertStore((state) => state.set)
   const [hidePass, setHidePass] = useState(true)
 
   const {
