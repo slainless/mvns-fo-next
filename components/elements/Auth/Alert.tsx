@@ -34,7 +34,7 @@ export default function AlertFeedback() {
     >
       <Text
         size="3"
-        variant={variant}
+        color={variant}
         css={{
           mb: '$1',
           fontWeight: '$bold',
@@ -42,7 +42,7 @@ export default function AlertFeedback() {
       >
         {heading}
       </Text>
-      <Text size="2" variant={variant}>
+      <Text size="2" color={variant}>
         {text}
       </Text>
       <Button

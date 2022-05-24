@@ -20,7 +20,7 @@ const StyledBubbleText = styled(Text, {
   },
 
   variants: {
-    variant: {
+    color: {
       red: {
         $$bubbleColor: '$colors$red4',
       },

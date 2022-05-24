@@ -369,3 +369,5 @@ export type { VariantProps } from '@stitches/react'
 export const darkTheme = createTheme('dark-theme', {
   colors: dark,
 })
+
+export const variant = <T extends Record<string, CSS>>(variant: T) => variant

@@ -53,7 +53,7 @@ const StyledHeading = styled($Heading, {
   // mb: '$1',
   defaultVariants: {
     size: false,
-    variant: 'red',
+    color: 'red',
   },
 })
 export const Heading = StyledHeading
