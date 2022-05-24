@@ -14,7 +14,7 @@ export default function CardGrid() {
       {slimCard.map((card, i) => (
         <CourseCard
           key={i}
-          rootCSS={{
+          css={{
             height: '24rem',
           }}
           {...card}

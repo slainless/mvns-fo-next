@@ -1,11 +1,11 @@
 import { Swiper } from '@Components/Swiper'
 import { TitledSection } from '@Components/TitledSection'
 import { SwiperSlide } from 'swiper/react'
-import CourseCard from '@Components/CourseCard'
+import CourseCard, { CourseCardData } from '@Components/CourseCard'
 import * as CardPreset from '@Styles/card'
 import { largeCard } from '@Dev/dummy'
 
-export default function Trending() {
+export default function TypeVideo() {
   return (
     <TitledSection
       title="Video on demand"
@@ -22,7 +22,7 @@ export default function Trending() {
       >
         {largeCard.map((props, i) => (
           <SwiperSlide key={i}>
-            <CourseCard {...props} />
+            <CourseCard hideFavorited={user == null} {...props} />
           </SwiperSlide>
         ))}
       </Swiper>

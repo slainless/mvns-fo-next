@@ -1,7 +1,7 @@
 import { Swiper } from '@Components/Swiper'
 import { TitledSection } from '@Components/TitledSection'
 import { SwiperProps, SwiperSlide } from 'swiper/react'
-import BlogCard from '@Components/BlogCard'
+import BlogCard, { BlogCardData } from '@Components/BlogCard'
 import * as CardPreset from '@Styles/card'
 import { blogCards } from '@Dev/dummy'
 import { merge } from 'lodash-es'

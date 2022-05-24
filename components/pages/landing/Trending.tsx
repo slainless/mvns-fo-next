@@ -1,7 +1,7 @@
 import { Swiper } from '@Components/Swiper'
 import { TitledSection } from '@Components/TitledSection'
 import { SwiperSlide } from 'swiper/react'
-import CourseCard from '@Components/CourseCard'
+import CourseCard, { CourseCardData } from '@Components/CourseCard'
 import * as CardPreset from '@Styles/card'
 import { slimCard } from '@Dev/dummy'
 

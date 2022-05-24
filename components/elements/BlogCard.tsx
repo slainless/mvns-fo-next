@@ -1,72 +1,51 @@
-import { Badge } from '@Components/Badge'
-import { Box } from '@Components/Box'
-import { FiCalendar } from 'react-icons/fi'
 import { isEmpty } from 'lodash-es'
 import { Flex } from '@Components/Flex'
-import { Text } from '@Components/Text'
-import { Icon } from '@Components/Icon'
-import { merge } from 'lodash-es'
-import BaseCard from './BaseCard'
-import Slot from '@Components/Slot'
+import * as Card from '@Components/DisplayCard'
+import { ComponentProps, ElementRef, forwardRef } from 'react'
+import Link from 'next/link'
 
-type Props = ReactProps<typeof BaseCard> & {
+/* -------------------------------------------------------------------------- */
+/*                               Main Component                               */
+/* -------------------------------------------------------------------------- */
+
+export * from '@Components/DisplayCard'
+
+export type BlogCardData = {
+  itemId?: number
   badges?: {
-    display: string
+    display?: string
     href?: string
   }[]
   date?: string | Date
   summary?: string
+  backgroundUrl?: string
+  href?: string
 }
-export default function BlogCard(props: Props) {
-  const {
-    children,
-    badges,
-    backgroundUrl,
-    date,
-    href,
-    headerCSS,
-    contentCSS,
-    ...rest
-  } = props
+
+type CardType = typeof Card.Root
+export const BlogCard = forwardRef<
+  ElementRef<CardType>,
+  ComponentProps<CardType> & BlogCardData
+>((props, ref) => {
+  const { title, badges, backgroundUrl, date, href, itemId } = props
 
   return (
-    <BaseCard
-      backgroundUrl={backgroundUrl}
-      headerCSS={merge(
-        {
-          jc: 'space-between',
-        },
-        headerCSS
-      )}
-      contentCSS={merge(
-        {
-          jc: 'space-between',
-          textAlign: 'left',
-          p: '$6',
-        },
-        contentCSS
-      )}
-      {...rest}
-    >
-      <Slot name="overlay">
-        {!isEmpty(backgroundUrl) && (
-          <Box
-            css={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              opacity: 1,
-              inset: 0,
-              top: '$5',
-              $$overlayColor: '$colors$loContrast',
-              background:
-                'linear-gradient(to bottom, transparent, $$overlayColor)',
-            }}
-          />
-        )}
-      </Slot>
-
-      <Slot name="header">
+    <Card.Root>
+      <Card.Overlay
+        as="img"
+        src={backgroundUrl}
+        css={{
+          objectFit: 'cover',
+        }}
+      />
+      <Card.Overlay
+        css={{
+          rounded: '$3',
+          $$overlayColor: '$colors$blackA11',
+          background: 'linear-gradient(to bottom, transparent, $$overlayColor)',
+        }}
+      />
+      <Card.Header>
         <Flex
           css={{
             flexDirection: 'column',
@@ -76,31 +55,46 @@ export default function BlogCard(props: Props) {
         >
           {!isEmpty(badges) &&
             badges!.map((badge, i) => (
-              <Badge
-                as="a"
-                key={i}
-                interactive
-                css={{ rounded: '$full', px: '$2' }}
-                href={badge.href}
-              >
+              <Card.Badge as="a" href={badge.href} key={i}>
                 {badge.display}
-              </Badge>
+              </Card.Badge>
             ))}
         </Flex>
-      </Slot>
+      </Card.Header>
+      <Card.Content>
+        <Link href={`/blog/read?id=${itemId}`} passHref>
+          <Card.Title
+            as="a"
+            css={{
+              color: 'white',
+              rounded: '$2',
+            }}
+            overlay
+          >
+            {title}
+          </Card.Title>
+        </Link>
 
-      <Slot name="post-content">
+        <Card.ContentSeparator
+          css={{
+            my: '$2',
+            mx: 'auto',
+            bc: '$whiteA11',
+          }}
+        />
+
         {!isEmpty(date) && (
-          <Text size="2" css={{ mb: '$1', color: '$slate11' }}>
-            <Icon>
-              <FiCalendar />
-            </Icon>{' '}
-            {date?.toString()}
-          </Text>
+          <Card.Date
+            css={{
+              mt: '$1',
+              color: '$whiteA12',
+            }}
+          >
+            {date}
+          </Card.Date>
         )}
-      </Slot>
-
-      {children}
-    </BaseCard>
+      </Card.Content>
+    </Card.Root>
   )
-}
+})
+export default BlogCard
