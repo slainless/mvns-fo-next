@@ -1,3 +1,4 @@
+import { useRegisterControl } from '@Components/Auth/control'
 import { Box } from '@Components/Box'
 import { Button } from '@Components/Button'
 import { Flex } from '@Components/Flex'
@@ -7,8 +8,13 @@ import { Link, NextLink } from '@Components/Link'
 import { Paragraph } from '@Components/Paragraph'
 import { Section } from '@Components/Section'
 import { Text } from '@Components/Text'
+import { useAuthUserStore } from '@Methods/auth'
 
 export default function Hero() {
+  const { open } = useRegisterControl()
+  const user = useAuthUserStore((state) => state.user)
+  if (user != null) return <></>
+
   return (
     <Section
       size="2"
@@ -111,6 +117,9 @@ export default function Hero() {
           css={{
             width: '100%',
             mb: '$3',
+          }}
+          onClick={() => {
+            if (user == null) open()
           }}
         >
           Register Now

@@ -6,8 +6,11 @@ import { StyledSlot } from '@Components/Slot'
 import { Image } from '@Components/Image'
 import { TitledSection } from '@Components/TitledSection'
 import { Button } from '@Components/Button'
+import { useAuthUserStore } from '@Methods/auth'
 
 export default function BusinessBanner() {
+  const user = useAuthUserStore((state) => state.user)
+  if (user != null) return <></>
   return (
     <TitledSection>
       <Flex
@@ -45,6 +48,7 @@ export default function BusinessBanner() {
         >
           <Heading
             as="h2"
+            // size="3"
             size="3"
             css={{
               ff: '$anybody',
