@@ -2,7 +2,7 @@ import { Box } from '@Components/Box'
 import { Grid } from '@Components/Grid'
 import { Image } from '@Components/Image'
 import Search from './Header/Search'
-import Links from './Header/Links'
+import Navigation from './Header/Navigation'
 import { Token, useColorSchemeStore } from '@Functions/use-color-scheme'
 import { Logo } from './Logo'
 import { darkTheme, styled } from '@Theme'
@@ -28,6 +28,7 @@ export default function Header() {
         boxShadow: 'inset 0 -1px 0 $colors$slate6',
         top: 0,
         height: '$header',
+        $$maxHeight: '$sizes$7',
       }}
     >
       <Grid
@@ -45,7 +46,10 @@ export default function Header() {
         }}
       >
         <Link href="/" passHref>
-          <Box as="a" css={{ height: '$tw_10', '@lg': { height: '$7' } }}>
+          <Box
+            as="a"
+            css={{ height: '$tw_10', '@lg': { height: '$$maxHeight' } }}
+          >
             <MavensLogo />
           </Box>
         </Link>
@@ -68,7 +72,7 @@ export default function Header() {
             },
           }}
         />
-        <Links />
+        <Navigation />
       </Grid>
     </Box>
   )
