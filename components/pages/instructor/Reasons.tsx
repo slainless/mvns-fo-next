@@ -63,7 +63,7 @@ export default function Reasons() {
       >
         <Reason title="Reach More">
           <Slot name="pre-heading">
-            <Icon thin={false} css={{ mr: '$2' }}>
+            <Icon thin={false} css={{ mr: '$3' }}>
               <FiShare2 />
             </Icon>
           </Slot>
@@ -72,7 +72,7 @@ export default function Reasons() {
         </Reason>
         <Reason title="Teach More">
           <Slot name="pre-heading">
-            <Icon thin={false} css={{ mr: '$2' }}>
+            <Icon thin={false} css={{ mr: '$3' }}>
               <FiBook />
             </Icon>
           </Slot>
@@ -81,7 +81,7 @@ export default function Reasons() {
         </Reason>
         <Reason title="Earn More">
           <Slot name="pre-heading">
-            <Icon thin={false} css={{ mr: '$2' }}>
+            <Icon thin={false} css={{ mr: '$3' }}>
               <FiDollarSign />
             </Icon>
           </Slot>

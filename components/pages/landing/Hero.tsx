@@ -115,7 +115,7 @@ export default function Hero() {
         <Button
           size="3"
           css={{
-            width: '100%',
+            width: '80%',
             mb: '$3',
           }}
           onClick={() => {
