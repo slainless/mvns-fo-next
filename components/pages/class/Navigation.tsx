@@ -2,6 +2,7 @@ import { Grid } from '@Components/Grid'
 import { Box } from '@Components/Box'
 import { Button } from '@Components/Button'
 import { styled } from '@Theme'
+import { useCourseStore } from './use-detail'
 
 const NaviButton = styled(Button, {
   py: '$5',
@@ -14,6 +15,9 @@ const NaviButton = styled(Button, {
   },
 })
 export default function Navigation() {
+  const fallback = useCourseStore((state) => state.shouldFallback)
+  // const fallback = true
+
   return (
     <Box
       css={{
@@ -23,6 +27,7 @@ export default function Navigation() {
         backgroundColor: '$slate1',
         boxShadow: 'inset 0 -1px 0 $colors$slate6',
         zIndex: '40',
+        visibility: fallback ? 'hidden' : undefined,
       }}
     >
       <Grid

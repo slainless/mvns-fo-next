@@ -18,6 +18,9 @@ import {
   PlayIcon,
 } from '@radix-ui/react-icons'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
+import { useCourseStore } from './use-detail'
+import shallow from 'zustand/shallow'
+import { Skeleton } from '@Components/Skeleton'
 
 const TextualIcon = (
   props: ReactProps<typeof StyledSlot> & {
@@ -34,6 +37,16 @@ const TextualIcon = (
   )
 }
 export default function Media() {
+  let { result, fallback } = useCourseStore(
+    (state) => ({
+      result: state.acceptedData,
+      fallback: state.shouldFallback,
+    }),
+    shallow
+  )
+  const data = result?.data
+  // fallback = true
+
   return (
     <Grid
       css={{
@@ -44,21 +57,35 @@ export default function Media() {
     >
       <Box>
         <AspectRatio ratio={16 / 9}>
-          <iframe
-            width="100%"
-            height="100%"
-            src="https://www.youtube.com/embed/oTKXv191tYU"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          {fallback ? (
+            <Skeleton
+              css={{
+                width: '100%',
+                height: '100%',
+              }}
+            />
+          ) : (
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/oTKXv191tYU"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          )}
         </AspectRatio>
       </Box>
-      <Flex direction="column">
+      <Grid
+        css={{
+          gridTemplateRows: 'max-content max-content auto',
+        }}
+      >
         <Grid
           css={{
             gap: '$2',
+            visibility: fallback ? 'hidden' : undefined,
             gridTemplateColumns: 'repeat(2, 1fr)',
             [`& > ${Button}`]: {
               jc: 'flex-start',
@@ -81,61 +108,71 @@ export default function Media() {
           css={{
             my: '$3',
             color: '$slate11',
+            // visibility: fallback ? 'hidden' : undefined,
           }}
         >
           Lessons
         </Heading>
         <Card
           css={{
-            flexGrow: 1,
+            // flexGrow: 1,
+            height: 'max-content',
             position: 'relative',
             // overflow: 'auto',
           }}
         >
-          <Box
-            as="ol"
-            css={{
-              px: '$6',
-              my: 0,
-              position: 'absolute',
-              maxHeight: '100%',
-              overflow: 'auto',
-              '& > li': {
-                py: '$3',
-                position: 'relative',
-                '&:not(:last-child)::after': {
-                  content: '',
-                  height: '1px',
-                  width: 'calc(100% + $6 + $6)',
-                  backgroundColor: '$slate6',
-                  position: 'absolute',
-                  bottom: 0,
-                  left: '$-6',
+          {fallback ? (
+            <Flex
+              direction="column"
+              css={{
+                py: '$4',
+                px: '$6',
+                gap: '$6',
+              }}
+            >
+              <Skeleton css={{ width: '90%' }} />
+              <Skeleton css={{ width: '95%' }} />
+              <Skeleton css={{ width: '85%' }} />
+              <Skeleton css={{ width: '90%' }} />
+            </Flex>
+          ) : (
+            <Box
+              as="ol"
+              css={{
+                px: '$6',
+                my: 0,
+                position: 'absolute',
+                maxHeight: '100%',
+                overflow: 'auto',
+                '& > li': {
+                  py: '$3',
+                  position: 'relative',
+                  '&:not(:last-child)::after': {
+                    content: '',
+                    height: '1px',
+                    width: 'calc(100% + $6 + $6)',
+                    backgroundColor: '$slate6',
+                    position: 'absolute',
+                    bottom: 0,
+                    left: '$-6',
+                  },
+                  '& > span': {
+                    lineHeight: '$sm',
+                    display: 'inline-flex',
+                    pl: '$2',
+                  },
                 },
-                '& > span': {
-                  lineHeight: '$sm',
-                  display: 'inline-flex',
-                  pl: '$2',
-                },
-              },
-            }}
-          >
-            {[
-              'Meet your Instructor',
-              'Your first steps',
-              'Starting Line',
-              `I don't know, this the longest line in this card, so yes let us see how it can adapt to the card`,
-              'Goal Setting',
-              `Balancing the Runner's Mind`,
-              'Running Equipment and Environment',
-            ].map((i, k) => (
-              <li key={k}>
-                <span>{i}</span>
-              </li>
-            ))}
-          </Box>
+              }}
+            >
+              {data?.lessons?.map((i, k) => (
+                <li key={k}>
+                  <span>{i.title}</span>
+                </li>
+              ))}
+            </Box>
+          )}
         </Card>
-      </Flex>
+      </Grid>
     </Grid>
   )
 }

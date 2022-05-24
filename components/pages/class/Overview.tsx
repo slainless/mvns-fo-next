@@ -12,6 +12,11 @@ import { Card } from '@Components/Card'
 import { Span } from '@Components/Span'
 import { StyledSlot } from '@Components/Slot'
 import { PlayIcon, StackIcon, Share1Icon } from '@radix-ui/react-icons'
+import { useCourseStore } from './use-detail'
+import shallow from 'zustand/shallow'
+import { Skeleton } from '@Components/Skeleton'
+import { CourseResponse } from '@Models/course'
+import Sharer from '@Components/Sharer'
 
 function Action(
   props: ReactProps<typeof Box> & {
@@ -46,6 +51,15 @@ function Action(
 }
 
 export default function Hero() {
+  let { result, fallback } = useCourseStore(
+    (state) => ({
+      result: state.acceptedData,
+      fallback: state.shouldFallback,
+    }),
+    shallow
+  )
+  const data = result?.data
+
   return (
     <Box
       as="section"
@@ -69,22 +83,34 @@ export default function Hero() {
             ai: 'center',
           }}
         >
-          <Image
-            id="hero-image"
-            css={{
-              pointerEvents: 'none',
-              objectFit: 'cover',
-              objectPosition: 'top',
-              // maxHeight: '$tw_72',
-
-              '@lg': {
-                // maxHeight: 'initial',
+          {fallback ? (
+            <Skeleton
+              css={{
+                width: '100%',
                 height: '100%',
-                roundedX: '$2xl',
-              },
-            }}
-            src="/media/class-thumb.png"
-          />
+                minHeight: '28rem',
+                rounded: '$3',
+              }}
+            />
+          ) : (
+            <Image
+              id="hero-image"
+              css={{
+                display: fallback ? 'none' : undefined,
+                pointerEvents: 'none',
+                objectFit: 'cover',
+                objectPosition: 'top',
+                // maxHeight: '$tw_72',
+
+                '@lg': {
+                  // maxHeight: 'initial',
+                  height: '100%',
+                  roundedX: '$2xl',
+                },
+              }}
+              src={data?.image}
+            />
+          )}
           <Flex
             id="hero-callout"
             direction="column"
@@ -92,6 +118,7 @@ export default function Hero() {
               textAlign: 'center',
               ai: 'center',
               jc: 'center',
+              width: '100%',
               py: '$6',
               px: '$8',
               // width: 'max-content',
@@ -102,57 +129,114 @@ export default function Hero() {
               // },
             }}
           >
-            <Heading
-              as="h1"
-              // size=""
-              css={{
-                fontSet: '$4xl',
-                fontVariationSettings: `'wdth' 70`,
-                // textTransform: 'uppercase',
-                fontWeight: '$bold',
-                display: 'inline',
-                mb: '$2',
-                // mx: 'auto',
-              }}
-            >
-              Blanchard Leadership– The SLII Experience™
-            </Heading>
-            <Text
-              size="4"
-              css={{
-                color: '$slate11',
-                mb: '$6',
-                fontWeight: '$bold',
-                '& em': {
+            {fallback ? (
+              <Skeleton
+                variant="title"
+                css={{
+                  width: '100%',
+                  mb: '$3',
+                }}
+              />
+            ) : (
+              <Heading
+                as="h1"
+                // size=""
+                css={{
+                  display: fallback ? 'none' : undefined,
+                  fontSet: '$4xl',
+                  fontVariationSettings: `'wdth' 70`,
+                  // textTransform: 'uppercase',
+                  fontWeight: '$bold',
+                  display: 'inline',
+                  mb: '$3',
+                  // mx: 'auto',
+                }}
+              >
+                {data?.title}
+              </Heading>
+            )}
+            {fallback ? (
+              <Skeleton
+                css={{
+                  width: '$tw_32',
+                  mb: '$6',
+                }}
+              />
+            ) : (
+              <Text
+                size="4"
+                css={{
                   color: '$slate12',
-                  ml: '$1',
-                },
-              }}
-            >
-              by <em>Uwais Zainal</em>
-            </Text>
-            <Text
-              css={{
-                fontSet: '$md',
-                maxWidth: '40ch',
-                mb: '$6',
-                // mx: 'auto',
-                // lineHeight: '1.5',
-              }}
-            >
-              Next available date: 15th & 16th March 2022 SLII® is the most
-              widely taught leadership model in the world. It teaches leaders to
-              use the appropriate leadership
-            </Text>
+                  mb: '$6',
+                  fontWeight: '$bold',
+                  '&::before': {
+                    content: 'by ',
+                    color: '$slate11',
+                    mr: '$1',
+                  },
+                }}
+              >
+                <em>
+                  {data?.instructor_user?.firstname ?? ''}{' '}
+                  {data?.instructor_user?.lastname ?? ''}
+                </em>
+              </Text>
+            )}
+            {fallback ? (
+              <Flex
+                direction="column"
+                css={{
+                  mb: '$6',
+                  ai: 'center',
+                  gap: '$3',
+                }}
+              >
+                <Skeleton
+                  css={{
+                    width: '$tw_80',
+                  }}
+                />
+                <Skeleton
+                  css={{
+                    width: '$tw_96',
+                  }}
+                />
+                <Skeleton
+                  css={{
+                    width: '$tw_80',
+                  }}
+                />
+              </Flex>
+            ) : (
+              <Text
+                css={{
+                  fontSet: '$md',
+                  maxWidth: '40ch',
+                  mb: '$6',
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                  display: '-webkit-box',
+                  // mx: 'auto',
+                  // lineHeight: '1.5',
+                }}
+              >
+                {data?.description}
+              </Text>
+            )}
+
             <Flex
               css={{
                 gap: '$2',
                 mb: '$4',
+                visibility: fallback ? 'hidden' : undefined,
               }}
             >
               <Action name="Trailer" icon={<PlayIcon />} />
               <Action name="Sample" icon={<StackIcon />} />
-              <Action name="Share" icon={<Share1Icon />} />
+              <Sharer title={data?.title ?? ''}>
+                <Action name="Share" icon={<Share1Icon />} />
+              </Sharer>
             </Flex>
             <Card
               css={{
@@ -162,24 +246,39 @@ export default function Hero() {
                 ai: 'center',
               }}
             >
-              <Text size="4">
-                <Span
+              {fallback ? (
+                <Skeleton
                   css={{
-                    mr: '$1',
+                    width: '$tw_24',
                   }}
-                >
-                  Price:
-                </Span>
-                <Span
-                  css={{
-                    color: '$red11',
-                    fontWeight: '$semibold',
-                  }}
-                >
-                  $30
-                </Span>
-              </Text>
-              <Button variant="red" size="3">
+                />
+              ) : (
+                <Text size="4">
+                  <Span
+                    css={{
+                      mr: '$1',
+                    }}
+                  >
+                    Price:
+                  </Span>
+                  <Span
+                    css={{
+                      color: '$red11',
+                      fontWeight: '$semibold',
+                    }}
+                  >
+                    $30
+                  </Span>
+                </Text>
+              )}
+
+              <Button
+                variant="red"
+                size="3"
+                css={{
+                  visibility: fallback ? 'hidden' : undefined,
+                }}
+              >
                 Add to cart
               </Button>
             </Card>
