@@ -11,6 +11,8 @@ export default function SideList(
   props: ReactProps<typeof Flex> & { articles: ArticleCardData[] }
 ) {
   const { articles, ...rest } = props
+  let fallback = articles == null
+  // fallback = true
   return (
     <Flex
       {...merge(
@@ -19,6 +21,7 @@ export default function SideList(
             // gridAutoRows: '24rem',
             flexDirection: 'column',
             gap: '$2',
+            visibility: fallback ? 'hidden' : undefined,
           },
         },
         rest
@@ -59,7 +62,7 @@ export default function SideList(
             '& .card-img-container': {
               display: 'flex',
               ai: 'center',
-              jc: 'centerjnmmmmmmmmmmmmmmmmmmmmmfg3b5h,',
+              jc: 'center,',
             },
           }}
           badgeProps={{
@@ -68,6 +71,7 @@ export default function SideList(
             },
           }}
           headingProps={{
+            size: '1',
             css: {
               border: 'none',
               mb: '$1',

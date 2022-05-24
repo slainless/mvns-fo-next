@@ -9,28 +9,24 @@ import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { Prose } from '@Components/Prose'
 import ReactMarkdown from 'react-markdown'
 import { Card } from '@Components/Card'
-
-const loremipsum = `
-## What is Lorem Ipsum?
-
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-## Why do we use it?
-
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
-## Where does it come from?
-
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-
-## Where can I get some?
-
-There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-`
+import { Skeleton } from '@Components/Skeleton'
+import { useBlogStore } from './use-read'
+import shallow from 'zustand/shallow'
+import { DateTime } from 'luxon'
+import parse from 'html-react-parser'
+import Sharer from '@Components/Sharer'
 
 export default function Article() {
+  let { result, fallback } = useBlogStore(
+    (state) => ({
+      result: state.acceptedData,
+      fallback: state.shouldFallback,
+    }),
+    shallow
+  )
+  const data = result?.data
+  // fallback = true
+
   return (
     <Box>
       <Box
@@ -38,46 +34,98 @@ export default function Article() {
           mb: '$6',
         }}
       >
-        <Flex
-          css={{
-            gap: '$2',
-            mb: '$2',
-          }}
-        >
-          {['News', 'Tech'].map((i) => (
-            <Badge key={i} variant="red" size="2">
-              {i}
-            </Badge>
-          ))}
-        </Flex>
-        <Heading
-          css={{
-            fontSet: '$5xl',
-            fontWeight: '$black',
-            mb: '$4',
-          }}
-        >
-          Briefly Explaining What Self-Care Is (And What It Isn’t)
-        </Heading>
-        <Text
-          css={{
-            fontSize: '$lg',
-            fontWeight: '$bold',
-            color: '$red11',
-            mb: '$1',
-          }}
-        >
-          Paul Bankhead
-        </Text>
-        <Text
-          css={{
-            fontSize: '$sm',
-            fontStyle: 'italic',
-            color: '$slate11',
-          }}
-        >
-          January 20, 2022
-        </Text>
+        {fallback ? (
+          <Flex
+            css={{
+              gap: '$2',
+              mb: '$2',
+            }}
+          >
+            {[0, 1].map((i) => (
+              <Badge key={i} variant="gray" size="2">
+                <Skeleton
+                  css={{
+                    width: '$tw_12',
+                  }}
+                />
+              </Badge>
+            ))}
+          </Flex>
+        ) : (
+          <Flex
+            css={{
+              gap: '$2',
+              mb: '$2',
+            }}
+          >
+            {data?.keywords?.map((i) => (
+              <Badge key={i} variant="red" size="2">
+                {i}
+              </Badge>
+            ))}
+          </Flex>
+        )}
+        {fallback ? (
+          <Skeleton
+            variant="title"
+            css={{
+              mb: '$4',
+              width: '90%',
+            }}
+          />
+        ) : (
+          <Heading
+            css={{
+              fontSet: '$5xl',
+              fontWeight: '$black',
+              mb: '$4',
+            }}
+          >
+            {data?.title}
+          </Heading>
+        )}
+        {fallback ? (
+          <Skeleton
+            css={{
+              mb: '$2',
+              width: '$tw_40',
+            }}
+          />
+        ) : (
+          <Text
+            css={{
+              fontSize: '$lg',
+              fontWeight: '$bold',
+              color: '$red11',
+              mb: '$1',
+            }}
+          >
+            {data?.user?.firstname ?? ''}
+            {data?.user?.lastname ?? ''}
+          </Text>
+        )}
+        {fallback ? (
+          <Skeleton
+            css={{
+              width: '$tw_28',
+            }}
+          />
+        ) : (
+          <Text
+            css={{
+              fontSize: '$sm',
+              fontStyle: 'italic',
+              color: '$slate11',
+            }}
+          >
+            {(() => {
+              if (data?.updated_at == null) return ''
+              return DateTime.fromISO(data.updated_at).toLocaleString(
+                DateTime.DATE_FULL
+              )
+            })()}
+          </Text>
+        )}
       </Box>
       <Box
         css={{
@@ -86,28 +134,41 @@ export default function Article() {
         }}
       >
         <AspectRatio ratio={16 / 9}>
-          <Image
-            src="https://picsum.photos/800"
-            css={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              rounded: '$3',
-            }}
-          ></Image>
+          {fallback ? (
+            <Skeleton
+              css={{
+                width: '100%',
+                height: '100%',
+                rounded: '$3',
+              }}
+            />
+          ) : (
+            <Image
+              src="https://picsum.photos/800"
+              css={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                rounded: '$3',
+              }}
+            ></Image>
+          )}
         </AspectRatio>
-        <Button
-          css={{
-            position: 'absolute',
-            left: '$2',
-            bottom: '$2',
-            fontWeight: '$bold',
-          }}
-          size="2"
-          variant="transparentWhite"
-        >
-          Share
-        </Button>
+        <Sharer title={data?.title ?? ''}>
+          <Button
+            css={{
+              position: 'absolute',
+              left: '$2',
+              bottom: '$2',
+              fontWeight: '$bold',
+              visibility: fallback ? 'hidden' : undefined,
+            }}
+            size="2"
+            variant="transparentWhite"
+          >
+            Share
+          </Button>
+        </Sharer>
       </Box>
       <Text
         css={{
@@ -117,17 +178,59 @@ export default function Article() {
           pl: '$4',
           mb: '$6',
           borderBottom: '1px solid $invertColorSchemeA5',
+          visibility: fallback ? 'hidden' : undefined,
         }}
       >
         This is the caption of the picture
       </Text>
-      <Prose
-        css={{
-          mb: '$9',
-        }}
-      >
-        <ReactMarkdown>{loremipsum}</ReactMarkdown>
-      </Prose>
+      {fallback ? (
+        <>
+          <Box
+            css={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '$3',
+              mb: '$9',
+            }}
+          >
+            <Skeleton
+              variant="heading"
+              css={{
+                width: '$tw_80',
+                mb: '$2',
+              }}
+            />
+            <Skeleton css={{ width: '90%' }} />
+            <Skeleton css={{ width: '95%' }} />
+            <Skeleton css={{ width: '93%' }} />
+            <Skeleton css={{ width: '97%' }} />
+            <Skeleton css={{ width: '92%' }} />
+            <Skeleton
+              variant="heading"
+              css={{
+                width: '$tw_80',
+                mb: '$2',
+                mt: '$6',
+              }}
+            />
+            <Skeleton css={{ width: '90%' }} />
+            <Skeleton css={{ width: '95%' }} />
+            <Skeleton css={{ width: '93%' }} />
+            <Skeleton css={{ width: '97%' }} />
+            <Skeleton css={{ width: '92%' }} />
+          </Box>
+        </>
+      ) : (
+        <Prose
+          css={{
+            mb: '$9',
+          }}
+        >
+          {/* <ReactMarkdown>{data?.content ?? ''}</ReactMarkdown> */}
+          {parse(data?.content ?? '')}
+        </Prose>
+      )}
+
       <Card
         css={{
           // mt: '$9',
