@@ -1,9 +1,9 @@
-import { Slot } from '@radix-ui/react-slot'
 import { styled } from '@Theme'
 
-export const Icon = styled(Slot, {
+export const Icon = styled('span', {
   width: '15px',
   height: '15px',
+  display: 'inline-block',
   variants: {
     thin: {
       true: {

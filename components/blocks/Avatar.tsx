@@ -264,10 +264,10 @@ export const Avatar = React.forwardRef<
     return (
       <Box
         css={{
-          ...css,
           position: 'relative',
           height: 'fit-content',
           width: 'fit-content',
+          ...css,
         }}
       >
         <StyledAvatar
