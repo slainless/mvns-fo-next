@@ -29,9 +29,9 @@
       "@Layouts/*": ["./components/layouts/*"],
       "@Styles/*": ["./styles/*"],
       "@Types/*": ["./types/*"],
-      "@Models/*": ["./api/models/*"],
-      "@Methods/*": ["./api/methods/*"],
-      "@Api/*": ["./api/*"],
+      "@Models/*": ["./connection/models/*"],
+      "@Methods/*": ["./connection/methods/*"],
+      "@Api/*": ["./connection/*"],
       "@Dev/*": ["./_dev/*"]
     }
     // "typeRoots": ["node_modules/@types", "./types/"]
