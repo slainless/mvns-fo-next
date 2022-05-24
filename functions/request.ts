@@ -4,6 +4,7 @@ import { validate } from 'class-validator'
 import { isArray, isEmpty } from 'lodash-es'
 import ky, { HTTPError, Options } from 'ky'
 import { useAuthUserStore } from '@Methods/auth'
+import Config from '@Config'
 
 type ClassOf<T extends Record<any, any>> = {
   [k in keyof T]: InstanceType<T[k]>
@@ -14,6 +15,7 @@ const defaultResponseType = {
   201: APIResponse.Created,
   401: APIResponse.Unauthorized,
   404: APIResponse.NotFound,
+  409: APIResponse.Conflict,
   500: APIResponse.InternalError,
   default: APIResponse.Generic,
 }
@@ -46,7 +48,7 @@ export async function requestJSON<
     response = await ky(url, {
       ...rest,
       headers: {
-        // Accept: 'application/json',
+        Accept: 'application/json',
         Authorization: (() => {
           if (!useAuth) return undefined
           const token = useAuthUserStore.getState().user?.token
@@ -75,8 +77,7 @@ export async function requestJSON<
 
   const errors = await validate(data)
   if (errors.length > 0) {
-    if (process.env.MODE === 'development')
-      console.error('Validation failed with:', errors)
+    if (Config.debug) console.error('Validation failed with:', errors)
     throw new Error('Response mismatch!')
   }
 

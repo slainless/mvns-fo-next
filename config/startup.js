@@ -7,7 +7,8 @@ export default async function Startup() {
   /** @type {MyNextConfig} */
   const config = {
     publicRuntimeConfig: {
-      categories
+      categories,
+      debug: process.env.MODE === 'development'
     }
   }
 
