@@ -21,6 +21,7 @@
     "noImplicitAny": false,
     "paths": {
       "@Theme": ["./stitches.config.ts"],
+      "@Config": ["./config/runtime.ts"],
       "@Functions/*": ["./functions/*"],
       "@Components/*": ["./components/blocks/*", "./components/elements/*"],
       "@Primitives/*": ["./components/primitives/*"],

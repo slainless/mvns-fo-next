@@ -8,6 +8,7 @@ import { blogItems } from '@Dev/dummy'
 import { ArticleCardData } from '@Pages/blog/Card'
 import { Box } from '@Components/Box'
 import { Grid } from '@Components/Grid'
+import Config from '@Config'
 
 const items: ArticleCardData[] = blogItems.map((item) => ({
   title: item.title,
@@ -17,9 +18,8 @@ const items: ArticleCardData[] = blogItems.map((item) => ({
   date: item.date,
 }))
 
-const { publicRuntimeConfig } = getConfig() as MyNextConfig
 const Page: NextPage = () => {
-  const { categories } = publicRuntimeConfig
+  const { categories } = Config
 
   return (
     <TitledSection>

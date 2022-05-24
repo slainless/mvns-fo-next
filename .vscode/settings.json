@@ -1,6 +1,7 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "liveServer.settings.root": "/out",
   "conventionalCommits.scopes": [
     "element",
     "type",
@@ -9,6 +10,8 @@
     "style",
     "api",
     "page",
-    "type"
+    "type",
+    "lint",
+    "config"
   ]
 }

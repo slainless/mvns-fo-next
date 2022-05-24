@@ -4,11 +4,11 @@ import { Card } from '@Components/Card'
 import { Text } from '@Components/Text'
 import { Grid } from '@Components/Grid'
 import { Checkbox } from '@Components/Checkbox'
-import getConfig from 'next/config'
+import Config from '@Config'
 
 const { publicRuntimeConfig } = getConfig() as MyNextConfig
 const Page: NextPage = () => {
-  const { categories } = publicRuntimeConfig
+  const { categories } = Config
 
   return (
     <TitledSection

@@ -4,10 +4,10 @@ import getConfig from 'next/config'
 import { Text } from '@Components/Text'
 import Filter from '@Pages/class/Filter'
 import CardGrid from '@Pages/class/CardGrid'
+import Config from '@Config'
 
-const { publicRuntimeConfig } = getConfig() as MyNextConfig
 const Page: NextPage = () => {
-  const { categories } = publicRuntimeConfig
+  const { categories } = Config
 
   return (
     <TitledSection title="All Classes">

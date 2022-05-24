@@ -4,12 +4,12 @@ import getConfig from 'next/config'
 import { Text } from '@Components/Text'
 import List from '@Pages/interesting/List'
 import Category from '@Pages/interesting/Category'
+import Config from '@Config'
+import { useRouter } from 'next/router'
 
-const { publicRuntimeConfig } = getConfig() as MyNextConfig
-const { categories } = publicRuntimeConfig
-
+const { categories } = Config
 const Page: NextPage = () => {
-  const interestedCategories = [categories[0], categories[1], categories[2]]
+  const router = useRouter()
 
   return (
     <TitledSection title="You may like one of these courses">
