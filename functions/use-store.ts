@@ -6,7 +6,7 @@ import { Data } from 'ahooks/lib/usePagination/types'
 import { useEffect } from 'react'
 import { RequestResult } from './request'
 import { ClassConstructor } from 'class-transformer'
-import APIResponse from '@Models/response'
+import { APIResponse } from '@Models/response'
 
 type StateStore<T> = {
   state: T
