@@ -5,6 +5,7 @@ import { styled } from '@Theme'
 import Featured from '@Pages/landing/Featured'
 import Trending from '@Pages/landing/Trending'
 import TypeVideo from '@Pages/landing/TypeVideo'
+import MyClasses from '@Pages/landing/MyClasses'
 import BusinessBanner from '@Pages/landing/BusinessBanner'
 import Blog from '@Pages/landing/Blog'
 import Category from '@Pages/landing/Category'
@@ -14,6 +15,9 @@ const Page: NextPage = () => {
   const user = useAuthUserStore((state) => state.user)
   return (
     <>
+      <div>
+        <MyClasses />
+      </div>
       <div>
         <Hero />
       </div>
