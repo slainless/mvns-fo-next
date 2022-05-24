@@ -35,7 +35,9 @@ export default function AnyError(props: { error: APIError.Generic }) {
           >
             Course not found!
           </ErrorCard.Heading>
-          <Text size="4">The course you are looking for doesn't exist.</Text>
+          <Text size="4">
+            The course you are looking for doesn&apos;t exist.
+          </Text>
           <Link passHref href="/">
             <Button
               as="a"

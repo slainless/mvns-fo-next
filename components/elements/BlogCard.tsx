@@ -3,6 +3,9 @@ import { Flex } from '@Components/Flex'
 import * as Card from '@Components/DisplayCard'
 import { ComponentProps, ElementRef, forwardRef } from 'react'
 import Link from 'next/link'
+import { makeDisplayName } from '@Functions/display-name'
+
+const name = makeDisplayName(`BlogCard`)
 
 /* -------------------------------------------------------------------------- */
 /*                               Main Component                               */
@@ -97,4 +100,6 @@ export const BlogCard = forwardRef<
     </Card.Root>
   )
 })
+BlogCard.displayName = name('Card')
+
 export default BlogCard

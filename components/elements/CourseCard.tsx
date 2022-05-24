@@ -13,6 +13,9 @@ import { Alert } from '@Components/Alert'
 import { forwardRef, useState, ElementRef, ComponentProps } from 'react'
 import { useFavorite } from './CourseCard/favorite'
 import Link from 'next/link'
+import { makeDisplayName } from '@Functions/display-name'
+
+const name = makeDisplayName('CourseCard')
 
 /* -------------------------------------------------------------------------- */
 /*                            Extension Components                            */
@@ -44,6 +47,8 @@ const _FavoriteButton = forwardRef<
     </IconButton>
   )
 })
+_FavoriteButton.displayName = name('FavoriteButton')
+
 export const StyledFavoriteButton = styled(_FavoriteButton, IconButton, {
   rounded: '$full',
 })
@@ -203,6 +208,8 @@ export const CourseCard = forwardRef<
     </Card.Root>
   )
 })
+CourseCard.displayName = name('Card')
+
 export default CourseCard
 
 // type Props = ReactProps<typeof BaseCard> & CourseCardData

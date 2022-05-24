@@ -53,8 +53,8 @@ const Page: NextPage = () => {
   }, [data])
 
   if (error) {
-    if (error instanceof APIError.NotFound)
-      return <NotFoundError error={error} />
+    // if (error instanceof APIError.NotFound)
+    //   return <NotFoundError error={error} />
 
     return <AnyError error={error} />
   }

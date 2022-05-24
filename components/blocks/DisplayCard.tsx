@@ -9,6 +9,10 @@ import { Separator } from '@radix-ui/react-separator'
 import { styled } from '@Theme'
 import { forwardRef, ElementRef, ComponentProps } from 'react'
 import { FiCalendar } from 'react-icons/fi'
+import { makeDisplayName } from '@Functions/display-name'
+
+const MODULE_NAME = 'DisplayCard'
+const name = makeDisplayName(MODULE_NAME)
 
 /* -------------------------------------------------------------------------- */
 /*                                 Main Layout                                */
@@ -116,6 +120,8 @@ export const _Date = forwardRef<
     </Text>
   )
 })
+_Date.displayName = name(`Date`)
+
 const StyledDate = styled(_Date, Text, {
   color: '$slate11',
   display: 'inline-flex',
