@@ -20,7 +20,7 @@ export default function List(props: { categories: Category[] }) {
             rounded: '$full',
           }}
         >
-          {category.name}
+          {category.keyword}
         </Badge>
       ))}
     </Flex>

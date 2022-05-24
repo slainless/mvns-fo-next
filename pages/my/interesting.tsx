@@ -24,7 +24,7 @@ const Page: NextPage = () => {
       </Text>
       <List categories={interestedCategories} />
       {interestedCategories.map((category, i) => (
-        <Category name={category.name} key={i} />
+        <Category name={category.keyword} key={i} />
       ))}
     </TitledSection>
   )

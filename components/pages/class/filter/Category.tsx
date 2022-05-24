@@ -94,7 +94,7 @@ export default function Category(props: {
                     fontSet: '$sm',
                   }}
                 >
-                  {category.name}
+                  {category.keyword}
                 </Text>
                 <Checkbox
                   css={{

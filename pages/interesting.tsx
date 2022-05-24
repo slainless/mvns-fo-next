@@ -47,7 +47,7 @@ const Page: NextPage = () => {
                 fontSet: '$md',
               }}
             >
-              {category.name}
+              {category.keyword}
             </Text>
             <Checkbox size="1" />
           </Card>
