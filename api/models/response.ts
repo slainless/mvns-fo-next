@@ -46,6 +46,11 @@ export module APIResponse {
     @Equals(false) success: false
   }
 
+  export class Conflict extends Generic {
+    @Equals(409) declare code: 409
+    @Equals(false) success: false
+  }
+
   // prettier-ignore
   export class InternalError extends Generic {
     @IsOptional() @Equals(500) declare code?: 500
