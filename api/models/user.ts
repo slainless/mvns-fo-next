@@ -8,6 +8,7 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator'
+import { Interest } from './interest'
 import { APIResponse } from './response'
 
 export enum RoleValue {
@@ -54,6 +55,7 @@ export class User {
 export class AuthUser extends User {
   // credential
   @IsString() token: string
+  @IsArray() declare student_interest: Interest[]
 }
 
 export module AuthUserResponse {
