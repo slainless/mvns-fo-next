@@ -46,6 +46,9 @@ const globalStyles = globalCss({
   svg: {
     display: 'block',
   },
+  '.swiper-button-lock': {
+    display: 'none !important',
+  },
   // '*': {
   //   '-webkit-font-smoothing': 'antialiased',
   //   '-moz-osx-font-smoothing': 'grayscale',

@@ -22,23 +22,11 @@ export default function ErrorPreset(props: { error: Error }) {
         }}
         src="/media/sparks/wondering.png"
       ></Image> */}
-      <Alert
-        variant={error ? 'red' : 'gray'}
-        css={{
-          p: '$5',
-        }}
-      >
-        <Text
-          size="5"
-          color="red"
-          css={{
-            fontWeight: '$bold',
-            mb: '$1',
-          }}
-        >
-          Sorry, we are facing an error with message:
+      <Alert variant={error ? 'red' : 'gray'} css={{ p: '$5' }}>
+        <Text size="5" color="red" css={{ mb: '$1' }}>
+          Sorry, we encountered an error with message:
         </Text>
-        <Text size="4" color="red">
+        <Text size="4" css={{ color: '$slate11' }}>
           {error?.message}
         </Text>
       </Alert>
