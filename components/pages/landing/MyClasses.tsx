@@ -2,67 +2,39 @@ import { Swiper } from '@Components/CardSwiper'
 import { Text } from '@Components/Text'
 import { TitledSection } from '@Components/TitledSection'
 import { SwiperSlide } from 'swiper/react'
-import CourseCard, { CourseCardData } from '@Components/CourseCard'
+import CourseCard from '@Components/CourseCard'
 import * as CardPreset from '@Styles/card'
-import { slimCard } from '@Dev/dummy'
-import { useRequest } from 'ahooks'
+import { useRequest } from '@Functions/use-request'
 import { CourseAPI } from '@Methods/course'
 import { useAuthUserStore } from '@Methods/auth'
 import { useEffect, useState } from 'react'
 import { CourseResponse } from '@Models/course'
-import { DateTime } from 'luxon'
-import { isEmpty } from 'lodash-es'
-import { Alert } from '@Components/Alert'
-import { Box } from '@Components/Box'
-import { Flex } from '@Components/Flex'
-import { Image } from '@Components/Image'
 import FallbackCard, { EmptyError, Fallback } from '@Components/FallbackCard'
 import { Conditional, Else, If } from '@Components/Conditional'
+import { courseToCard } from '@Functions/data-conversion'
+import Empty from './MyClasses/Empty'
 
 export default function MyClasses() {
   const user = useAuthUserStore((state) => state.user)
   const {
-    data: result,
+    data: $data,
     loading,
     error,
     run,
   } = useRequest(CourseAPI.my, {
     manual: true,
+    acceptOnly: CourseResponse.Get,
   })
 
   useEffect(() => {
     if (user != null) run()
   }, [user])
 
-  const [data, setData] = useState<CourseCardData[]>([])
-  useEffect(() => {
-    if (result == null) return
-    if (result.data instanceof CourseResponse.Get) {
-      const d = result.data.data
-      return void setData(
-        d.map((i) => ({
-          itemId: i.id,
-          title: i.title,
-          badges: [
-            { display: i.type, href: '' },
-            { display: i.category, href: '' },
-          ],
-          isFavorited: i.is_wishlist,
-          price: i.prices[0]?.price.toString(),
-          date: isEmpty(i.course_datetime)
-            ? undefined
-            : DateTime.fromISO(i?.course_datetime ?? '').toLocaleString(
-                DateTime.DATE_FULL
-              ),
-          backgroundUrl: i.image,
-        }))
-      )
-    }
-  }, [result])
-
   if (user == null) return <></>
-  const isEmpty = data.length === 0
-  const fallback = error
+
+  const isEmpty = $data?.data.length === 0
+  const fallback = error || $data == null
+  console.log(isEmpty, fallback, $data)
 
   return (
     <TitledSection
@@ -70,24 +42,19 @@ export default function MyClasses() {
       hotlink={
         fallback || isEmpty
           ? undefined
-          : {
-              display: 'See all my classes',
-              href: '/class/my',
-            }
+          : { display: 'See all my classes', href: '/class/my' }
       }
     >
       <FallbackCard error={error}>
-        <Conditional value={isEmpty && !error}>
+        <Conditional value={isEmpty && !error && !loading}>
           <If is={false}>
             <Swiper
               swiperOptions={CardPreset.Normal}
-              swiperCSS={{
-                height: '28rem',
-              }}
+              swiperCSS={{ height: '28rem' }}
             >
-              {data.map((props, i) => (
+              {$data?.data.map((props, i) => (
                 <SwiperSlide key={i}>
-                  <CourseCard {...props} />
+                  <CourseCard {...courseToCard(props)} />
                 </SwiperSlide>
               ))}
             </Swiper>

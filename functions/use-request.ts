@@ -10,7 +10,7 @@ type Options<Data, Params extends any[]> = Parameters<typeof useReq<Data, Params
 type Plugins<Data, Params extends any[]> = Parameters<typeof useReq<Data, Params>>[2]
 
 export function useRequest<
-TData extends RequestResult<{}>,
+TData extends RequestResult<any>,
 TParams extends any[],
 TType extends TData['data'] = APIResponse.OK | APIResponse.Created
 >(
@@ -22,23 +22,24 @@ TType extends TData['data'] = APIResponse.OK | APIResponse.Created
   plugins?: Plugins<TData, TParams>
 ) {
   const { acceptOnly = [APIResponse.OK, APIResponse.Created] } = options ?? {}
-  const { data: $data, error, run, runAsync } = useReq(service, options, plugins)
+  const { data: $data, error, run, runAsync, loading } = useReq(service, options, plugins)
 
   const data = useMemo(() => {
     if(!$data) return undefined
 
     for(const cls of Array.isArray(acceptOnly) ? acceptOnly : [acceptOnly]) {
-      if($data?.data instanceof cls) return $data.data.data
+      if($data?.data instanceof cls) return $data.data
     }
     return undefined
   }, [$data])
 
   return {
-    data: data as TType,
+    data: data as TType | undefined,
     response: $data,
     error,
     run,
     runAsync,
+    loading,
     isWrongType: data == null && $data != null
   }
 }

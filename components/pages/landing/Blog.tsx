@@ -1,17 +1,13 @@
 import { Swiper } from '@Components/CardSwiper'
 import { TitledSection } from '@Components/TitledSection'
 import { SwiperProps, SwiperSlide } from 'swiper/react'
-import BlogCard, { BlogCardData } from '@Components/BlogCard'
+import BlogCard from '@Components/BlogCard'
 import * as CardPreset from '@Styles/card'
-import { blogCards } from '@Dev/dummy'
 import { isEmpty, merge } from 'lodash-es'
 import { BlogAPI } from '@Methods/blog'
-import { CourseResponse } from '@Models/course'
-import { useRequest } from 'ahooks'
-import { DateTime } from 'luxon'
-import { useState, useEffect } from 'react'
+import { useRequest } from '@Functions/use-request'
+import { blogToCard } from '@Functions/data-conversion'
 import { BlogResponse } from '@Models/blog'
-import { nanoid } from 'nanoid'
 import FallbackCard from '@Components/FallbackCard'
 
 const swiperOptions: SwiperProps = {
@@ -41,53 +37,24 @@ const swiperOptions: SwiperProps = {
   },
 }
 export default function Blog() {
-  const { data: result, loading, error } = useRequest(BlogAPI.latest)
-  const [data, setData] = useState<BlogCardData[]>([])
+  const { data, loading, error } = useRequest(BlogAPI.latest, {
+    acceptOnly: BlogResponse.Get,
+  })
 
-  useEffect(() => {
-    if (result == null) return
-    if (result.data instanceof BlogResponse.Get)
-      return void setData(
-        result.data.data.map((i) => ({
-          itemId: i.id,
-          title: i.title,
-          // badges: [
-          //   { display: i., href: '' },
-          //   { display: i.category, href: '' },
-          // ],
-          date: isEmpty(i.created_at)
-            ? undefined
-            : DateTime.fromISO(i?.created_at ?? '').toLocaleString(
-                DateTime.DATE_FULL
-              ),
-          backgroundUrl:
-            isEmpty(i.thumbnail_url) ||
-            i.thumbnail_url.startsWith('http://localhost') ||
-            i.thumbnail_url.startsWith('https://mavens.upanastudio.com')
-              ? `https://picsum.photos/800?rand=${nanoid(10)}`
-              : i.thumbnail_url,
-        }))
-      )
-  }, [result])
   return (
     <TitledSection
       title="Our Blog"
-      hotlink={{
-        display: 'See all',
-        href: '/blog',
-      }}
+      hotlink={{ display: 'See all', href: '/blog' }}
     >
       <FallbackCard error={error}>
         <Swiper
           swiperOptions={merge(CardPreset.Large, swiperOptions)}
-          swiperCSS={{
-            height: '28rem',
-          }}
+          swiperCSS={{ height: '28rem' }}
           id="blog"
         >
-          {data.map((props, i) => (
+          {data?.data.map((props, i) => (
             <SwiperSlide key={i}>
-              <BlogCard {...props} />
+              <BlogCard {...blogToCard(props)} />
             </SwiperSlide>
           ))}
         </Swiper>
