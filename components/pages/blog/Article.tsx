@@ -98,7 +98,10 @@ export default function Article() {
       </Box>
       <Box css={{ position: 'relative', mb: '$2' }}>
         <AspectRatio ratio={16 / 9}>
-          <Skeleton css={{ width: '100%', height: '100%', rounded: '$3' }}>
+          <Skeleton
+            css={{ width: '100%', height: '100%', rounded: '$3' }}
+            when={fallback}
+          >
             <Image
               src="https://picsum.photos/800"
               css={{

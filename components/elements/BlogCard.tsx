@@ -14,12 +14,13 @@ const name = makeDisplayName(`BlogCard`)
 export * from '@Components/DisplayCard'
 
 export type BlogCardData = {
+  title?: string
   itemId?: number
   badges?: {
     display?: string
     href?: string
   }[]
-  date?: string | Date
+  date?: string
   summary?: string
   backgroundUrl?: string
 }
