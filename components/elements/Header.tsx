@@ -23,7 +23,8 @@ export default function Header() {
     <Box
       css={{
         bc: '$loContrast',
-        position: 'sticky',
+        position: 'fixed',
+        width: '100%',
         zIndex: '$50',
         boxShadow: 'inset 0 -1px 0 $colors$slate6',
         top: 0,
