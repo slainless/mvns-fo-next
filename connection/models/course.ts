@@ -7,14 +7,14 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator'
-import { capitalize } from 'lodash-es'
+import { capitalize, lowerCase } from 'lodash-es'
 import { APIResponse } from './response'
 import { User } from './user'
 
 export enum CourseType {
   VIDEO = 'video',
   ONLINE = 'online',
-  PHYSICAL = 'physical',
+  // PHYSICAL = 'physical',
   OFFLINE = 'offline',
 }
 
@@ -28,7 +28,7 @@ export class Enrollment {
   @IsNumber() id: number
   @IsNumber() user_id: number
   @IsNumber() course_id: number
-  @IsString() enroll_code: string
+  @IsString() @IsOptional() enroll_code: string
 
   @IsString() @IsOptional() created_at?: string
   @IsString() @IsOptional() updated_at?: string
@@ -41,9 +41,9 @@ export class Price {
   @IsNumber() id: number
   @IsNumber() course_id: number
 
-  @IsString() title: string
-  @IsNumber() price: number
-  @IsString() description: string
+  @IsString() @IsOptional() title: string
+  @IsNumber() @IsOptional() price: number
+  @IsString() @IsOptional() description: string
 
   @IsString() @IsOptional() created_at?: string
   @IsString() @IsOptional() updated_at?: string
@@ -53,15 +53,15 @@ export class Lesson {
   @IsNumber() id: number
   @IsNumber() course_id: number
 
-  @IsString() title: string
-  @IsString() description: string
+  @IsString() @IsOptional() title: string
+  @IsString() @IsOptional() description: string
   @Type(() => Boolean) is_active: boolean
 
   @IsString() @IsOptional() created_at?: string
   @IsString() @IsOptional() updated_at?: string
 
-  @IsString() content: string
-  @IsString() pdf_path: string
+  @IsString() @IsOptional() content: string
+  @IsString() @IsOptional() pdf_path: string
 }
 
 export class Review {}
@@ -69,12 +69,19 @@ export class Review {}
 // prettier-ignore
 export class Course {
   @IsNumber() id: number
-  @IsString() title: string
-  @IsString() description: string
+  @IsString() @IsOptional() title: string
+  @IsString() @IsOptional() description: string
   @IsString() @IsOptional() subtitle: string
-  @IsString() image: string
+  @IsString() @IsOptional() image: string
   @IsString() @IsOptional() trailer: string
-  @IsIn(Object.values(CourseType).map(capitalize)) type: CourseType
+
+  @IsIn(
+    [
+      ...Object.values(CourseType).map(capitalize),
+      ...Object.values(CourseType).map(lowerCase),
+    ]) 
+  @IsOptional() 
+  type: CourseType
 
   @IsString() @IsOptional() slug?: string
   @IsString() @IsOptional() link?: string
@@ -99,7 +106,8 @@ export class Course {
 
   @IsNumber() @IsOptional() instructor_id?: number
   @IsNumber() @IsOptional() co_instructor_id?: number
-  @IsNumber() @IsOptional() number_of_session?: number
+  // @IsNumber() @IsOptional() number_of_session?: number
+  @IsOptional() number_of_session?: any
   // duration_for_each_session: server will return Array<string> in String... WTF
   @IsString() @IsOptional() duration_for_each_session?: string
 
