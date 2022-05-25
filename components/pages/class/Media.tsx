@@ -20,7 +20,7 @@ import {
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { useCourseStore } from './use-detail'
 import shallow from 'zustand/shallow'
-import { Skeleton } from '@Components/Skeleton'
+import { Skeleton, Conditional, If, Else } from '@Components/Conditional'
 
 const TextualIcon = (
   props: ReactProps<typeof StyledSlot> & {
@@ -48,23 +48,10 @@ export default function Media() {
   // fallback = true
 
   return (
-    <Grid
-      css={{
-        gridTemplateColumns: '70% auto',
-        mt: '$6',
-        gap: '$6',
-      }}
-    >
+    <Grid css={{ gridTemplateColumns: '70% auto', mt: '$6', gap: '$6' }}>
       <Box>
         <AspectRatio ratio={16 / 9}>
-          {fallback ? (
-            <Skeleton
-              css={{
-                width: '100%',
-                height: '100%',
-              }}
-            />
-          ) : (
+          <Skeleton css={{ width: '100%', height: '100%' }} when={fallback}>
             <iframe
               width="100%"
               height="100%"
@@ -74,14 +61,10 @@ export default function Media() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-          )}
+          </Skeleton>
         </AspectRatio>
       </Box>
-      <Grid
-        css={{
-          gridTemplateRows: 'max-content max-content auto',
-        }}
-      >
+      <Grid css={{ gridTemplateRows: 'max-content max-content auto' }}>
         <Grid
           css={{
             gap: '$2',
@@ -121,56 +104,52 @@ export default function Media() {
             // overflow: 'auto',
           }}
         >
-          {fallback ? (
-            <Flex
-              direction="column"
-              css={{
-                py: '$4',
-                px: '$6',
-                gap: '$6',
-              }}
-            >
-              <Skeleton css={{ width: '90%' }} />
-              <Skeleton css={{ width: '95%' }} />
-              <Skeleton css={{ width: '85%' }} />
-              <Skeleton css={{ width: '90%' }} />
-            </Flex>
-          ) : (
-            <Box
-              as="ol"
-              css={{
-                px: '$6',
-                my: 0,
-                position: 'absolute',
-                maxHeight: '100%',
-                overflow: 'auto',
-                '& > li': {
-                  py: '$3',
-                  position: 'relative',
-                  '&:not(:last-child)::after': {
-                    content: '',
-                    height: '1px',
-                    width: 'calc(100% + $6 + $6)',
-                    backgroundColor: '$slate6',
-                    position: 'absolute',
-                    bottom: 0,
-                    left: '$-6',
+          <Conditional value={fallback}>
+            <If is={true}>
+              <Flex direction="column" css={{ py: '$4', px: '$6', gap: '$6' }}>
+                <Skeleton css={{ width: '90%' }} />
+                <Skeleton css={{ width: '95%' }} />
+                <Skeleton css={{ width: '85%' }} />
+                <Skeleton css={{ width: '90%' }} />
+              </Flex>
+            </If>
+            <Else>
+              <Box
+                as="ol"
+                css={{
+                  px: '$6',
+                  my: 0,
+                  position: 'absolute',
+                  maxHeight: '100%',
+                  overflow: 'auto',
+                  '& > li': {
+                    py: '$3',
+                    position: 'relative',
+                    '&:not(:last-child)::after': {
+                      content: '',
+                      height: '1px',
+                      width: 'calc(100% + $6 + $6)',
+                      backgroundColor: '$slate6',
+                      position: 'absolute',
+                      bottom: 0,
+                      left: '$-6',
+                    },
+                    '& > span': {
+                      lineHeight: '$sm',
+                      display: 'inline-flex',
+                      pl: '$2',
+                    },
                   },
-                  '& > span': {
-                    lineHeight: '$sm',
-                    display: 'inline-flex',
-                    pl: '$2',
-                  },
-                },
-              }}
-            >
-              {data?.lessons?.map((i, k) => (
-                <li key={k}>
-                  <span>{i.title}</span>
-                </li>
-              ))}
-            </Box>
-          )}
+                }}
+              >
+                {data?.lessons?.map((i, k) => (
+                  <li key={k}>
+                    <span>{i.title}</span>
+                  </li>
+                ))}
+              </Box>
+            </Else>
+          </Conditional>
         </Card>
       </Grid>
     </Grid>

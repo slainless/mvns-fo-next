@@ -9,7 +9,7 @@ import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { Prose } from '@Components/Prose'
 import ReactMarkdown from 'react-markdown'
 import { Card } from '@Components/Card'
-import { Skeleton } from '@Components/Skeleton'
+import { Skeleton, Conditional, If, Else } from '@Components/Conditional'
 import { useBlogStore } from './use-read'
 import shallow from 'zustand/shallow'
 import { DateTime } from 'luxon'
@@ -34,46 +34,32 @@ export default function Article() {
           mb: '$6',
         }}
       >
-        {fallback ? (
-          <Flex
-            css={{
-              gap: '$2',
-              mb: '$2',
-            }}
-          >
-            {[0, 1].map((i) => (
+        <Conditional value={fallback}>
+          <If is={true}>
+            <Flex css={{ gap: '$2', mb: '$2' }}>
               <Badge key={i} variant="gray" size="2">
-                <Skeleton
-                  css={{
-                    width: '$tw_12',
-                  }}
-                />
+                <Skeleton css={{ width: '$tw_12' }} />
               </Badge>
-            ))}
-          </Flex>
-        ) : (
-          <Flex
-            css={{
-              gap: '$2',
-              mb: '$2',
-            }}
-          >
-            {data?.keywords?.map((i) => (
-              <Badge key={i} variant="red" size="2">
-                {i}
+              <Badge key={i} variant="gray" size="2">
+                <Skeleton css={{ width: '$tw_12' }} />
               </Badge>
-            ))}
-          </Flex>
-        )}
-        {fallback ? (
-          <Skeleton
-            variant="title"
-            css={{
-              mb: '$4',
-              width: '90%',
-            }}
-          />
-        ) : (
+            </Flex>
+          </If>
+          <Else>
+            <Flex css={{ gap: '$2', mb: '$2' }}>
+              {data?.keywords?.map((i) => (
+                <Badge key={i} variant="red" size="2">
+                  {i}
+                </Badge>
+              ))}
+            </Flex>
+          </Else>
+        </Conditional>
+        <Skeleton
+          variant="title"
+          css={{ mb: '$4', width: '90%' }}
+          when={fallback}
+        >
           <Heading
             css={{
               fontSet: '$5xl',
@@ -83,15 +69,8 @@ export default function Article() {
           >
             {data?.title}
           </Heading>
-        )}
-        {fallback ? (
-          <Skeleton
-            css={{
-              mb: '$2',
-              width: '$tw_40',
-            }}
-          />
-        ) : (
+        </Skeleton>
+        <Skeleton css={{ mb: '$2', width: '$tw_40' }} when={fallback}>
           <Text
             css={{
               fontSize: '$lg',
@@ -103,14 +82,8 @@ export default function Article() {
             {data?.user?.firstname ?? ''}
             {data?.user?.lastname ?? ''}
           </Text>
-        )}
-        {fallback ? (
-          <Skeleton
-            css={{
-              width: '$tw_28',
-            }}
-          />
-        ) : (
+        </Skeleton>
+        <Skeleton css={{ width: '$tw_28' }} when={fallback}>
           <Text
             css={{
               fontSize: '$sm',
@@ -125,24 +98,11 @@ export default function Article() {
               )
             })()}
           </Text>
-        )}
+        </Skeleton>
       </Box>
-      <Box
-        css={{
-          position: 'relative',
-          mb: '$2',
-        }}
-      >
+      <Box css={{ position: 'relative', mb: '$2' }}>
         <AspectRatio ratio={16 / 9}>
-          {fallback ? (
-            <Skeleton
-              css={{
-                width: '100%',
-                height: '100%',
-                rounded: '$3',
-              }}
-            />
-          ) : (
+          <Skeleton css={{ width: '100%', height: '100%', rounded: '$3' }}>
             <Image
               src="https://picsum.photos/800"
               css={{
@@ -152,7 +112,7 @@ export default function Article() {
                 rounded: '$3',
               }}
             ></Image>
-          )}
+          </Skeleton>
         </AspectRatio>
         <Sharer title={data?.title ?? ''}>
           <Button
@@ -183,8 +143,8 @@ export default function Article() {
       >
         This is the caption of the picture
       </Text>
-      {fallback ? (
-        <>
+      <Conditional value={fallback}>
+        <If is={true}>
           <Box
             css={{
               display: 'flex',
@@ -193,13 +153,7 @@ export default function Article() {
               mb: '$9',
             }}
           >
-            <Skeleton
-              variant="heading"
-              css={{
-                width: '$tw_80',
-                mb: '$2',
-              }}
-            />
+            <Skeleton variant="heading" css={{ width: '$tw_80', mb: '$2' }} />
             <Skeleton css={{ width: '90%' }} />
             <Skeleton css={{ width: '95%' }} />
             <Skeleton css={{ width: '93%' }} />
@@ -207,11 +161,7 @@ export default function Article() {
             <Skeleton css={{ width: '92%' }} />
             <Skeleton
               variant="heading"
-              css={{
-                width: '$tw_80',
-                mb: '$2',
-                mt: '$6',
-              }}
+              css={{ width: '$tw_80', mb: '$2', mt: '$6' }}
             />
             <Skeleton css={{ width: '90%' }} />
             <Skeleton css={{ width: '95%' }} />
@@ -219,31 +169,24 @@ export default function Article() {
             <Skeleton css={{ width: '97%' }} />
             <Skeleton css={{ width: '92%' }} />
           </Box>
-        </>
-      ) : (
-        <Prose
-          css={{
-            mb: '$9',
-          }}
-        >
-          {/* <ReactMarkdown>{data?.content ?? ''}</ReactMarkdown> */}
-          {parse(data?.content ?? '')}
-        </Prose>
-      )}
+        </If>
+        <Else>
+          <Prose
+            css={{
+              mb: '$9',
+            }}
+          >
+            {/* <ReactMarkdown>{data?.content ?? ''}</ReactMarkdown> */}
+            {parse(data?.content ?? '')}
+          </Prose>
+        </Else>
+      </Conditional>
 
       <Card
-        css={{
-          // mt: '$9',
-          display: 'grid',
-          gridTemplateColumns: '24rem auto',
-        }}
+        css={{ display: 'grid', gridTemplateColumns: '24rem auto' }}
         // variant="active"
       >
-        <Box
-          css={{
-            p: '$6',
-          }}
-        >
+        <Box css={{ p: '$6' }}>
           <Heading
             css={{
               fontSet: '$4xl',

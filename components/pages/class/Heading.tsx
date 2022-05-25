@@ -15,7 +15,7 @@ import {
 } from '@radix-ui/react-icons'
 import { useCourseStore } from './use-detail'
 import shallow from 'zustand/shallow'
-import { Skeleton } from '@Components/Skeleton'
+import { Skeleton } from '@Components/Conditional'
 
 const TextualIcon = (
   props: ReactProps<typeof StyledSlot> & {
@@ -56,13 +56,7 @@ export default function Detail() {
           mb: '$2',
         }}
       >
-        {fallback ? (
-          <Skeleton
-            css={{
-              width: '$tw_24',
-            }}
-          />
-        ) : (
+        <Skeleton css={{ width: '$tw_24' }} when={fallback}>
           <TextualIcon
             icon={FiRadio}
             css={{
@@ -71,19 +65,18 @@ export default function Detail() {
           >
             {data?.type} Class
           </TextualIcon>
-        )}
+        </Skeleton>
       </Badge>
-      {fallback ? (
-        <Skeleton
-          variant="title"
-          css={{
-            mb: '$2',
-            maxWidth: '30ch',
-            ff: '$spaceGrotesk',
-            fontSet: '$5xl',
-          }}
-        />
-      ) : (
+      <Skeleton
+        variant="title"
+        css={{
+          mb: '$2',
+          maxWidth: '30ch',
+          ff: '$spaceGrotesk',
+          fontSet: '$5xl',
+        }}
+        when={fallback}
+      >
         <Heading
           css={{
             fontSet: '$5xl',
@@ -94,7 +87,7 @@ export default function Detail() {
         >
           {data?.title}
         </Heading>
-      )}
+      </Skeleton>
       <Flex
         css={{
           '& > *': {
@@ -118,39 +111,21 @@ export default function Detail() {
         }}
       >
         <Text>
-          {fallback ? (
-            <Skeleton
-              css={{
-                width: '$tw_24',
-              }}
-            />
-          ) : (
+          <Skeleton css={{ width: '$tw_24' }} when={fallback}>
             <TextualIcon icon={StarIcon}>
               {data?.avg_rating ? data.avg_rating : 'No review'}
             </TextualIcon>
-          )}
+          </Skeleton>
         </Text>
         <Text>
-          {fallback ? (
-            <Skeleton
-              css={{
-                width: '$tw_24',
-              }}
-            />
-          ) : (
+          <Skeleton css={{ width: '$tw_24' }} when={fallback}>
             <TextualIcon icon={ClockIcon}>1 Lectures (2 hours)</TextualIcon>
-          )}
+          </Skeleton>
         </Text>
         <Text>
-          {fallback ? (
-            <Skeleton
-              css={{
-                width: '$tw_24',
-              }}
-            />
-          ) : (
+          <Skeleton css={{ width: '$tw_24' }} when={fallback}>
             <TextualIcon icon={MixIcon}>{data?.category}</TextualIcon>
-          )}
+          </Skeleton>
         </Text>
       </Flex>
     </Box>

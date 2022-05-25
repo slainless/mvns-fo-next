@@ -6,7 +6,7 @@ import { TitledSection } from '@Components/TitledSection'
 import { Paragraph } from '@Components/Paragraph'
 import { useCourseStore } from './use-detail'
 import shallow from 'zustand/shallow'
-import { Skeleton } from '@Components/Skeleton'
+import { Else, Skeleton, Conditional, If } from '@Components/Conditional'
 import { DateTime } from 'luxon'
 
 export default function Instructor() {
@@ -34,21 +34,18 @@ export default function Instructor() {
           mb: '$5',
         }}
       >
-        {fallback ? (
-          <Skeleton variant="avatar6" />
-        ) : (
+        <Skeleton variant="avatar6" when={fallback}>
           <Avatar size="6" fallback="F" src="https://i.pravatar.cc/300" />
-        )}
+        </Skeleton>
         <Box>
-          {fallback ? (
-            <Skeleton
-              variant="heading"
-              css={{
-                width: '$tw_32',
-                mb: '$2',
-              }}
-            />
-          ) : (
+          <Skeleton
+            variant="heading"
+            css={{
+              width: '$tw_32',
+              mb: '$2',
+            }}
+            when={fallback}
+          >
             <Text
               size="6"
               css={{
@@ -59,14 +56,13 @@ export default function Instructor() {
               {data?.instructor_user.firstname ?? ''}{' '}
               {data?.instructor_user.lastname ?? ''}
             </Text>
-          )}
-          {fallback ? (
-            <Skeleton
-              css={{
-                width: '$tw_64',
-              }}
-            />
-          ) : (
+          </Skeleton>
+          <Skeleton
+            css={{
+              width: '$tw_64',
+            }}
+            when={fallback}
+          >
             <Text
               // size="6"
               css={{
@@ -81,50 +77,34 @@ export default function Instructor() {
                 return `Hosted on mavensdotlive since ${year}`
               })()}
             </Text>
-          )}
+          </Skeleton>
         </Box>
       </Flex>
-      {fallback ? (
-        <Flex
-          direction="column"
-          css={{
-            gap: '$3',
-            maxWidth: '60ch',
-          }}
-        >
-          <Skeleton
+      <Conditional value={fallback}>
+        <If is={true}>
+          <Flex
+            direction="column"
             css={{
-              width: '90%',
+              gap: '$3',
+              maxWidth: '60ch',
             }}
-          />
-          <Skeleton
-            css={{
-              width: '95%',
-            }}
-          />
-          <Skeleton
-            css={{
-              width: '93%',
-            }}
-          />
-          <Skeleton
-            css={{
-              width: '70%',
-            }}
-          />
-        </Flex>
-      ) : (
-        <Paragraph
-          css={{
-            maxWidth: '60ch',
-          }}
-        >
-          Pg Muhd Uwuis Al Qarni is a certified Professional Scrum Master,
-          Product Owner and a Business Coach with his vast experience mainly in
-          Software Development Projects. He is keen to support the community in
-          coaching startups with their product designs and business model.
-        </Paragraph>
-      )}
+          >
+            <Skeleton css={{ width: '90%' }} />
+            <Skeleton css={{ width: '95%' }} />
+            <Skeleton css={{ width: '93%' }} />
+            <Skeleton css={{ width: '70%' }} />
+          </Flex>
+        </If>
+        <Else>
+          <Paragraph css={{ maxWidth: '60ch' }}>
+            Pg Muhd Uwuis Al Qarni is a certified Professional Scrum Master,
+            Product Owner and a Business Coach with his vast experience mainly
+            in Software Development Projects. He is keen to support the
+            community in coaching startups with their product designs and
+            business model.
+          </Paragraph>
+        </Else>
+      </Conditional>
     </TitledSection>
   )
 }

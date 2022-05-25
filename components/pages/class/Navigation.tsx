@@ -30,13 +30,7 @@ export default function Navigation() {
         visibility: fallback ? 'hidden' : undefined,
       }}
     >
-      <Grid
-        columns={3}
-        css={{
-          width: '$tw_96',
-          mx: 'auto',
-        }}
-      >
+      <Grid columns={3} css={{ width: '$tw_96', mx: 'auto' }}>
         <NaviButton>Details</NaviButton>
         <NaviButton>Instructor</NaviButton>
         <NaviButton>Reviews</NaviButton>

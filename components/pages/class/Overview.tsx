@@ -14,7 +14,7 @@ import { StyledSlot } from '@Components/Slot'
 import { PlayIcon, StackIcon, Share1Icon } from '@radix-ui/react-icons'
 import { useCourseStore } from './use-detail'
 import shallow from 'zustand/shallow'
-import { Skeleton } from '@Components/Skeleton'
+import { Conditional, If, Else, Skeleton } from '@Components/Conditional'
 import { CourseResponse } from '@Models/course'
 import Sharer from '@Components/Sharer'
 
@@ -38,13 +38,7 @@ function Action(
       }}
       {...rest}
     >
-      <Box
-        css={{
-          mb: '$1',
-        }}
-      >
-        {icon}
-      </Box>
+      <Box css={{ mb: '$1' }}>{icon}</Box>
       <Text>{name}</Text>
     </Button>
   )
@@ -61,38 +55,18 @@ export default function Hero() {
   const data = result?.data
 
   return (
-    <Box
-      as="section"
-      id="hero"
-      css={{
-        backgroundColor: '$slate1',
-        pb: '$6',
-      }}
-    >
-      <Section
-        as="div"
-        size="2"
-        // as="section"
-        css={{
-          px: 0,
-        }}
-      >
-        <Grid
-          css={{
-            gridTemplateColumns: '55% 45%',
-            ai: 'center',
-          }}
-        >
-          {fallback ? (
-            <Skeleton
-              css={{
-                width: '100%',
-                height: '100%',
-                minHeight: '28rem',
-                rounded: '$3',
-              }}
-            />
-          ) : (
+    <Box as="section" id="hero" css={{ backgroundColor: '$slate1', pb: '$6' }}>
+      <Section as="div" size="2" css={{ px: 0 }}>
+        <Grid css={{ gridTemplateColumns: '55% 45%', ai: 'center' }}>
+          <Skeleton
+            css={{
+              width: '100%',
+              height: '100%',
+              minHeight: '28rem',
+              rounded: '$3',
+            }}
+            when={fallback}
+          >
             <Image
               id="hero-image"
               css={{
@@ -110,7 +84,7 @@ export default function Hero() {
               }}
               src={data?.image}
             />
-          )}
+          </Skeleton>
           <Flex
             id="hero-callout"
             direction="column"
@@ -129,18 +103,13 @@ export default function Hero() {
               // },
             }}
           >
-            {fallback ? (
-              <Skeleton
-                variant="title"
-                css={{
-                  width: '100%',
-                  mb: '$3',
-                }}
-              />
-            ) : (
+            <Skeleton
+              variant="title"
+              css={{ width: '100%', mb: '$3' }}
+              when={fallback}
+            >
               <Heading
                 as="h1"
-                // size=""
                 css={{
                   display: fallback ? 'none' : undefined,
                   fontSet: '$4xl',
@@ -154,15 +123,8 @@ export default function Hero() {
               >
                 {data?.title}
               </Heading>
-            )}
-            {fallback ? (
-              <Skeleton
-                css={{
-                  width: '$tw_32',
-                  mb: '$6',
-                }}
-              />
-            ) : (
+            </Skeleton>
+            <Skeleton css={{ width: '$tw_32', mb: '$6' }} when={fallback}>
               <Text
                 size="4"
                 css={{
@@ -181,50 +143,36 @@ export default function Hero() {
                   {data?.instructor_user?.lastname ?? ''}
                 </em>
               </Text>
-            )}
-            {fallback ? (
-              <Flex
-                direction="column"
-                css={{
-                  mb: '$6',
-                  ai: 'center',
-                  gap: '$3',
-                }}
-              >
-                <Skeleton
+            </Skeleton>
+            <Conditional value={fallback}>
+              <If is={true}>
+                <Flex
+                  direction="column"
+                  css={{ mb: '$6', ai: 'center', gap: '$3' }}
+                >
+                  <Skeleton css={{ width: '$tw_80' }} />
+                  <Skeleton css={{ width: '$tw_96' }} />
+                  <Skeleton css={{ width: '$tw_80' }} />
+                </Flex>
+              </If>
+              <Else>
+                <Text
                   css={{
-                    width: '$tw_80',
+                    fontSet: '$md',
+                    maxWidth: '40ch',
+                    mb: '$6',
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                    display: '-webkit-box',
+                    // mx: 'auto',
+                    // lineHeight: '1.5',
                   }}
-                />
-                <Skeleton
-                  css={{
-                    width: '$tw_96',
-                  }}
-                />
-                <Skeleton
-                  css={{
-                    width: '$tw_80',
-                  }}
-                />
-              </Flex>
-            ) : (
-              <Text
-                css={{
-                  fontSet: '$md',
-                  maxWidth: '40ch',
-                  mb: '$6',
-                  WebkitLineClamp: 3,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                  display: '-webkit-box',
-                  // mx: 'auto',
-                  // lineHeight: '1.5',
-                }}
-              >
-                {data?.description}
-              </Text>
-            )}
-
+                >
+                  {data?.description}
+                </Text>
+              </Else>
+            </Conditional>
             <Flex
               css={{
                 gap: '$2',
@@ -238,39 +186,15 @@ export default function Hero() {
                 <Action name="Share" icon={<Share1Icon />} />
               </Sharer>
             </Flex>
-            <Card
-              css={{
-                p: '$4',
-                display: 'flex',
-                gap: '$6',
-                ai: 'center',
-              }}
-            >
-              {fallback ? (
-                <Skeleton
-                  css={{
-                    width: '$tw_24',
-                  }}
-                />
-              ) : (
+            <Card css={{ p: '$4', display: 'flex', gap: '$6', ai: 'center' }}>
+              <Skeleton css={{ width: '$tw_24' }} when={fallback}>
                 <Text size="4">
-                  <Span
-                    css={{
-                      mr: '$1',
-                    }}
-                  >
-                    Price:
-                  </Span>
-                  <Span
-                    css={{
-                      color: '$red11',
-                      fontWeight: '$semibold',
-                    }}
-                  >
+                  <Span css={{ mr: '$1' }}>Price:</Span>
+                  <Span css={{ color: '$red11', fontWeight: '$semibold' }}>
                     $30
                   </Span>
                 </Text>
-              )}
+              </Skeleton>
 
               <Button
                 variant="red"
