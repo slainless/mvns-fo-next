@@ -29,18 +29,14 @@ export default function Article() {
 
   return (
     <Box>
-      <Box
-        css={{
-          mb: '$6',
-        }}
-      >
+      <Box css={{ mb: '$6' }}>
         <Conditional value={fallback}>
           <If is={true}>
             <Flex css={{ gap: '$2', mb: '$2' }}>
-              <Badge key={i} variant="gray" size="2">
+              <Badge variant="gray" size="2">
                 <Skeleton css={{ width: '$tw_12' }} />
               </Badge>
-              <Badge key={i} variant="gray" size="2">
+              <Badge variant="gray" size="2">
                 <Skeleton css={{ width: '$tw_12' }} />
               </Badge>
             </Flex>
