@@ -59,7 +59,9 @@ export default function MyClasses() {
               ))}
             </Swiper>
           </If>
-          <Else>EMPTY</Else>
+          <Else>
+            <Empty />
+          </Else>
         </Conditional>
       </FallbackCard>
     </TitledSection>
