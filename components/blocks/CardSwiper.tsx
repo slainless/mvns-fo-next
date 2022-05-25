@@ -49,12 +49,7 @@ export function Swiper(props: Props) {
   )
 
   return (
-    <Box
-      id={`carousel-${myId}`}
-      css={{
-        position: 'relative',
-      }}
-    >
+    <Box id={`carousel-${myId}`} css={{ position: 'relative' }}>
       <StyledSwiper
         css={merge<CSS, CSS>(
           {

@@ -1,7 +1,7 @@
 import { Box } from '@Components/Box'
 import { Heading } from '@Components/Heading'
 import * as CardPreset from '@Styles/card'
-import { Swiper } from '@Components/Swiper'
+import { Swiper } from '@Components/CardSwiper'
 import { SwiperSlide } from 'swiper/react'
 import CourseCard from '@Components/CourseCard'
 import { slimCard } from '@Dev/dummy'

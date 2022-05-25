@@ -1,4 +1,4 @@
-import { Swiper } from '@Components/Swiper'
+import { Swiper } from '@Components/CardSwiper'
 import { TitledSection } from '@Components/TitledSection'
 import { SwiperProps, SwiperSlide } from 'swiper/react'
 import BlogCard, { BlogCardData } from '@Components/BlogCard'
