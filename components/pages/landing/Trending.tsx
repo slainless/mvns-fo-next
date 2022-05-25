@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { CourseResponse } from '@Models/course'
 import { DateTime } from 'luxon'
 import { isEmpty } from 'lodash-es'
+import FallbackCard from '@Components/FallbackCard'
 
 export default function Trending() {
   const user = useAuthUserStore((state) => state.user)
@@ -52,19 +53,21 @@ export default function Trending() {
         href: '/class',
       }}
     >
-      <Swiper
-        swiperOptions={CardPreset.Normal}
-        swiperCSS={{
-          height: '28rem',
-        }}
-        id="trending"
-      >
-        {data.map((props, i) => (
-          <SwiperSlide key={i}>
-            <CourseCard hideFavorited={user == null} {...props} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <FallbackCard error={error}>
+        <Swiper
+          swiperOptions={CardPreset.Normal}
+          swiperCSS={{
+            height: '28rem',
+          }}
+          id="trending"
+        >
+          {data.map((props, i) => (
+            <SwiperSlide key={i}>
+              <CourseCard hideFavorited={user == null} {...props} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </FallbackCard>
     </TitledSection>
   )
 }

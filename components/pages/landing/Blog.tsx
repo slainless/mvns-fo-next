@@ -12,6 +12,7 @@ import { DateTime } from 'luxon'
 import { useState, useEffect } from 'react'
 import { BlogResponse } from '@Models/blog'
 import { nanoid } from 'nanoid'
+import FallbackCard from '@Components/FallbackCard'
 
 const swiperOptions: SwiperProps = {
   rewind: false,
@@ -76,19 +77,21 @@ export default function Blog() {
         href: '/blog',
       }}
     >
-      <Swiper
-        swiperOptions={merge(CardPreset.Large, swiperOptions)}
-        swiperCSS={{
-          height: '28rem',
-        }}
-        id="blog"
-      >
-        {data.map((props, i) => (
-          <SwiperSlide key={i}>
-            <BlogCard {...props} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <FallbackCard error={error}>
+        <Swiper
+          swiperOptions={merge(CardPreset.Large, swiperOptions)}
+          swiperCSS={{
+            height: '28rem',
+          }}
+          id="blog"
+        >
+          {data.map((props, i) => (
+            <SwiperSlide key={i}>
+              <BlogCard {...props} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </FallbackCard>
     </TitledSection>
   )
 }

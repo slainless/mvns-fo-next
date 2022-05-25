@@ -11,6 +11,7 @@ import { CourseAPI } from '@Methods/course'
 import { CourseResponse, CourseType } from '@Models/course'
 import { isEmpty } from 'lodash-es'
 import { DateTime } from 'luxon'
+import FallbackCard from '@Components/FallbackCard'
 
 export default function TypeVideo() {
   const user = useAuthUserStore((state) => state.user)
@@ -59,19 +60,21 @@ export default function TypeVideo() {
         href: '/class',
       }}
     >
-      <Swiper
-        swiperOptions={CardPreset.Normal}
-        swiperCSS={{
-          height: '28rem',
-        }}
-        id="vod"
-      >
-        {data.map((props, i) => (
-          <SwiperSlide key={i}>
-            <CourseCard hideFavorited={user == null} {...props} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <FallbackCard error={error}>
+        <Swiper
+          swiperOptions={CardPreset.Normal}
+          swiperCSS={{
+            height: '28rem',
+          }}
+          id="vod"
+        >
+          {data.map((props, i) => (
+            <SwiperSlide key={i}>
+              <CourseCard hideFavorited={user == null} {...props} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </FallbackCard>
     </TitledSection>
   )
 }

@@ -17,30 +17,28 @@ import { Box } from '@Components/Box'
 import { Flex } from '@Components/Flex'
 import { Image } from '@Components/Image'
 import FallbackCard, { EmptyError, Fallback } from '@Components/FallbackCard'
+import { Conditional, Else, If } from '@Components/Conditional'
 
 export default function MyClasses() {
   const user = useAuthUserStore((state) => state.user)
   const {
     data: result,
     loading,
-    error: err,
+    error,
     run,
   } = useRequest(CourseAPI.my, {
     manual: true,
   })
-  const [data, setData] = useState<CourseCardData[]>([])
-  const [fallback, setFallback] = useState<Fallback>()
 
   useEffect(() => {
     if (user != null) run()
   }, [user])
 
+  const [data, setData] = useState<CourseCardData[]>([])
   useEffect(() => {
-    if (err) return void setFallback(err)
     if (result == null) return
     if (result.data instanceof CourseResponse.Get) {
       const d = result.data.data
-      if (d.length === 0) setFallback(new EmptyError())
       return void setData(
         d.map((i) => ({
           itemId: i.id,
@@ -60,39 +58,43 @@ export default function MyClasses() {
         }))
       )
     }
-
-    setFallback(new Error(result.data.message))
-  }, [err, result])
+  }, [result])
 
   if (user == null) return <></>
+  const isEmpty = data.length === 0
+  const fallback = error
 
   return (
     <TitledSection
       title="Continue Learning"
       hotlink={
-        !fallback
-          ? {
+        fallback || isEmpty
+          ? undefined
+          : {
               display: 'See all my classes',
               href: '/class/my',
             }
-          : undefined
       }
     >
-      {!fallback && (
-        <Swiper
-          swiperOptions={CardPreset.Normal}
-          swiperCSS={{
-            height: '28rem',
-          }}
-        >
-          {data.map((props, i) => (
-            <SwiperSlide key={i}>
-              <CourseCard {...props} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      )}
-      {fallback && <FallbackCard error={fallback} />}
+      <FallbackCard error={error}>
+        <Conditional value={isEmpty && !error}>
+          <If is={false}>
+            <Swiper
+              swiperOptions={CardPreset.Normal}
+              swiperCSS={{
+                height: '28rem',
+              }}
+            >
+              {data.map((props, i) => (
+                <SwiperSlide key={i}>
+                  <CourseCard {...props} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </If>
+          <Else>EMPTY</Else>
+        </Conditional>
+      </FallbackCard>
     </TitledSection>
   )
 }
