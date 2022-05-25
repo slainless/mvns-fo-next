@@ -22,7 +22,6 @@ export type BlogCardData = {
   date?: string | Date
   summary?: string
   backgroundUrl?: string
-  href?: string
 }
 
 type CardType = typeof Card.Root
@@ -30,7 +29,19 @@ export const BlogCard = forwardRef<
   ElementRef<CardType>,
   ComponentProps<CardType> & BlogCardData
 >((props, ref) => {
-  const { title, badges, backgroundUrl, date, href, itemId } = props
+  const { title, badges, backgroundUrl, date, itemId } = props
+  const titleEl = (
+    <Card.Title
+      as="a"
+      css={{
+        color: 'white',
+        rounded: '$2',
+      }}
+      overlay={itemId != null}
+    >
+      {title}
+    </Card.Title>
+  )
 
   return (
     <Card.Root>
@@ -65,18 +76,13 @@ export const BlogCard = forwardRef<
         </Flex>
       </Card.Header>
       <Card.Content>
-        <Link href={`/blog/read?id=${itemId}`} passHref>
-          <Card.Title
-            as="a"
-            css={{
-              color: 'white',
-              rounded: '$2',
-            }}
-            overlay
-          >
-            {title}
-          </Card.Title>
-        </Link>
+        {itemId != null ? (
+          <Link href={`/blog/read?id=${itemId}`} passHref>
+            {titleEl}
+          </Link>
+        ) : (
+          titleEl
+        )}
 
         <Card.ContentSeparator
           css={{

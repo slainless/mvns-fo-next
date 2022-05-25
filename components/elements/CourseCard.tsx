@@ -101,6 +101,19 @@ export const CourseCard = forwardRef<
     toggle: toggleFav,
   } = useFavorite(itemId, isFavorited)
 
+  const titleEl = (
+    <Card.Title
+      as="a"
+      css={{
+        color: 'white',
+        rounded: '$2',
+      }}
+      overlay={itemId != null}
+    >
+      {title}
+    </Card.Title>
+  )
+
   return (
     <Card.Root ref={ref}>
       <Card.Overlay
@@ -150,18 +163,13 @@ export const CourseCard = forwardRef<
         )}
       </Card.Header>
       <Card.Content>
-        <Link href={`/class/detail?id=${itemId}`} passHref>
-          <Card.Title
-            as="a"
-            css={{
-              color: 'white',
-              rounded: '$2',
-            }}
-            overlay
-          >
-            {title}
-          </Card.Title>
-        </Link>
+        {itemId != null ? (
+          <Link href={`/class/detail?id=${itemId}`} passHref>
+            {titleEl}
+          </Link>
+        ) : (
+          titleEl
+        )}
 
         {!hideSeparator && (
           <Card.ContentSeparator
@@ -211,158 +219,3 @@ export const CourseCard = forwardRef<
 CourseCard.displayName = name('Card')
 
 export default CourseCard
-
-// type Props = ReactProps<typeof BaseCard> & CourseCardData
-// export default function CourseCard(props: Props) {
-//   const {
-//     children,
-//     badges,
-//     isFavorited,
-//     hideFavorited,
-//     hideSeparator,
-//     backgroundUrl,
-//     author,
-//     date,
-//     href,
-//     price,
-//     itemId,
-
-//     headerCSS,
-//     contentCSS,
-//     ...rest
-//   } = props
-//   const {
-//     state: isFav,
-//     error: favErr,
-//     loading: favLoading,
-//     toggle: toggleFav,
-//   } = useFavorite(itemId, isFavorited)
-
-//   return (
-//     <BaseCard
-//       css={{
-//         position: ''
-//       }}
-//       backgroundUrl={backgroundUrl}
-//       href={itemId ? `/class/detail?id=${itemId}` : undefined}
-//       headerCSS={merge(
-//         {
-//           jc: 'space-between',
-//         },
-//         headerCSS
-//       )}
-//       contentCSS={merge(
-//         {
-//           jc: 'space-between',
-//           [`& .card-title`]: {
-//             color: 'white',
-//             // bc: '$blackA10',
-//             rounded: '$2',
-//           },
-//           // '& .card-title': {
-//           //   color: '$loContrast',
-//           //   [`.${darkTheme} &`]: {
-//           //     color: '$hiContrast',
-//           //   },
-//           // },
-//         },
-//         contentCSS
-//       )}
-//       {...rest}
-//     >
-//       <Slot name="overlay">
-//         {!isEmpty(backgroundUrl) && (
-//           <Box
-//             css={{
-//               position: 'absolute',
-//               width: '100%',
-//               height: '100%',
-//               opacity: 1,
-//               bottom: 0,
-//               rounded: '$3',
-//               $$overlayColor: '$colors$blackA11',
-//               background:
-//                 'linear-gradient(to bottom, transparent, $$overlayColor)',
-
-//               // [`.${darkTheme} &`]: {
-//               //   $$overlayColor: '$colors$loContrast',
-//               // },
-//             }}
-//           />
-//         )}
-//       </Slot>
-
-//       <Slot name="header">
-//         <Flex
-//           css={{
-//             flexDirection: 'column',
-//             ai: 'flex-start',
-//             gap: '$1',
-//           }}
-//         >
-//           {!isEmpty(badges) &&
-//             badges!.map((badge, i) => (
-//               <Badge
-//                 as="a"
-//                 interactive
-//                 css={{ rounded: '$full', px: '$2' }}
-//                 href={badge.href}
-//                 key={i}
-//               >
-//                 {badge.display}
-//               </Badge>
-//             ))}
-//         </Flex>
-
-//         {!hideFavorited && (
-//           <IconButton css={{ rounded: '$full' }} onClick={toggleFav}>
-//             {isFav ? <HeartFilledIcon /> : <HeartIcon />}
-//           </IconButton>
-//         )}
-//       </Slot>
-
-//       <Slot name="post-content">
-//         {!hideSeparator && (
-//           <VisualSeparator className="separator" css={{ bc: '$whiteA11' }} />
-//         )}
-//         {!isEmpty(price) && (
-//           <Text
-//             size="4"
-//             css={{
-//               mb: '$1',
-//               fontWeight: '$bold',
-//               bc: '$blackA11',
-//               width: 'max-content',
-//               mx: 'auto',
-//               p: '$1',
-//               rounded: '$1',
-//               color: '$whiteA12',
-//               ff: '$spaceGrotesk',
-//             }}
-//           >
-//             $ {price}
-//           </Text>
-//         )}
-//         {!isEmpty(author) && (
-//           <Text as="h4" css={{ mb: '$1' }}>
-//             {author}
-//           </Text>
-//         )}
-//         {!isEmpty(date) && (
-//           <Text
-//             size="2"
-//             className="date"
-//             css={{ mb: '$1', color: '$whiteA12' }}
-//           >
-//             <Icon thin={false}>
-//               <FiCalendar />
-//             </Icon>{' '}
-//             {date}
-//           </Text>
-//         )}
-//       </Slot>
-
-//       {children}
-//     </BaseCard>
-//   )
-// }
