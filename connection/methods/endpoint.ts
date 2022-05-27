@@ -25,7 +25,7 @@ const Endpoints = {
   BLOG_DETAIL: make('blogs/show'),
 
   WISH_ADD: make('my/wishlist'),
-  WISH_ALL: make('my/cart'),
+  WISH_ALL: make('my/wishlist'),
   WISH_REMOVE: make('my/wishlist/destory'),
 
   CART_ADD: make('my/cart'),
