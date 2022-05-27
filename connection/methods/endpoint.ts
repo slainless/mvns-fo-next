@@ -29,7 +29,7 @@ const Endpoints = {
 
   CART_ADD: make('my/cart'),
   CART_ALL: make('my/cart'),
-  CART_REMOVE: make('my/cart/destory'),
+  CART_REMOVE: make('my/cart/destroy'),
 
   INTEREST_SET: make('my/course-interest'),
   INTEREST_GET: make('my/course-interest'),
