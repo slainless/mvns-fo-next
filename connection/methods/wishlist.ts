@@ -4,6 +4,16 @@ import urlJoin from 'url-join'
 import Endpoints from './endpoint'
 
 export module WishlistAPI {
+  export function get() {
+    return requestJSON(urlJoin(Endpoints.WISH_ALL), {
+      useAuth: true,
+      method: 'get',
+      responseType: {
+        200: WishResponse.Get,
+      },
+    })
+  }
+
   export function add(courseId?: number) {
     return requestJSON(urlJoin(Endpoints.WISH_ADD), {
       useAuth: true,
@@ -30,5 +40,3 @@ export module WishlistAPI {
     )
   }
 }
-
-export default WishlistAPI

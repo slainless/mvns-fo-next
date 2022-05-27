@@ -23,7 +23,7 @@ export module CartAPI {
         quantity: quantity,
       },
       responseType: {
-        200: CartResponse.Add,
+        201: CartResponse.Add,
       },
     })
   }

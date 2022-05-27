@@ -8,12 +8,18 @@ import {
   ValidateNested,
 } from 'class-validator'
 import { APIResponse } from './response'
+import { Course } from '@Models/course'
 
 // prettier-ignore
 export class Wish {
   @IsNumber() id: number
-  @IsNumber() user_id: number
+  @IsNumber() @IsOptional() user_id: number
   @IsNumber() course_id: number
+  
+  @Type(() => Course)
+  @ValidateNested()
+  @IsOptional()
+  course?: Course
 
   @IsISO8601() @IsOptional() created_at?: string
   @IsISO8601() @IsOptional() updated_at?: string
