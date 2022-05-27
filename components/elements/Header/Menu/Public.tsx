@@ -1,26 +1,20 @@
 import { Box } from '@Components/Box'
 import { Link, NextLink } from '@Components/Link'
-import ThemeToggler from '@Components/ThemeToggler'
-import FullscreenMenu from './Fullscreen'
 import Login from '@Components/Login'
 import Register from '@Components/Register'
+import { styled } from '@Theme'
 
 export default function PublicMenu() {
   return (
     <Box
       css={{
         display: 'none',
-
-        '@lg': {
-          display: 'contents',
-        },
-
-        '& > a::after': {
-          width: 0,
-        },
-
+        '@lg': { display: 'contents' },
+        '& > ::after': { width: 0 },
         [`& > ${Link}`]: {
           mr: '$4',
+          cursor: 'pointer',
+          '&:last-child': { mr: 0 },
         },
       }}
     >

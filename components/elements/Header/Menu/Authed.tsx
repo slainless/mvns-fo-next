@@ -1,14 +1,11 @@
 import { Avatar } from '@Components/Avatar'
-import { Box } from '@Components/Box'
 import { Button } from '@Components/Button'
 import { Flex } from '@Components/Flex'
 import { IconButton } from '@Components/IconButton'
-import { panelStyles } from '@Components/Panel'
 import Span from '@Components/Span'
-import { DashboardIcon, HamburgerMenuIcon } from '@radix-ui/react-icons'
+import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import * as Menu from '@Components/NavigationMenu'
-import { styled, keyframes } from '@Theme'
-import { forwardRef } from 'react'
+import { styled } from '@Theme'
 import {
   FiBook,
   FiGrid,
@@ -20,6 +17,7 @@ import {
 } from 'react-icons/fi'
 import { useAuthUserStore } from '@Methods/auth'
 import { toast } from 'react-hot-toast'
+import Link from 'next/link'
 
 const List = styled(Menu.List, Flex, {
   my: 0,
@@ -57,12 +55,7 @@ export default function Authed() {
   return (
     <Menu.Root>
       <List>
-        <Item
-          value="hamburger-menu"
-          css={{
-            mr: '$2',
-          }}
-        >
+        <Item value="hamburger-menu" css={{ mr: '$2' }}>
           <Menu.Trigger>
             <IconButton
               css={{
@@ -80,11 +73,7 @@ export default function Authed() {
               <HamburgerMenuIcon />
             </IconButton>
           </Menu.Trigger>
-          <Content
-            css={{
-              width: '$tw_32',
-            }}
-          >
+          <Content css={{ width: '$tw_32' }}>
             <Button variant="blue" ghost>
               <Span css={{ mr: '$2' }}>
                 <FiGrid />
@@ -120,11 +109,7 @@ export default function Authed() {
               }}
             />
           </Menu.Trigger>
-          <Content
-            css={{
-              width: '$tw_32',
-            }}
-          >
+          <Content css={{ width: '$tw_32' }}>
             <Button ghost>
               <Span css={{ mr: '$2' }}>
                 <FiBook />
@@ -169,5 +154,31 @@ export default function Authed() {
         <Menu.Viewport />
       </Menu.ViewportContainer>
     </Menu.Root>
+  )
+}
+
+export function CartButton() {
+  return (
+    <Link href="/my/cart" passHref>
+      <IconButton as={'a'}>
+        <FiShoppingCart />
+      </IconButton>
+    </Link>
+  )
+}
+
+export function NotificationButton() {
+  return (
+    <IconButton
+    // size="2"
+    // css={{
+    //   '& svg': {
+    //     width: '$4',
+    //     height: '$4',
+    //   },
+    // }}
+    >
+      <FiShoppingCart />
+    </IconButton>
   )
 }
