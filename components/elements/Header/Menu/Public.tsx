@@ -2,7 +2,6 @@ import { Box } from '@Components/Box'
 import { Link, NextLink } from '@Components/Link'
 import Login from '@Components/Login'
 import Register from '@Components/Register'
-import { styled } from '@Theme'
 
 export default function PublicMenu() {
   return (
@@ -22,12 +21,12 @@ export default function PublicMenu() {
         Become Instructor
       </NextLink>
       <Login>
-        <Link type="decorative" href="javascript:void(0)">
+        <Link as="button" type="decorative">
           Log In
         </Link>
       </Login>
       <Register>
-        <Link type="decorative" href="#">
+        <Link as="button" type="decorative">
           Register
         </Link>
       </Register>

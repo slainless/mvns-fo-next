@@ -6,6 +6,8 @@ import { ComponentProps, ElementRef, forwardRef } from 'react'
 
 const StyledAnchor = styled('a')
 export const Link = styled('a', {
+  all: 'unset',
+  cursor: 'pointer',
   alignItems: 'center',
   gap: '$1',
   flexShrink: 0,
