@@ -50,6 +50,13 @@ const Item = styled(Menu.Item, {
   display: 'flex',
 })
 
+const StyledButton = styled(Button, {
+  cursor: 'pointer',
+  defaultVariants: {
+    ghost: true,
+  },
+})
+
 export default function Authed() {
   const removeUser = useAuthUserStore((state) => state.removeUser)
   return (
@@ -74,25 +81,29 @@ export default function Authed() {
             </IconButton>
           </Menu.Trigger>
           <Content css={{ width: '$tw_32' }}>
-            <Button variant="blue" ghost>
+            <StyledButton as="a" href={'/portal'} variant="blue">
               <Span css={{ mr: '$2' }}>
                 <FiGrid />
               </Span>{' '}
               Dashboard
-            </Button>
-            <Button ghost>
-              <Span css={{ mr: '$2' }}>
-                <FiRss />
-              </Span>{' '}
-              Blog
-            </Button>
-            {/* <Button ghost>Terms</Button> */}
-            <Button ghost>
-              <Span css={{ mr: '$2' }}>
-                <FiHelpCircle />
-              </Span>{' '}
-              FAQ
-            </Button>
+            </StyledButton>
+            <Link href={'/blog'} passHref>
+              <StyledButton as="a">
+                <Span css={{ mr: '$2' }}>
+                  <FiRss />
+                </Span>{' '}
+                Blog
+              </StyledButton>
+            </Link>
+            {/* <StyledButton>Terms</Button> */}
+            <Link href={'/faq'} passHref>
+              <StyledButton as="a">
+                <Span css={{ mr: '$2' }}>
+                  <FiHelpCircle />
+                </Span>{' '}
+                FAQ
+              </StyledButton>
+            </Link>
           </Content>
         </Item>
         <Item value="avatar-menu">
@@ -110,28 +121,33 @@ export default function Authed() {
             />
           </Menu.Trigger>
           <Content css={{ width: '$tw_32' }}>
-            <Button ghost>
-              <Span css={{ mr: '$2' }}>
-                <FiBook />
-              </Span>{' '}
-              Classes
-            </Button>
-            <Button ghost>
-              <Span css={{ mr: '$2' }}>
-                <FiStar />
-              </Span>{' '}
-              Wishlist
-            </Button>
-            {/* <Button ghost>Terms</Button> */}
-            <Button ghost>
-              <Span css={{ mr: '$2' }}>
-                <FiShoppingCart />
-              </Span>{' '}
-              Cart
-            </Button>
-            <Button
+            <Link href={'/my/class'} passHref>
+              <StyledButton as="a">
+                <Span css={{ mr: '$2' }}>
+                  <FiBook />
+                </Span>{' '}
+                Classes
+              </StyledButton>
+            </Link>
+            <Link href={'/my/wishlist'} passHref>
+              <StyledButton as="a">
+                <Span css={{ mr: '$2' }}>
+                  <FiStar />
+                </Span>{' '}
+                Wishlist
+              </StyledButton>
+            </Link>
+            {/* <StyledButton>Terms</Button> */}
+            <Link href={'/my/cart'} passHref>
+              <StyledButton as="a">
+                <Span css={{ mr: '$2' }}>
+                  <FiShoppingCart />
+                </Span>{' '}
+                Cart
+              </StyledButton>
+            </Link>
+            <StyledButton
               variant="red"
-              ghost
               onClick={() => {
                 removeUser()
                 toast('Logged Out', {
@@ -144,7 +160,7 @@ export default function Authed() {
                 <FiLogOut />
               </Span>{' '}
               Log Out
-            </Button>
+            </StyledButton>
           </Content>
         </Item>
         <Menu.Indicator />
