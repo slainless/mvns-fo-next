@@ -4,20 +4,14 @@ import { Box } from '@Components/Box'
 import { Text } from '@Components/Text'
 import { TitledSection } from '@Components/TitledSection'
 import { Paragraph } from '@Components/Paragraph'
-import { useCourseStore } from './use-detail'
-import shallow from 'zustand/shallow'
+import { useDetail } from './use-detail'
 import { Else, Skeleton, Conditional, If } from '@Components/Conditional'
 import { DateTime } from 'luxon'
 
 export default function Instructor() {
-  let { result, fallback } = useCourseStore(
-    (state) => ({
-      result: state.acceptedData,
-      fallback: state.shouldFallback,
-    }),
-    shallow
-  )
-  const data = result?.data
+  let { data: $data } = useDetail()
+  const data = $data?.data
+  const fallback = $data == null
 
   return (
     <TitledSection

@@ -2,19 +2,12 @@ import { Box } from '@Components/Box'
 import { Text } from '@Components/Text'
 import { Badge } from '@Components/Badge'
 import { FiRadio } from 'react-icons/fi'
-import { TitledSection } from '@Components/TitledSection'
 import { Heading } from '@Components/Heading'
 import { StyledSlot } from '@Components/Slot'
 import { Flex } from '@Components/Flex'
 import { styled } from '@Theme'
-import {
-  StarIcon,
-  StarFilledIcon,
-  ClockIcon,
-  MixIcon,
-} from '@radix-ui/react-icons'
-import { useCourseStore } from './use-detail'
-import shallow from 'zustand/shallow'
+import { StarIcon, ClockIcon, MixIcon } from '@radix-ui/react-icons'
+import { useDetail } from './use-detail'
 import { Skeleton } from '@Components/Conditional'
 
 const TextualIcon = (
@@ -32,14 +25,9 @@ const TextualIcon = (
   )
 }
 export default function Detail() {
-  let { result, fallback } = useCourseStore(
-    (state) => ({
-      result: state.acceptedData,
-      fallback: state.shouldFallback,
-    }),
-    shallow
-  )
-  const data = result?.data
+  let { data: $data } = useDetail()
+  const data = $data?.data
+  const fallback = $data == null
 
   return (
     <Box

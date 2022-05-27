@@ -1,8 +1,12 @@
-import { createRequestStore } from '@Functions/use-store'
 import { CourseAPI } from '@Methods/course'
 import { CourseResponse } from '@Models/course'
+import { createRequestContext } from '@Functions/use-request'
 
-export const useCourseRequest = createRequestStore(CourseAPI.detail, {
-  accept: [CourseResponse.GetOne],
-})
-export const useCourseStore = useCourseRequest.store
+const { Provider, ConsumerHook, RequestHook } = createRequestContext(
+  CourseAPI.detail,
+  CourseResponse.GetOne
+)
+
+export const useDetailRequest = RequestHook
+export const useDetail = ConsumerHook
+export const DetailProvider = Provider

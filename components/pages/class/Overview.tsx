@@ -3,28 +3,25 @@ import { Button } from '@Components/Button'
 import { Flex } from '@Components/Flex'
 import { Heading } from '@Components/Heading'
 import { Image } from '@Components/Image'
-import { Link, NextLink } from '@Components/Link'
-import { Paragraph } from '@Components/Paragraph'
 import { Section } from '@Components/Section'
 import { Text } from '@Components/Text'
 import { Grid } from '@Components/Grid'
 import { Card } from '@Components/Card'
 import { Span } from '@Components/Span'
-import { StyledSlot } from '@Components/Slot'
 import { PlayIcon, StackIcon, Share1Icon } from '@radix-ui/react-icons'
-import { useCourseStore } from './use-detail'
-import shallow from 'zustand/shallow'
+import { useDetail } from './use-detail'
 import { Conditional, If, Else, Skeleton } from '@Components/Conditional'
-import { CourseResponse } from '@Models/course'
 import Sharer from '@Components/Sharer'
+import { ComponentProps, ElementRef, forwardRef } from 'react'
 
-function Action(
-  props: ReactProps<typeof Box> & {
+const Action = forwardRef<
+  ElementRef<typeof Button>,
+  ComponentProps<typeof Button> & {
     name: string
     icon: any
     href?: string
   }
-) {
+>((props, ref) => {
   const { name, icon, href, children, ...rest } = props
   return (
     <Button
@@ -37,22 +34,19 @@ function Action(
         p: '$2',
       }}
       {...rest}
+      ref={ref}
     >
       <Box css={{ mb: '$1' }}>{icon}</Box>
       <Text>{name}</Text>
     </Button>
   )
-}
+})
+Action.displayName = 'Class.Overview.Action'
 
 export default function Hero() {
-  let { result, fallback } = useCourseStore(
-    (state) => ({
-      result: state.acceptedData,
-      fallback: state.shouldFallback,
-    }),
-    shallow
-  )
-  const data = result?.data
+  let { data: $data } = useDetail()
+  const data = $data?.data
+  const fallback = $data == null
 
   return (
     <Box as="section" id="hero" css={{ backgroundColor: '$slate1', pb: '$6' }}>
@@ -195,7 +189,6 @@ export default function Hero() {
                   </Span>
                 </Text>
               </Skeleton>
-
               <Button
                 variant="red"
                 size="3"

@@ -8,13 +8,13 @@ import { ArticleCardData } from '@Pages/blog/Card'
 import { Box } from '@Components/Box'
 import { Grid } from '@Components/Grid'
 import Config from '@Config'
-import { useBlogRequest, useBlogStore } from '@Pages/blog/use-read'
+import { useReadRequest, ReadProvider } from '@Pages/blog/use-read'
 import { useIsomorphicLayoutEffect } from 'ahooks'
-import { BlogResponse } from '@Models/blog'
 import isBrowser from '@Functions/is-browser'
-import shallow from 'zustand/shallow'
-import { useEffect } from 'react'
 import AnyError from '@Components/AnyError'
+import { useRouter } from 'next/router'
+// import NotFoundError from '@Pages/blog/NotFoundError'
+// import { APIError } from '@Models/response'
 
 const items: ArticleCardData[] = blogItems.map((item) => ({
   title: item.title,
@@ -26,31 +26,20 @@ const items: ArticleCardData[] = blogItems.map((item) => ({
 const { categories } = Config
 
 const Page: NextPage = () => {
+  const router = useRouter()
   const id = isBrowser
     ? new URL(window.location.href).searchParams.get('id')
     : null
+
   useIsomorphicLayoutEffect(() => {
-    if (id == null) window.location.replace('/not-found')
-  }, [])
-  useBlogRequest({
-    defaultParams: id ? [id] : undefined,
+    if (id == null) router.replace('/not-found')
+  }, [id])
+
+  const request = useReadRequest({
+    defaultParams: [id],
     manual: id == null,
   })
-
-  const { data, error, setError } = useBlogStore(
-    (state) => ({
-      data: state.data,
-      error: state.error,
-      setError: state.setError,
-    }),
-    shallow
-  )
-
-  useEffect(() => {
-    if (data?.data == null) return
-    if (!(data.data instanceof BlogResponse.GetOne))
-      return void setError(data.data.toError())
-  }, [data])
+  const { error } = request
 
   if (error) {
     // if (error instanceof APIError.NotFound)
@@ -60,23 +49,25 @@ const Page: NextPage = () => {
   }
 
   return (
-    <TitledSection>
-      <Grid
-        css={{
-          gridTemplateColumns: '70% auto',
-          gap: '$6',
-        }}
-      >
-        <Article />
-        <Box
+    <ReadProvider value={request}>
+      <TitledSection>
+        <Grid
           css={{
-            width: '100%',
+            gridTemplateColumns: '70% auto',
+            gap: '$6',
           }}
         >
-          <SideList articles={items} />
-        </Box>
-      </Grid>
-    </TitledSection>
+          <Article />
+          <Box
+            css={{
+              width: '100%',
+            }}
+          >
+            <SideList articles={items} />
+          </Box>
+        </Grid>
+      </TitledSection>
+    </ReadProvider>
   )
 }
 

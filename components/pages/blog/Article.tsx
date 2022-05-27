@@ -7,24 +7,17 @@ import { Button } from '@Components/Button'
 import { Image } from '@Components/Image'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { Prose } from '@Components/Prose'
-import ReactMarkdown from 'react-markdown'
 import { Card } from '@Components/Card'
 import { Skeleton, Conditional, If, Else } from '@Components/Conditional'
-import { useBlogStore } from './use-read'
-import shallow from 'zustand/shallow'
+import { useRead } from './use-read'
 import { DateTime } from 'luxon'
 import parse from 'html-react-parser'
 import Sharer from '@Components/Sharer'
 
 export default function Article() {
-  let { result, fallback } = useBlogStore(
-    (state) => ({
-      result: state.acceptedData,
-      fallback: state.shouldFallback,
-    }),
-    shallow
-  )
-  const data = result?.data
+  const { data: $data } = useRead()
+  const data = $data?.data
+  const fallback = data == null
   // fallback = true
 
   return (

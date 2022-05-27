@@ -1,4 +1,3 @@
-import { RequestResult } from './request'
 import { useRequest as useReq } from 'ahooks'
 import type {
   Service,
@@ -8,15 +7,7 @@ import type {
 } from 'ahooks/lib/useRequest/src/types'
 import { APIResponse } from '@Models/response'
 import { ClassConstructor } from 'class-transformer'
-import {
-  createContext,
-  createElement,
-  useEffect,
-  useMemo,
-  ReactNode,
-  useContext,
-} from 'react'
-import shallow from 'zustand/shallow'
+import { createContext, useMemo, useContext } from 'react'
 
 type ExtendedResult<
   TData,
@@ -65,6 +56,59 @@ export function useRequest<
     run,
     runAsync,
     loading,
-    isWrongType: data == null && $data != null
+    isWrongType: data == null && $data != null,
+  }
+}
+
+export function createRequestContext<
+  TData,
+  TParams extends any[],
+  AccType extends Awaited<ReturnType<TData>>['data'] =
+    | APIResponse.OK
+    | APIResponse.Created
+>(
+  service: Service<TData, TParams>,
+  acceptOnly?: ClassConstructor<AccType> | ClassConstructor<AccType>[]
+) {
+  const Context = createContext<Contextable<TData, TParams, AccType>>({
+    data: undefined,
+    error: undefined,
+    response: undefined,
+    loading: false,
+    isWrongType: false,
+  })
+  //
+  // const Provider = (props: {
+  //   options?: RequestOptions<Fn>
+  //   plugins?: RequestPlugins<Fn>
+  //   children?: ReactNode
+  // }) => {
+  //   const { options, plugins, children } = props
+  //   const request = useRequest(service, {
+  //     ...options,
+  //     acceptOnly
+  //   }, plugins)
+  //
+  //   return createElement(Context.Provider, {
+  //     value: request
+  //   }, children)
+  // }
+  const RequestHook = (
+    options: Options<TData, TParams>,
+    plugins?: Plugins<TData, TParams>
+  ) =>
+    useRequest<TData, TParams, AccType>(
+      service,
+      { ...options, acceptOnly },
+      plugins
+    )
+  const ConsumerHook = () => useContext(Context)
+
+  return {
+    Provider: Context.Provider,
+    Consumer: Context.Consumer,
+    Context,
+    RequestHook,
+    ConsumerHook,
   }
 }

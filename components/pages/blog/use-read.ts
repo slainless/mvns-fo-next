@@ -1,8 +1,12 @@
-import { createRequestStore } from '@Functions/use-store'
 import { BlogAPI } from '@Methods/blog'
 import { BlogResponse } from '@Models/blog'
+import { createRequestContext } from '@Functions/use-request'
 
-export const useBlogRequest = createRequestStore(BlogAPI.detail, {
-  accept: [BlogResponse.GetOne],
-})
-export const useBlogStore = useBlogRequest.store
+const { Provider, RequestHook, ConsumerHook } = createRequestContext(
+  BlogAPI.detail,
+  BlogResponse.GetOne
+)
+
+export const useReadRequest = RequestHook
+export const useRead = ConsumerHook
+export const ReadProvider = Provider

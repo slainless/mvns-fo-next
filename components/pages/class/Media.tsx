@@ -1,8 +1,4 @@
 import { Box } from '@Components/Box'
-import { Text } from '@Components/Text'
-import { Badge } from '@Components/Badge'
-import { FiGrid, FiRadio } from 'react-icons/fi'
-import { TitledSection } from '@Components/TitledSection'
 import { Heading } from '@Components/Heading'
 import { Button } from '@Components/Button'
 import { Grid } from '@Components/Grid'
@@ -10,16 +6,9 @@ import { StyledSlot } from '@Components/Slot'
 import { Flex } from '@Components/Flex'
 import { Card } from '@Components/Card'
 import { styled } from '@Theme'
-import {
-  StarIcon,
-  ClockIcon,
-  MixIcon,
-  CardStackIcon,
-  PlayIcon,
-} from '@radix-ui/react-icons'
+import { CardStackIcon, PlayIcon } from '@radix-ui/react-icons'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
-import { useCourseStore } from './use-detail'
-import shallow from 'zustand/shallow'
+import { useDetail } from './use-detail'
 import { Skeleton, Conditional, If, Else } from '@Components/Conditional'
 
 const TextualIcon = (
@@ -37,15 +26,9 @@ const TextualIcon = (
   )
 }
 export default function Media() {
-  let { result, fallback } = useCourseStore(
-    (state) => ({
-      result: state.acceptedData,
-      fallback: state.shouldFallback,
-    }),
-    shallow
-  )
-  const data = result?.data
-  // fallback = true
+  let { data: $data } = useDetail()
+  const data = $data?.data
+  const fallback = $data == null
 
   return (
     <Grid css={{ gridTemplateColumns: '70% auto', mt: '$6', gap: '$6' }}>

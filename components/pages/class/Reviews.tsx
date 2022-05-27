@@ -1,15 +1,11 @@
-import { Avatar } from '@Components/Avatar'
 import { Flex } from '@Components/Flex'
-import { Box } from '@Components/Box'
 import { Text } from '@Components/Text'
 import { Span } from '@Components/Span'
 import { TitledSection } from '@Components/TitledSection'
-import { StarIcon, StarFilledIcon } from '@radix-ui/react-icons'
-import { Paragraph } from '@Components/Paragraph'
+import { StarFilledIcon } from '@radix-ui/react-icons'
 import { StyledSlot } from '@Components/Slot'
 import { styled } from '@Theme'
-import { useCourseStore } from './use-detail'
-import shallow from 'zustand/shallow'
+import { useDetail } from './use-detail'
 import { Skeleton } from '@Components/Conditional'
 
 function Review() {}
@@ -24,14 +20,9 @@ const Icon = (
   return <StyledIcon {...rest} />
 }
 export default function Reviews() {
-  let { result, fallback } = useCourseStore(
-    (state) => ({
-      result: state.acceptedData,
-      fallback: state.shouldFallback,
-    }),
-    shallow
-  )
-  const data = result?.data
+  let { data: $data } = useDetail()
+  const data = $data?.data
+  const fallback = $data == null
 
   return (
     <TitledSection title="Reviews" size="2">
