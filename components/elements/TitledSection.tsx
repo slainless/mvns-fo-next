@@ -1,6 +1,6 @@
 import { Box } from '@Components/Box'
 import { Heading } from '@Components/Heading'
-import { Link } from '@Components/Link'
+import { NextLink } from '@Components/Link'
 import { Section } from '@Components/Section'
 import { isEmpty } from 'lodash-es'
 import { CSS } from '@Theme'
@@ -32,7 +32,7 @@ export function TitledSection(props: Props) {
           </Heading>
         )}
         {!isEmpty(hotlink) && (
-          <Link
+          <NextLink
             href={hotlink?.href}
             css={{
               color: '$slate11',
@@ -40,7 +40,7 @@ export function TitledSection(props: Props) {
             }}
           >
             {hotlink?.display}
-          </Link>
+          </NextLink>
         )}
       </Box>
       <Box>{children}</Box>

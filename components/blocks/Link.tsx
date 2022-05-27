@@ -2,7 +2,9 @@ import { styled } from '@Theme'
 import { Text } from './Text'
 import PrimitiveLink from 'next/link'
 import { Url } from 'url'
+import { ComponentProps, ElementRef, forwardRef } from 'react'
 
+const StyledAnchor = styled('a')
 export const Link = styled('a', {
   alignItems: 'center',
   gap: '$1',
@@ -162,13 +164,14 @@ export const Link = styled('a', {
   },
 })
 
-type NextLinkProps = ReactProps<typeof PrimitiveLink>
-export function NextLink(
-  props: Omit<ReactProps<typeof Link>, 'href'> &
-    Omit<NextLinkProps, 'passHref' | 'as'> & {
-      asUrl?: Url
-    }
-) {
+type NextLinkProps = Omit<ComponentProps<typeof StyledAnchor>, 'href'> &
+  Omit<ComponentProps<typeof PrimitiveLink>, 'passHref' | 'as'> & {
+    asUrl?: Url
+  }
+const PrimitiveNextLink = forwardRef<
+  ElementRef<typeof StyledAnchor>,
+  NextLinkProps
+>((props, ref) => {
   const { asUrl, prefetch, replace, scroll, shallow, locale, href, ...rest } =
     props
   return (
@@ -182,7 +185,10 @@ export function NextLink(
       shallow={shallow}
       locale={locale}
     >
-      <Link {...rest} />
+      <StyledAnchor {...rest} ref={ref} />
     </PrimitiveLink>
   )
-}
+})
+PrimitiveNextLink.displayName = 'NextLink'
+const StyledNextLink = styled(PrimitiveNextLink, Link)
+export const NextLink = StyledNextLink
