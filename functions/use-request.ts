@@ -1,37 +1,62 @@
 import { RequestResult } from './request'
 import { useRequest as useReq } from 'ahooks'
+import type {
+  Service,
+  Options,
+  Plugins,
+  Result,
+} from 'ahooks/lib/useRequest/src/types'
 import { APIResponse } from '@Models/response'
 import { ClassConstructor } from 'class-transformer'
-import { useEffect, useMemo } from 'react'
+import {
+  createContext,
+  createElement,
+  useEffect,
+  useMemo,
+  ReactNode,
+  useContext,
+} from 'react'
 import shallow from 'zustand/shallow'
 
-type Service<Data, Params extends any[]> = Parameters<typeof useReq<Data, Params>>[0]
-type Options<Data, Params extends any[]> = Parameters<typeof useReq<Data, Params>>[1]
-type Plugins<Data, Params extends any[]> = Parameters<typeof useReq<Data, Params>>[2]
+type ExtendedResult<
+  TData,
+  TParams extends any[],
+  TType extends Awaited<ReturnType<TData>>['data']
+> = Omit<Result<TData, TParams>, 'data'> & {
+  data: TType | undefined
+  response: TData
+}
 
 export function useRequest<
-TData extends RequestResult<any>,
-TParams extends any[],
-TType extends TData['data'] = APIResponse.OK | APIResponse.Created
+  TData,
+  TParams extends any[],
+  TType extends Awaited<ReturnType<TData>>['data'] =
+    | APIResponse.OK
+    | APIResponse.Created
 >(
   service: Service<TData, TParams>,
   options?: Options<TData, TParams> & {
-    /** Response to accept, as a flag for fallback. If response is one of these class, then will set `shouldFallback` flag to false */
     acceptOnly?: ClassConstructor<TType> | ClassConstructor<TType>[]
   },
-  plugins?: Plugins<TData, TParams>
-) {
+  plugins?: Plugins<TData, TParams>[]
+): ExtendedResult<TData, TParams, TType> {
   const { acceptOnly = [APIResponse.OK, APIResponse.Created] } = options ?? {}
-  const { data: $data, error, run, runAsync, loading } = useReq(service, options, plugins)
+  const {
+    data: $data,
+    error,
+    run,
+    runAsync,
+    loading,
+  } = useReq(service, options, plugins)
 
   const data = useMemo(() => {
-    if(!$data) return undefined
+    if (!$data) return undefined
 
-    for(const cls of Array.isArray(acceptOnly) ? acceptOnly : [acceptOnly]) {
-      if($data?.data instanceof cls) return $data.data
+    for (const cls of Array.isArray(acceptOnly) ? acceptOnly : [acceptOnly]) {
+      if ($data?.data instanceof cls) return $data.data
     }
     return undefined
-  }, [$data])
+  }, [$data, acceptOnly])
 
   return {
     data: data as TType | undefined,

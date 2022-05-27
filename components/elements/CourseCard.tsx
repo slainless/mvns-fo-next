@@ -11,7 +11,7 @@ import { Icon } from '@Components/Icon'
 import * as Card from '@Components/DisplayCard'
 import { Alert } from '@Components/Alert'
 import { forwardRef, useState, ElementRef, ComponentProps } from 'react'
-import { useFavorite } from './CourseCard/favorite'
+import { useFavorite } from './CourseCard/use-favorite'
 import Link from 'next/link'
 import { makeDisplayName } from '@Functions/display-name'
 

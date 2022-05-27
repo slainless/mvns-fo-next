@@ -38,7 +38,7 @@ export async function requestJSON<
     useAuth?: boolean
   }
 ): Promise<RequestResult<T>> {
-  const { responseType, useAuth, ...rest } = options
+  const { responseType, useAuth, throwHttpErrors = true, ...rest } = options
 
   let rawJSON
   let code: number
@@ -57,15 +57,14 @@ export async function requestJSON<
         })(),
       },
     })
-    rawJSON = await response.json()
-    code = response.status
   } catch (e) {
     if (!(e instanceof HTTPError)) throw e
     response = e.response
-    rawJSON = await response.json()
-    code = response.status
     error = e
   }
+
+  rawJSON = await response.json()
+  code = response.status
 
   const mergedDataType = Object.assign({}, defaultResponseType, responseType)
   const dataType = mergedDataType[code] ?? mergedDataType.default
@@ -79,6 +78,10 @@ export async function requestJSON<
   if (errors.length > 0) {
     if (Config.debug) console.error('Validation failed with:', errors)
     throw new Error('Response mismatch!')
+  }
+
+  if (throwHttpErrors && error) {
+    throw data.toError()
   }
 
   // @ts-expect-error
