@@ -1,96 +1,48 @@
-import { Flex } from '@Components/Flex'
 import { Box } from '@Components/Box'
-import { Image } from '@Components/Image'
 import { Card } from '@Components/Card'
-import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { cartItems } from '@Dev/dummy'
-import { useMemo } from 'react'
-import { useTable, Column } from 'react-table'
 import { Table, Thead, Td, Tr, Th, Tbody, Tfoot } from '@Components/Table'
-import { Text } from '@Components/Text'
 import { Button } from '@Components/Button'
 import { ArrowRightIcon, Cross1Icon } from '@radix-ui/react-icons'
 import { TextField } from '@Components/TextField'
+import { CSS, styled } from '@Theme'
+import useTableHandler, { Item } from './List/use-table-handler'
 
-type Item = {
-  product?: {
-    img: string
-    name: string
+const StyledHeadTd = styled(Td, {
+  borderColor: '$slate6',
+  fontSize: '$sm !important',
+  py: '$4 !important',
+  px: '$2',
+})
+const StyledTr = styled(Tr, {
+  display: 'contents',
+})
+const StyledTd = styled(Td, {
+  display: 'flex',
+})
+
+const defineWidth = (id: string): CSS => {
+  switch (id) {
+    case 'image':
+      return {
+        maxWidth: '$tw_24',
+      }
+    case 'product':
+      return {}
+    case 'quantity':
+      return { maxWidth: 'max-content' }
+    case 'price':
+      return { maxWidth: '$tw_24' }
+    case 'subtotal':
+      return { maxWidth: '$tw_24' }
+    case 'actions':
+      return { maxWidth: '$tw_12' }
+    default:
+      return { maxWidth: '0' }
   }
-  price?: number
-  quantity?: number
-  subtotal?: number
 }
 
 export default function List() {
-  const data: Item[] = useMemo(() => cartItems, [])
-
-  const columns: Column<Item>[] = useMemo(
-    () => [
-      {
-        Header: () => null,
-        accessor: (row) => (
-          <AspectRatio ratio={16 / 9}>
-            <Image src={row.product?.img} />
-          </AspectRatio>
-        ),
-        id: 'image', // accessor is the "key" in the data,
-      },
-      {
-        Header: 'Product',
-        accessor: (row) => <Text>{row.product?.name}</Text>,
-        id: 'product', // accessor is the "key" in the data
-      },
-      {
-        Header: 'Price',
-        accessor: (row) => (
-          <Text>
-            ${row.price}
-            {/* <br />
-            <span className="inline md:hidden text-white/30 text-sm">
-              x&nbsp;<span className="text-white">{row.quantity}</span>
-              pcs
-            </span> */}
-          </Text>
-        ),
-        id: 'price', // accessor is the "key" in the data
-      },
-      {
-        Header: 'Qty',
-        accessor: (row) => <Text>{row.quantity}</Text>,
-        id: 'quantity', // accessor is the "key" in the data
-      },
-      {
-        Header: 'Subtotal',
-        accessor: (row) => <Text>${row.subtotal}</Text>,
-        id: 'subtotal', // accessor is the "key" in the data
-      },
-      {
-        Header: () => null,
-        accessor: (row) => (
-          <>
-            <Button
-              variant="red"
-              css={{
-                width: '$5',
-                height: '$5',
-                p: 0,
-              }}
-            >
-              <Cross1Icon />
-            </Button>
-            {/* <Icon
-              icon="close"
-              className="transition-colors w-6 h-6 rounded-full flex items-center justify-center text-red-600 border-2 border-red-600 text-base hover:bg-red-600 hover:text-white"
-            /> */}
-          </>
-        ),
-        id: 'actions', // accessor is the "key" in the data
-      },
-    ],
-    []
-  )
-
   const {
     getTableProps,
     getTableBodyProps,
@@ -99,58 +51,38 @@ export default function List() {
     rows,
     prepareRow,
     ...rest
-  } = useTable({ columns, data })
+  } = useTableHandler()
 
   return (
     <>
       <Card>
-        <Table {...getTableProps()}>
-          <Thead>
+        <Table
+          css={{
+            display: 'grid',
+            gridTemplateColumns:
+              '$tw_32 auto max-content max-content max-content max-content',
+          }}
+          {...getTableProps()}
+        >
+          <Thead css={{ display: 'contents' }}>
             {headerGroups.map((headerGroup, i) => (
-              <Tr key={i} {...headerGroup.getHeaderGroupProps()}>
+              <StyledTr key={i} {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column, i) => {
                   const { className, ...rest } = column.getHeaderProps()
                   return (
-                    <Th
-                      key={i}
-                      css={{
-                        borderColor: '$slate6',
-                        fontSize: '$sm !important',
-                        py: '$4 !important',
-                        width: (() => {
-                          switch (column.id) {
-                            case 'image':
-                              return '$tw_32'
-                            case 'product':
-                              return ''
-                            case 'quantity':
-                              return '$tw_12'
-                            case 'price':
-                              return '$tw_24'
-                            case 'subtotal':
-                              return '$tw_24'
-                            case 'actions':
-                              return '$tw_12'
-                            default:
-                              return '0'
-                          }
-                        })(),
-                        px: '$2',
-                      }}
-                      {...rest}
-                    >
+                    <StyledHeadTd key={i} {...rest}>
                       {column.render('Header')}
-                    </Th>
+                    </StyledHeadTd>
                   )
                 })}
-              </Tr>
+              </StyledTr>
             ))}
           </Thead>
-          <Tbody {...getTableBodyProps()}>
+          <Tbody css={{ display: 'contents' }} {...getTableBodyProps()}>
             {rows.map((row, i) => {
               prepareRow(row)
               return (
-                <Tr
+                <StyledTr
                   key={i}
                   css={{
                     borderColor: '$slate4',
@@ -161,7 +93,7 @@ export default function List() {
                   {...row.getRowProps()}
                 >
                   {row.cells.map((cell, i) => (
-                    <Td
+                    <StyledTd
                       key={i}
                       css={{
                         px: '$2',
@@ -182,47 +114,31 @@ export default function List() {
                       {...cell.getCellProps()}
                     >
                       {cell.render('Cell')}
-                    </Td>
+                    </StyledTd>
                   ))}
-                </Tr>
+                </StyledTr>
               )
             })}
           </Tbody>
-          <Tfoot>
-            <Tr
+          <Tfoot css={{ display: 'contents' }}>
+            <StyledTr
               css={{
-                '& td': {
-                  fontSize: '$sm !important',
-                  py: '$2 !important',
-                },
+                '& td': { fontSize: '$sm !important', py: '$2 !important' },
               }}
             >
-              <Td
-                colSpan={rest.allColumns.length - 4}
-                css={{
-                  px: '$2',
-                }}
-              >
+              <StyledTd css={{ px: '$2', gridColumn: '1 / span 3' }}>
                 <TextField
                   size="2"
                   placeholder="Coupon code"
-                  css={{
-                    mr: '$2',
-                    width: 'max-content',
-                  }}
+                  id={'discount-coupon'}
+                  css={{ mr: '$2', width: 'max-content' }}
                 />
                 <Button size="2" variant="blue">
                   Apply
                 </Button>
-              </Td>
-              <Td
-                css={{
-                  px: '$2',
-                }}
-              >
-                Total
-              </Td>
-              <Td
+              </StyledTd>
+              <StyledTd css={{ px: '$2' }}>Total</StyledTd>
+              <StyledTd
                 colSpan={3}
                 css={{
                   px: '$2',
@@ -234,8 +150,8 @@ export default function List() {
                 {cartItems
                   .map((i) => i.subtotal)
                   .reduce((a, b) => (a ?? 0) + (b ?? 0))}
-              </Td>
-            </Tr>
+              </StyledTd>
+            </StyledTr>
           </Tfoot>
         </Table>
         {/* <div id="alt-cart-view" className="flex flex-col sm:hidden">
@@ -283,20 +199,9 @@ export default function List() {
           </div>
         </div> */}
       </Card>
-      <Box
-        css={{
-          mt: '$4',
-          display: 'flex',
-          jc: 'flex-end',
-        }}
-      >
+      <Box css={{ mt: '$4', display: 'flex', jc: 'flex-end' }}>
         <Button
-          css={{
-            ml: 'auto',
-            '& svg': {
-              ml: '$2',
-            },
-          }}
+          css={{ ml: 'auto', '& svg': { ml: '$2' } }}
           size="3"
           variant="green"
         >

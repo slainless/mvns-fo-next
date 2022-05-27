@@ -13,6 +13,7 @@ import { useDetail } from './use-detail'
 import { Conditional, If, Else, Skeleton } from '@Components/Conditional'
 import Sharer from '@Components/Sharer'
 import { ComponentProps, ElementRef, forwardRef } from 'react'
+import CartButton from './Overview/CartButton'
 
 const Action = forwardRef<
   ElementRef<typeof Button>,
@@ -189,15 +190,13 @@ export default function Hero() {
                   </Span>
                 </Text>
               </Skeleton>
-              <Button
-                variant="red"
-                size="3"
+              <Box
                 css={{
                   visibility: fallback ? 'hidden' : undefined,
                 }}
               >
-                Add to cart
-              </Button>
+                <CartButton />
+              </Box>
             </Card>
           </Flex>
         </Grid>
