@@ -21,28 +21,4 @@ export module SearchAPI {
   }
 }
 
-export type SearchStore = {
-  result: SearchResult | null
-  loading: boolean
-  search: (query: string) => void
-}
-export const useSearchStore = create<SearchStore>((set, get) => ({
-  result: null,
-  loading: false,
-  search: async (query: string) => {
-    if (get().loading == true) return
-
-    set({ loading: true })
-    const { data } = (await SearchAPI.query(query)) ?? {}
-    set({ loading: false })
-    if (!(data instanceof SearchResponse.Get))
-      throw new Error('Response Mismatch')
-    if (!(data.data instanceof SearchResult))
-      throw new Error('Response Mismatch')
-    return set({
-      result: data.data,
-    })
-  },
-}))
-
 export default SearchAPI

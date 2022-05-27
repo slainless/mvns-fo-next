@@ -1,9 +1,6 @@
 import { IconButton } from '@Components/IconButton'
 import { Half2Icon, MoonIcon, SunIcon } from '@radix-ui/react-icons'
-import { darkTheme } from '@Theme'
-import { useEffect, useState } from 'react'
 import isBrowser from '@Functions/is-browser'
-import useStateCycle from '@Functions/use-state-cycle'
 import {
   Preference,
   Token,

@@ -35,7 +35,7 @@ const globalStyles = globalCss({
     $loaderColor: '$colors$hiContrast',
   },
   html: {
-    scrollPaddingTop: '$sizes$header',
+    scrollPaddingTop: 'calc($sizes$header + $sizes$6)',
   },
   '.loader-inner': {
     lineHeight: 0,
