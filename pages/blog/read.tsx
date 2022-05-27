@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import { TitledSection } from '@Components/TitledSection'
-import getConfig from 'next/config'
 import SideList from '@Pages/blog/SideList'
 import Article from '@Pages/blog/Article'
 import { blogItems } from '@Dev/dummy'
@@ -13,8 +12,8 @@ import { useIsomorphicLayoutEffect } from 'ahooks'
 import isBrowser from '@Functions/is-browser'
 import AnyError from '@Components/AnyError'
 import { useRouter } from 'next/router'
-// import NotFoundError from '@Pages/blog/NotFoundError'
-// import { APIError } from '@Models/response'
+import NotFoundError from '@Pages/blog/NotFoundError'
+import { APIError } from '@Models/response'
 
 const items: ArticleCardData[] = blogItems.map((item) => ({
   title: item.title,
@@ -42,9 +41,7 @@ const Page: NextPage = () => {
   const { error } = request
 
   if (error) {
-    // if (error instanceof APIError.NotFound)
-    //   return <NotFoundError error={error} />
-
+    if (error instanceof APIError.NotFound) return <NotFoundError />
     return <AnyError error={error} />
   }
 
