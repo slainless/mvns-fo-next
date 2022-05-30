@@ -31,13 +31,7 @@ type ListProps = ReactProps<typeof Flex> & {
 function List(props: ListProps) {
   const { title, items, ...rest } = props
   return (
-    <Flex
-      direction="column"
-      css={{
-        rowGap: '$2',
-      }}
-      {...rest}
-    >
+    <Flex direction="column" css={{ rowGap: '$2' }} {...rest}>
       <Heading
         as="h3"
         css={{
@@ -77,12 +71,7 @@ const StyledList = styled(List)
 
 export default function Footer() {
   return (
-    <Box
-      css={{
-        width: '100%',
-        backgroundColor: '$hiContrast',
-      }}
-    >
+    <Box css={{ width: '100%', backgroundColor: '$hiContrast' }}>
       <Box container="xl">
         <Grid
           css={{
@@ -100,20 +89,18 @@ export default function Footer() {
               { display: 'Become a Partner', href: '' },
               {
                 display: 'Become an Instructor',
-                href: '/become-an-instructor',
+                href: '/instructor',
               },
-              { display: 'Careers', href: '' },
+              { display: 'Careers', href: '/career' },
             ]}
           />
           <StyledList
             title="Classes"
-            css={{
-              gridColumn: 'span 3',
-            }}
+            css={{ gridColumn: 'span 3' }}
             items={[
-              { display: 'Online', href: '' },
-              { display: 'Physical', href: '' },
-              { display: 'Video', href: '' },
+              { display: 'Online', href: '/class?type=online' },
+              { display: 'Offline', href: '/class?type=offline' },
+              { display: 'Video', href: '/class?type=video' },
               { display: 'Certification', href: '' },
             ]}
           />
@@ -121,7 +108,7 @@ export default function Footer() {
             title="More"
             items={[
               { display: 'FAQs', href: '/faq' },
-              { display: 'Terms', href: '' },
+              { display: 'Terms', href: '/terms' },
               { display: 'Policy', href: '/policy' },
               { display: 'Blog', href: '' },
               { display: 'Sitemap', href: '' },
@@ -137,12 +124,7 @@ export default function Footer() {
             borderTop: '1px solid $colors$slate12',
           }}
         >
-          <Text
-            size="2"
-            css={{
-              color: '$slate11',
-            }}
-          >
+          <Text size="2" css={{ color: '$slate11' }}>
             © 2022, Mavensdotlive Sdn Bhd. All right reserved.
           </Text>
           <Flex
