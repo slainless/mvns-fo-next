@@ -7,6 +7,8 @@ export const fonts = {
   inter: `Inter, $fallbackFonts$default`,
   epilogue: `Epilogue, $fallbackFonts$default`,
   libreFranklin: `'Libre Franklin', $fallbackFonts$default`,
+  bigShouldersDisplay: `'Big Shoulders Display', $fallbackFonts$default`,
+  poppins: `Poppins, $fallbackFonts$default`,
   default: `$fallbackFonts$default`,
 }
 
@@ -19,6 +21,8 @@ export const variableFonts: Record<keyof typeof fonts, string> = {
   inter: `InterVariable, $fallbackFonts$default`,
   epilogue: `EpilogueVariable, $fallbackFonts$default`,
   libreFranklin: `'Libre FranklinVariable', $fallbackFonts$default`,
+  bigShouldersDisplay: `'Big Shoulders DisplayVariable', $fallbackFonts$default`,
+  poppins: `Poppins, $fallbackFonts$default`,
   default: `$fallbackFonts$default`,
 }
 

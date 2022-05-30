@@ -77,6 +77,7 @@ export default function Featured() {
             css={{
               position: 'relative',
               ai: 'center',
+              jc: 'center',
             }}
           >
             <Card.Header

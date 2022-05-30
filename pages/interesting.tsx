@@ -78,7 +78,7 @@ const Page: NextPage = () => {
                 ai: 'center',
                 py: '$6',
                 px: '$6',
-                ff: '$spaceGrotesk',
+                ff: '$poppins',
               }}
             >
               <Text
