@@ -16,7 +16,7 @@ const StyledSegment = styled(Base.Segment, Text, {
   display: 'inline-block',
   outline: 'none',
   fontWeight: '$bold',
-  ff: '$spaceGrotesk',
+  ff: '$poppins',
   px: '2px',
   '&:not([type="literal"])': {
     backgroundColor: '$blue3',

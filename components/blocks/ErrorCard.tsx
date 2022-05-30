@@ -47,7 +47,7 @@ export const ErrorCardAlert = StyledAlert
 
 const StyledHeading = styled($Heading, {
   fontSet: '$9xl',
-  ff: '$spaceGrotesk',
+  ff: '$poppins',
   // fontVariationSettings: `'wdth' 70`,
   fontWeight: '$extrabold',
   // mb: '$1',

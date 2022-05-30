@@ -5,7 +5,7 @@ const Size = $.Size
 export const Heading = styled('h1', Base, Color, {
   fontWeight: '$medium',
   fontVariantNumeric: 'proportional-nums',
-  ff: '$spaceGrotesk',
+  ff: '$poppins',
   variants: {
     size: {
       '1': {

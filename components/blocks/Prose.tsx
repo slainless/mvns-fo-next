@@ -14,7 +14,7 @@ export const Prose = styled('div', {
 
   '& :where(h2, h3)': {
     color: '$slate12',
-    ff: '$spaceGrotesk',
+    ff: '$poppins',
     mt: '$8',
   },
 

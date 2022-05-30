@@ -77,7 +77,7 @@ export default function Category() {
               flexDirection: 'column',
               width: 'max-content',
               rowGap: '$2',
-              ff: '$spaceGrotesk',
+              ff: '$poppins',
               fontWeight: '$semibold',
             }}
           >

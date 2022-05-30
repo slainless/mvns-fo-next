@@ -25,7 +25,7 @@ const name = makeDisplayName('CourseCard')
 
 const StyledPrice = styled(Text, {
   fontWeight: '$bold',
-  ff: '$spaceGrotesk',
+  ff: '$poppins',
   defaultVariants: {
     size: '4',
   },

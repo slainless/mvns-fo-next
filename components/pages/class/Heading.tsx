@@ -60,7 +60,7 @@ export default function Detail() {
         css={{
           mb: '$2',
           maxWidth: '30ch',
-          ff: '$spaceGrotesk',
+          ff: '$poppins',
           fontSet: '$5xl',
         }}
         when={fallback}
