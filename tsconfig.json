@@ -31,6 +31,7 @@
       "@Types/*": ["./types/*"],
       "@Models/*": ["./connection/models/*"],
       "@Methods/*": ["./connection/methods/*"],
+      "@Assets/*": ["./assets/*"],
       "@Api/*": ["./connection/*"],
       "@Dev/*": ["./_dev/*"]
     }
