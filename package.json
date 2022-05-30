@@ -13,10 +13,12 @@
   "dependencies": {
     "@abraham/reflection": "^0.10.0",
     "@fontsource/anybody": "^4.5.1",
+    "@fontsource/big-shoulders-display": "^4.5.8",
     "@fontsource/epilogue": "^4.5.8",
     "@fontsource/inter": "^4.5.10",
     "@fontsource/jost": "^4.5.9",
     "@fontsource/libre-franklin": "^4.5.8",
+    "@fontsource/poppins": "^4.5.8",
     "@fontsource/recursive": "^4.5.7",
     "@fontsource/space-grotesk": "^4.5.8",
     "@fontsource/urbanist": "^4.5.11",
@@ -74,8 +76,10 @@
     "luxon": "^2.4.0",
     "modern-normalize": "^1.1.0",
     "nanoid": "^3.3.4",
+    "nanoid-dictionary": "^4.3.0",
     "next": "12.1.5",
     "prop-types": "^15.8.1",
+    "query-string": "^7.1.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-hook-form": "^7.31.1",
@@ -107,6 +111,6 @@
     "eslint-config-next": "12.1.5",
     "prettier": "^2.6.2",
     "sass": "^1.51.0",
-    "typescript": "4.6.3"
+    "typescript": "^4.7.2"
   }
 }
