@@ -10,11 +10,12 @@ import BusinessBanner from '@Pages/landing/BusinessBanner'
 import Blog from '@Pages/landing/Blog'
 import Category from '@Pages/landing/Category'
 import { useAuthUserStore } from '@Methods/auth'
+import { Guard } from '@Components/RouteGuard'
 
 const Page: NextPage = () => {
   const user = useAuthUserStore((state) => state.user)
   return (
-    <>
+    <Guard.FirstTime>
       <div>
         <MyClasses />
       </div>
@@ -39,7 +40,7 @@ const Page: NextPage = () => {
       <div>
         <Category />
       </div>
-    </>
+    </Guard.FirstTime>
   )
 }
 

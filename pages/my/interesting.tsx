@@ -9,6 +9,7 @@ import { useAuthUserStore } from '@Methods/auth'
 import { useIsomorphicLayoutEffect } from 'ahooks'
 import { useRouter } from 'next/router'
 import { mapKeys } from 'lodash-es'
+import { Overlay } from '@Components/RouteGuard'
 
 const { categories } = Config
 const mappedCategories = mapKeys(categories, (v, k) => v.id)
@@ -21,9 +22,12 @@ const Page: NextPage = () => {
   )
 
   useIsomorphicLayoutEffect(() => {
-    if (interestedCategories.length === 0) router.replace('/first-time')
+    if (user == null) return void router.replace('/')
+    if (interestedCategories.length === 0)
+      return void router.replace('/first-time')
   })
 
+  if (user == null) return <Overlay />
   return (
     <TitledSection title="You may like one of these courses">
       <Text

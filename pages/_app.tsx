@@ -16,16 +16,9 @@ import '@fontsource/libre-franklin/variable-italic.css'
 import '@fontsource/epilogue/variable.css'
 import '@fontsource/epilogue/variable-italic.css'
 import 'loaders.css/src/animations/ball-pulse.scss'
-// import { globalCss } from '@Theme'
 import { globalCss } from '@Theme'
 import ColorSchemeHandler from '@Components/ColorSchemeHandler'
-// import { toast, Toaster, ToastBar } from 'react-hot-toast'
 import Toaster from '@Components/Toaster'
-import { toast } from 'react-hot-toast'
-import { useAuthUserStore } from '@Methods/auth'
-import { useIsomorphicLayoutEffect } from 'ahooks'
-import isBrowser from '@Functions/is-browser'
-import { useRouter } from 'next/router'
 
 const globalStyles = globalCss({
   '#root': {
@@ -59,24 +52,6 @@ const globalStyles = globalCss({
 
 function MyApp({ Component, pageProps }: AppProps) {
   globalStyles()
-
-  const router = useRouter()
-  const user = useAuthUserStore((state) => state.user)
-  const isFirstTime = user != null && user.student_interest?.length === 0
-
-  const isInFT = (() => {
-    if (!isBrowser) return false
-    return ['/interesting', '/interesting/'].includes(router.pathname)
-  })()
-
-  if (isFirstTime && !isInFT) {
-    router.replace('/interesting')
-    return (
-      <>
-        <ColorSchemeHandler />
-      </>
-    )
-  }
 
   return (
     <>
