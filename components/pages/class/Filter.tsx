@@ -3,6 +3,7 @@ import { Flex } from '@Components/Flex'
 import { Button } from '@Components/Button'
 import ClassType from './filter/ClassType'
 import Pricing from './filter/Pricing'
+import Rating from './filter/Rating'
 import Popularity from './filter/Popularity'
 import Category from './filter/Category'
 import Date from './filter/Date'
@@ -31,6 +32,9 @@ export default function Filter() {
       <Pricing>
         <PillButton>Pricing</PillButton>
       </Pricing>
+      <Rating>
+        <PillButton>Rating</PillButton>
+      </Rating>
       <Category>
         <PillButton>Category</PillButton>
       </Category>

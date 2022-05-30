@@ -18,6 +18,7 @@ const Endpoints = {
   COURSE_TRENDING: make('courses/trending'),
   COURSE_OF_TYPE: make('courses/type'),
   COURSE_DETAIL: make('courses/show'),
+  COURSE_FILTER: make('courses/filter'),
   COURSE_MY: make('my/courses'),
 
   BLOG_ALL: make('blogs'),

@@ -19,9 +19,10 @@ export enum CourseType {
 }
 
 export enum CourseQuery {
-  MOST_POPULAR = 'mostpopular',
+  MOST_POPULAR = 'most_popular',
   NEWEST = 'newest',
   TRENDING = 'trending',
+  HIGHEST_RATED = 'highest_rated',
 }
 
 export class Enrollment {
