@@ -87,4 +87,4 @@ plan a learning roadmap to reskill and upskill.
 
 Have a question? Feel free to reach out to someone from our press team, and we’ll get back to you promptly.
 
-<a as="x-button" href="mailto:hello@mavens.live">HELLO@MAVENS.LIVE</a>
+<a as="x-button" x:as="a" size="2" variant="red" href="mailto:hello@mavens.live">HELLO@MAVENS.LIVE</a>

@@ -1,0 +1,76 @@
+## Who May Use our Platform
+
+- You may use our platform only if you can form a binding contract with Mavensdotlive, and only in compliance with these Terms and all applicable laws. When you create your account, and subsequently when you use certain features, you must provide us with accurate and complete information, and you agree to update your information to keep it accurate and complete.
+- We do not have an age limit for our Service but Users aged 12 and below must require their parent or guardian’s permission.
+
+## Refusal of service
+
+Mavensdotlive reserves the right to refuse service to any person for any reason and/or to discontinue the service in whole or in part at any time, with or without prior notice and without the obligation to disclose the reason.
+
+## General Rules for All Users
+
+- You cannot impersonate any person or entity, including any of our employees or representatives.
+- You will not share content from the Service with anyone who is not properly licensed to access the content.
+- You will not use your account to breach security of another account or attempt to gain unauthorized access to another network or server. Not all parts of the Service may be available to you or other authorized users of the Service. You shall not interfere with anyone else’s use and enjoyment of the Service. Users who violate systems or network security may incur criminal or civil liability.
+- You agree that you will not engage in any behavior that constitutes unauthorized or unsolicited advertising, junk or bulk email (also known as “spamming”), chain letters, any other form of unauthorized solicitation, or any form of lottery or gambling.
+- You must not copy any materials or techniques for purposes of your own or others’ classes, or for interfering with any class or the teacher’s ongoing relationship with any students participating in such class.
+- You must follow all reasonable rules set by a teacher with respect to a class, and you will not take any actions to interfere with the teacher or any other students in the class.
+- You may not share your account login credentials with anyone else. You are responsible for what happens with your account and Mavensdotlive will not intervene in disputes between students or instructors who have shared account login credentials. You must notify us immediately upon learning that someone else may be using your account without your permission. We may request some information from you to confirm that you are indeed the owner of your account.
+
+## Payment
+
+- When you make a payment, you agree to use a valid payment method. For now, Mavensdotlive accepts Online transfer or in cash.
+- Corporate or Government organizations are required pay for their training or workshop in full before their course starts. Mavensdotlive does not accept deposits or partial payments prior to the class.
+
+## Refund/Cancellation
+
+Payments are nonrefundable and there are no refunds or credits for partially used periods. Following any cancellation, however, you will continue to have the benefits of your Mavensdotlive Membership through the end of your current billing period.
+
+## Information We Collect
+
+- We seek to constantly improve our service and in doing so records of your participation in courses may be used for optimization. However, your personal identity will not be publicly disclosed in any research findings without your express consent.
+- When users come to our Site, we may track, collect, and aggregate information indicating, among other things, which pages of our Site were visited, the order in which they were visited, when they were visited, and which hyperlinks were clicked. We also collect information from the URLs from which you linked to our Site. Collecting such information may involve logging the IP address, operating system, and browser software used by each user of the Site. We may be able to determine from an IP address a user’s Internet Service Provider and the geographic location of their point of connectivity.
+
+## Mavensdotlive’s Rights to Content You Post
+
+You grant Mavensdotlive to use your comments or class/course reviews for our use in our marketing, advertising and promotional material. This includes making your content available to other companies, organizations, or individuals who partner with Mavensdotlive for the syndication, broadcast, distribution, or publication of content on other media.
+
+## Limitation of Liability
+
+There are risks inherent to using our Services, for example, if you enroll in a physical course like Self-Defense, and you injure yourself. You fully accept these risks and you agree that you will have no recourse to seek damages against even if you suffer loss or damage from using our platform and Services.
+
+## Indemnity
+
+If a User’s behavior causes legal trouble, Mavensdotlive may exercise legal recourse against the User.
+
+## Deleting your Account
+
+You have certain rights in relation to your Personal Data. You can access your Personal Data and confirm that it remains correct and up-to-date, choose whether or not you wish to receive material from us or some of our partners, and choose whether to delete your account.
+
+## Independent Contractor Relationship Between Student and Tutor, Mavensdotlive is a Marketplace Provider
+
+- You acknowledge that Instructors are independent contractors operating an independent business enterprise who use the Platform to offer and provide live teaching to Students. Student acknowledges and agrees that Maventsdotlive has no responsibility for, control over, or involvement in the scope, nature, quality, character, timing or location of any work or services performed by Instructor, including any work or services that any individual affiliated with the - Instructor may provide, either as an employee, independent contractor, or otherwise. Student further represents, acknowledges, and warrants that throughout the Term it shall at all times treat Instructor as independent contractors and that Student will take no action that is inconsistent with such classification.
+- You acknowledge that Maventsdotlive is not an employer of, or joint employer or integrated or single enterprise with any Instructor or Student. Maventsdotlive is not responsible for the performance or non-performance of any Instructor or Student. Each Instructor is solely and entirely responsible for their own acts and for the acts of their employees, subcontractors, affiliates and agents. Each Student is solely and entirely responsible for their own acts and for the acts of their employees, subcontractors, affiliates, and agents. Maventsdotlive is under no obligation to ensure any Session is completed to Student’s satisfaction.
+- You acknowledge that Instructors are, and shall at all times be and remain, an independent contractor providing services to identified Students utilizing the Maventsdotlive platform. Nothing in this Agreement or otherwise shall be construed as identifying Instructor, Student, or their personnel or representatives as an employee, agent, or legal representative of Maventsdotlive or any of Maventsdotlive’s related or affiliated entities for any purpose, and Student and Instructor and any respective representatives shall not hold themselves out as employees of Maventsdotlive in any capacity.
+- You are not to transact business, incur obligations, sell goods, receive payments, solicit goods or services, enter into any contract, or assign or create any obligation of any kind, express or implied, on behalf of Maventsdotlive or any of Maventsdotlive’s related or affiliated entities, or to bind in any way whatsoever, or to make any promise, warranty, or representation on behalf of Maventsdotlive or any of Maventsdotlive’s related or affiliated entities regarding any matter, except as expressly authorized in this Agreement or in another writing signed by an authorized officer of Maventsdotlive. Furthermore, Students shall not use Maventsdotlive’s trade names, logos, trademarks, service names, service marks, or any other proprietary designations without the prior written approval of Maventsdotlive.
+- You understand that, except as otherwise specifically agreed between Student and Instructor, Instructor will provide all equipment, tools, materials, and labor that she or he needs to perform the Instructing Services agreed to with Student and that Maventsdotlive will provide no equipment, tools, materials, or labor that may be needed to perform the Instructing Services under this Agreement. Maventsdotlive will, however, provide both Student and Instructor with access to the Platform to facilitate access to available, optional support resources and materials, if Student so chooses.
+- Instructors are solely responsible for scheduling the timing of Instructing Services and agrees to do as consistent with the Student’s scheduling requirements. Student agrees and understands that Maventsdotlive plays no role in scheduling or delivery of Instructing Services.
+- You understand and agree that Instructors are solely responsible for determining how Instructing Services will be completed, as well as the preparation and additional work necessary to properly perform Instructing Services to the satisfaction of the Student.
+- You understand that Instructors may hire employees or co-instructors or teaching assistants (at his or her sole expense) to assist with providing the Instructing Services; however, Instructor’s employees or subcontractors may not be used to deliver Instructing Services on behalf of Instructor without the express written permission of Student. Student understands and acknowledges that the Instructor acknowledges that they remain solely and exclusively responsible for the timely provision of the Instructing Services to meet Student’s requirements and specifications.
+- You understand and acknowledge that Instructors shall remain responsible for and shall pay all operational costs, expenses, and disbursements relating to operating Instructor’s business (including the activities of any employees or subcontractors) and the provision of the Instructing Services under this Agreement.
+
+## Copyright, Licenses and User Submissions
+
+The entire contents of the Service are protected by international copyright and trademark laws and other proprietary rights. The owners of the copyrights and trademarks are Mavensdotlive, its affiliates and/or other third party licensors. YOU MAY NOT MODIFY, COPY, REPRODUCE, REPUBLISH, UPLOAD, POST, TRANSMIT, OR DISTRIBUTE, IN ANY MANNER, THE MATERIAL ON THE SERVICE, INCLUDING TEXT, GRAPHICS, CODE AND/OR SOFTWARE. You may print and download portions of material from the different areas of the Service solely for your own non-commercial use provided that you agree not to change or delete any copyright or proprietary notices from the materials, and not to share any material that you paid for with anyone else who has not also purchased a license for that material.
+
+You may not use any robots, spiders, or similar data mining, data gathering or extraction tools or manual processes to collect, gather or copy any content or data on or related to the Service in a manner not authorized by Mavensdotlive in writing. You may not engage in practices of “screen scraping,” “database scraping” or any other practice or activity the purpose of which is to obtain lists of users, portions of a database, or other lists or information from the Service, in any manner and any quantities not authorized by Mavensdotlive in writing. You may not frame or utilize framing techniques to enclose any trademark, logo or other proprietary information (including images, text, page layout or form) of Mavensdotlive or its affiliates without express written consent. You may not use meta tags or any other “hidden text” utilizing the Mavensdotlive name or trademarks without the express written consent of Mavensdotlive.
+
+Content submitted by users for inclusion on the Service (including, without limitation, any information submitted on message boards, forums or other public areas of the Service) is sometimes referred to in these Terms of Service as “User Submissions.” Whether or not any User Submission is published, it will be subject to these Terms of Service. Mavensdotlive does not guarantee any confidentiality with respect to a User Submission, regardless of whether or not it is published. You are solely responsible for your own User Submissions and the consequences of posting or publishing them. You represent and warrant that you own or have the necessary licenses, rights, consents and permissions to your User Submissions (and all content included therein), including the right to authorize Mavensdotlive to use the User Submissions in the manner contemplated by the Service and these Terms of Service.
+
+You hereby grant to Mavensdotlive a non-exclusive, royalty-free, worldwide, perpetual license, with the right to sub-license, to reproduce, distribute, transmit, create derivative works of, publicly display and publicly perform any User Submissions or any other materials or information (including, without limitation, ideas for new or improved products or services) you communicate to Mavensdotlive by all means and in any media now known or hereafter developed. You also grant to Mavensdotlive the right to use your name in connection with the submitted materials and other information as well as in connection with all advertising, marketing and promotional material related thereto. You agree that you shall have no recourse against Mavensdotlive for any alleged or actual infringement or misappropriation of any proprietary right in your communications to Mavensdotlive.
+
+We neither endorse nor assume any liability for the contents of any User Submission. We generally do not pre-screen, monitor, or edit User Submissions. However, we and our agents have the right at their sole discretion to remove any User Submission or other content that, in our judgment, does not comply with these Terms of Service and any other rules of user conduct for the Service, or is otherwise harmful, objectionable, or inaccurate. We are not responsible for any failure or delay in removing any such User Submission or other content. You hereby consent to such removal and waive any claim against us arising out of such removal of any User Submission, whether it is your own or another user’s. See “Copyrights, Licenses and User Submissions” above for a description of the procedures to be followed in the event that any party believes that a User Submission infringes on any patent, trademark, trade secret, copyright, right of publicity, or other proprietary right of any party.
+
+## Updating These Terms
+
+From time to time, we may update these Terms to clarify our practices or to reflect new or different practices (e.g. feature updates), and Mavensdotlive reserves the right in its sole discretion to modify and/or make changes to these Terms at any time. If we make any material change, we will notify you using prominent means such as by email notice sent to the email address specified in your account or by posting a notice through our Services. Modifications will become effective on the day they are posted unless stated otherwise
