@@ -7,20 +7,26 @@ import { useRequest } from '@Functions/use-request'
 import { CourseAPI } from '@Methods/course'
 import { CourseResponse } from '@Models/course'
 import { courseToCard } from '@Functions/data-conversion'
+import { Guard } from '@Components/RouteGuard'
 
 const Page: NextPage = () => {
-  // const user = useAuthUserStore((state) => state.user)
+  const user = useAuthUserStore((state) => state.user)
   const { data, loading, error, response } = useRequest(CourseAPI.my, {
     acceptOnly: CourseResponse.Get,
+    manual: user == null,
   })
   return (
-    <TitledSection title="My Classes">
-      <Text color={'gray'} css={{ mb: '$4', lineHeight: 1.15 }}>
-        Here is the classes that you attended to. <br />
-        Video-on-demand classes can be watched at anytime you want.
-      </Text>
-      <CourseGrid courses={data?.data != null ? courseToCard(data.data) : []} />
-    </TitledSection>
+    <Guard.Auth>
+      <TitledSection title="My Classes">
+        <Text color={'gray'} css={{ mb: '$4', lineHeight: 1.15 }}>
+          Here is the classes that you attended to. <br />
+          Video-on-demand classes can be watched at anytime you want.
+        </Text>
+        <CourseGrid
+          courses={data?.data != null ? courseToCard(data.data) : []}
+        />
+      </TitledSection>
+    </Guard.Auth>
   )
 }
 

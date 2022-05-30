@@ -7,21 +7,24 @@ import { useRequest } from '@Functions/use-request'
 import { WishlistAPI } from '@Methods/wishlist'
 import { WishResponse } from '@Models/wishlist'
 import { courseToCard } from '@Functions/data-conversion'
+import { Guard } from '@Components/RouteGuard'
 
 const Page: NextPage = () => {
-  // const user = useAuthUserStore((state) => state.user)
+  const user = useAuthUserStore((state) => state.user)
   const { data, loading, error, response } = useRequest(WishlistAPI.get, {
     acceptOnly: WishResponse.Get,
+    manual: user == null,
   })
-  console.log(data, response)
   return (
-    <TitledSection title="My Wishlist">
-      <Text color={'gray'} css={{ mb: '$4' }}>
-        Here is the classes that you saved. You can add it to cart at anytime
-        you want.
-      </Text>
-      <CourseGrid courses={data?.data.map((v) => courseToCard(v.course!))} />
-    </TitledSection>
+    <Guard.Auth>
+      <TitledSection title="My Wishlist">
+        <Text color={'gray'} css={{ mb: '$4' }}>
+          Here is the classes that you saved. You can add it to cart at anytime
+          you want.
+        </Text>
+        <CourseGrid courses={data?.data.map((v) => courseToCard(v.course!))} />
+      </TitledSection>
+    </Guard.Auth>
   )
 }
 
